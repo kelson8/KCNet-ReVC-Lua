@@ -1,4 +1,4 @@
-# ViceExtended-Lua
+# KCNet-ReVC-Lua
 
 This is the custom lua scripts for my modified build of ReVC.
 
