@@ -7,21 +7,6 @@ local airport = GameLocations.airport
 local policeStation = GameLocations.policeStation
 local construction_site = GameLocations.constructionSiteVehicle
 
--- TODO Attempt to make freeroam_miami.scm load a custom script called freeroam-game.lua.
-
--- I will need to figure out how to disable the game scripts which might be a bit easy to do.
-
--- TODO Switch game from using .scm to lua. 
--- Reimplement the init player and other required startup functions into my player cheats for lua.
--- Or just call functions like that if I can.
-
--- TODO Make this able to be toggled in the ini, with a flag such as gbDisableGameScripts.
--- It should shut down the game scm scripting engine, return and exit out of some script functions.
--- Also this should do some things to prevent the game from crashing without the scripts in place.
-
--- Look into my Vice City scm scripts repo for setting up the player and other scm script examples.
--- https://git.internal.kelsoncraft.net/kelson8/GTAVC-ScmScripts
-
 --------
 -- REQUIRED
 -- If you remove these functions out of the freeroam script you will most likely crash!
