@@ -1,0 +1,21 @@
+
+# Extra assets and stuff in ViceExtended folder
+fonts/
+logs/
+stats/
+toml/
+
+backups/
+
+*.ini
+gamecontrollerdb.txt
+readme.txt
+
+# Internal TODO And info.
+lua_scripts/TODO.md
+
+# May be added later, for normal game with missions and saving/loading.
+lua_scripts/kcnet-events.lua
+lua_scripts/kcnet-init.lua
+
+stats.txt

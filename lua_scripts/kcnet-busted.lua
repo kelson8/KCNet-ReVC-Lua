@@ -1,6 +1,12 @@
 -- Events to run when the player is busted
 
-print("KCNet -- Player busted")
+-- The game time to pass when busted, this is the default in game.
+local time_to_pass = 720
+
+-- print("KCNet -- Player busted")
+
+game.pass_time(time_to_pass)
+
 
 -- Quick test for this here:
 -- Log the player coordinates and heading when respawning.

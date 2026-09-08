@@ -16,12 +16,12 @@ create_vehicle(145, construction_site.pos.x, construction_site.pos.y, constructi
 ]]
 
 GameLocations = {
--- Spawn in the middle of the map.
+    -- Spawn in the middle of the map.
     oldSpawn = {
         pos = {
             x = -258.1,
-	        y = -453.1,
-	        z = 13.5
+            y = -453.1,
+            z = 13.5
         },
         heading = 0.0
     },
@@ -62,4 +62,3 @@ GameLocations = {
 
 -- mainSpawnY = constructionSiteVehiclePos.y
 -- mainSpawnZ = constructionSiteVehiclePos.z
-

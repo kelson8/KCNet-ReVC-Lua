@@ -1,3 +1,4 @@
+---@diagnostic disable: empty-block
 -- Keybind events are in here for when running with F9.
 
 -- For vehicle functions, such as converting a model name to an ID.
@@ -5,6 +6,26 @@ dofile("ViceExtended/lua_scripts/vehicles.lua")
 
 -- For loading locations
 dofile("ViceExtended/lua_scripts/freeroam-locations.lua")
+
+-- For functions such as spawning vehicles, lua helper functions.
+dofile("ViceExtended/lua_scripts/freeroam-functions.lua")
+
+-- New for enums, which will be used in my freeroam and other scripts.
+dofile("ViceExtended/lua_scripts/freeroam-enums.lua")
+
+------
+-- Prefix for logging values to the console.
+------
+
+local lua_log_prefix = "[KcNet-Lua]: "
+
+--- Print a message to the console with my log prefix.
+-- Adds the specific lua_log_prefix to this.
+-- @param msg The message to print.
+--
+local function print_info(msg)
+	print(lua_log_prefix .. msg)
+end
 
 ------
 -- Locations from freeroam-locations.lua
@@ -18,13 +39,17 @@ local construction_site = GameLocations.constructionSiteVehicle
 -- The current players position.
 -- This adds an offset for spawning vehicles.
 -- TODO Make into a player.get_position function later.
-local playerPos = {x = playerX + 5.0, y = playerY + 5.0, z = playerZ + 2.0}
+local playerPos = { x = playerX + 5.0, y = playerY + 5.0, z = playerZ + 2.0 }
 
 -- TODO Rename this file to freeroam-keybind-events.lua later.
 
 ------
 -- Toggles
 ------
+
+-------------------------
+-- Debug, may be disabled in the future.
+-------------------------
 
 -- If the vehicle spawned message gets displayed on the screen.
 -- Only does anything if create_vehicle_toggle is enabled
@@ -33,13 +58,32 @@ local dbgShowVehicleIdMsg = false
 -- If this should heal the player.
 local dbgHealPlayer = false
 
--- This works but doesn't delete the previous vehicle.
+-- Cheat codes testing
+local dbgCheatCodes = false
+
+-- Starting a fire, for testing
+local dbgStartFire = false
+
+-- Clear an area
+local dbgClearArea = false
+
+-- Unlock all car doors in the players area.
+local dbgUnlockAllDoorsInArea = false
+
+-- Run a random number test function
+local dbgRandomNumberTest = false
+
+-------------------------
+-- Normal game flow, will always be here.
+-------------------------
+
+-- This works now and can delete the previous vehicle.
 local create_vehicle_toggle = false
 
 -- TODO Make this get from a list of random values
 -- Teleport the player to a random spawn I setup.
-local teleportPlayerToSpawn = false
-local teleportPlayerToAirport = false
+-- local teleportPlayerToSpawn = false
+-- local teleportPlayerToAirport = false
 
 -- If the player should teleport to the position set when 'F9' is pressed.
 local teleportPlayer = false
@@ -58,7 +102,12 @@ local teleportPlayer = false
 -- Vehicle functions
 ------
 -- Create a vehicle
--- Currently, delete last vehicle and warp into vehicle are buggy so they should be kept off for now.
+-- You can now delete the previous vehicle with this, but warping into it is stilled glitched - 1.2.10-3a.
+
+-- I think I have fixed warping into the vehicles now - 1.2.10-4a
+
+-- TODO Fix this to not place the vehicle in a building or a wall.
+-- TODO Check if area is safe to spawn.
 
 -- create_vehicle(vehicle id, CVector pos, delete last vehicle, warp into vehicle)
 -- Example:
@@ -67,6 +116,7 @@ local teleportPlayer = false
 -- Disabled this message
 -- print("kcnet-keybind-events.lua loaded")
 
+----
 -- Set the players position if enabled, new values can easily be added into freeroam-locations.lua.
 if teleportPlayer then
 	player.set_position({
@@ -76,14 +126,134 @@ if teleportPlayer then
 	})
 end
 
+----
 -- New format, heal the player
 if dbgHealPlayer then
 	player.heal()
 end
 
+----
+-- Testing cheat codes.
+----
+
+-- List of cheats to use currently.
+-- This is mostly just shortcuts for functions that I will implement into the lua code later.
+
+--[[
+KILLME - This kills the player.
+BLOWMEUP - Blows up the vehicle you are in, well currently this just sets it on fire.
+]]
+if dbgCheatCodes then
+	-- game.cheat("KILLME")
+	game.cheat("BLOWMEUP")
+end
+
+----
+-- Start a fire for testing the function.
+if dbgStartFire then
+	game.start_fire({ x = playerPos.x, y = playerPos.y + 2, z = playerPos.z })
+	-- game.start_fire({x = construction_site.pos.x + 5.0,
+	-- y = construction_site.pos.y + 5.0,
+	-- z = construction_site.pos.z})
+end
+
+----
+-- Clear the area around the player, with a set radius.
+if dbgClearArea then
+	world.clear_area(20)
+end
+
+----
+-- Unlock all locked cars in the players area
+-- This works! Tested with a cop car that normally has the doors locked and driving.
+if dbgUnlockAllDoorsInArea then
+	local leftBottomX = playerPos.x - 20
+	local leftBottomY = playerPos.y - 20
+	local topRightX = playerPos.x + 20
+	local topRightY = playerPos.y + 20
+
+	world.unlock_all_car_doors_in_area(leftBottomX, leftBottomY, topRightX, topRightY)
+end
+
+-----
 -- Get the players position, this only works in this file
 -- TODO Move into a CVector value instead of the floats later.
 -- print("Player coordinates, X: " .. playerX .. " Y: " .. playerY .. " Z: " .. playerZ)
+
+-- TODO REMOVE
+-- player.kill()
+
+-- Test, may be changed/removed later.
+-- Currently, gives the players a weapon and tries to have them kill the player.
+-- world.set_ped_objectives()
+
+-- Set the game time.
+-- game.set_time(10, 55)
+
+-- Test for my enums, this works.
+-- print("Weapon index MI_BRASS_KNUCKLES: " .. weapon_enums.eWeaponModelIndices.MI_BRASS_KNUCKLES)
+
+-- TODO Fix below to work
+
+-- Set the time scale
+-- game.set_time_scale(0.5)
+----
+---
+
+-- Freeze the vehicle position.
+-- local vehicleFrozen = false
+-- vehicle.freeze_position(is_frozen)
+
+
+
+
+
+
+--
+
+
+----
+-- Random number testing, using a very basic random number generator in lua.
+if dbgRandomNumberTest then
+	local min_random_number = 1
+	-- local max_random_number = 150
+	local max_random_number = 6
+	local random_number = math.random(min_random_number, max_random_number)
+	-- This works for a basic random number generator.
+	print_info("Random number: " .. random_number)
+
+	-- Check if the random number was even
+	if random_number % 2 == 0 then
+
+		-- Unfreeze the players vehicle
+		-- vehicle.freeze_position(false)
+
+		-- Put the player at the airport
+		player.set_position({
+			x = airport.pos.x,
+			y = airport.pos.y,
+			z = airport.pos.z
+		})
+
+		-- print_info("Random number was even.")
+	else
+		-- Freeze the players vehicle
+		-- vehicle.freeze_position(true)
+
+		-- Put the player at the Police station.
+		player.set_position({
+			x = policeStation.pos.x,
+			y = policeStation.pos.y,
+			z = policeStation.pos.z
+		})
+
+		-- Kill the player if the number was odd, make this like a dice roll.
+		-- print_info("Random number was odd.")
+		-- player.kill()
+	end
+end
+
+
 
 if create_vehicle_toggle then
 	local vehicle_id = getVehicleIdByName("Infernus")
@@ -96,7 +266,7 @@ if create_vehicle_toggle then
 	print(vehicle_id_msg)
 
 	-- Display the message to the screen.
--- 	print_msg(vehicle_id_msg)
+	-- 	print_msg(vehicle_id_msg)
 
 	print("Spawned ID " .. vehicle_id)
 	-- Well this crashes it..
@@ -105,18 +275,22 @@ if create_vehicle_toggle then
 	-- I'll fix it later.
 
 	-- New vehicle format, this works for spawning a vehicle now.
-	vehicle.create(
-    	vehicle_id,
-		-- CVector of the position to spawn the vehicle, currently this just spawns it near the player.
-		-- The playerPos variable has a bit of an offset.
-    	{
-        	x = playerPos.x,
-        	y = playerPos.y,
-        	z = playerPos.z
-    	},
-    	false, -- Should this remove the previous vehicle, this needs fixed it doesn't work.
-    	false -- Should this warp the player into the vehicle, somewhat buggy so defaults to false.
-	)
+	-- vehicle.create(
+	-- 	vehicle_id,
+	-- 	-- CVector of the position to spawn the vehicle, currently this just spawns it near the player.
+	-- 	-- The playerPos variable has a bit of an offset.
+	-- 	{
+	--     	x = playerPos.x,
+	--     	y = playerPos.y,
+	--     	z = playerPos.z
+	-- 	},
+	-- 	true, -- Should this remove the previous vehicle, now this works for removing the last spawned vehicle.
+	-- 	true -- Should this warp the player into the vehicle, works fine now unless it's spammed.
+	-- )
+
+	create_vehicle(vehicle_id, { x = playerPos.x, y = playerPos.y, z = playerPos.z }, true, true)
+
+
 
 	-- TODO Fix this below, should create a random vehicle.
 	-- To create a random vehicle from the available IDs (keys):
@@ -129,27 +303,27 @@ if create_vehicle_toggle then
 	-- local availableIds = {}
 	-- print("Before loop - availableIds:", availableIds) -- Check if it's an empty table initially
 
-  	-- -- Populate availableIds with vehicle IDs
-  	-- for id, name in pairs(vehicles) do
-    -- 	print("Inside loop - ID:", id, "Name:", name)
-    -- 	table.insert(availableIds, id)
-    -- 	print("Inside loop - availableIds:", availableIds)
-  	-- end
+	-- -- Populate availableIds with vehicle IDs
+	-- for id, name in pairs(vehicles) do
+	-- 	print("Inside loop - ID:", id, "Name:", name)
+	-- 	table.insert(availableIds, id)
+	-- 	print("Inside loop - availableIds:", availableIds)
+	-- end
 
 	-- print("After loop - availableIds:", availableIds) -- Check the final content
 
 	-- -- This print doesn't run but it shows nil if i comment the above code out.
 	-- -- print(availableIds)
 
-  	-- -- Select a random ID and create the vehicle
-  	-- if #availableIds > 0 then -- Ensure there are IDs in the table
-    -- 	local randomIndex = math.random(#availableIds)
-    -- 	local randomVehicleId = availableIds[randomIndex]
-    -- 	create_vehicle(randomVehicleId, true, true)
-    -- 	print("Created random vehicle with ID:", randomVehicleId)
-  	-- else
-    -- 	print("Error: No vehicle IDs found in availableIds.")
-  	-- end
+	-- -- Select a random ID and create the vehicle
+	-- if #availableIds > 0 then -- Ensure there are IDs in the table
+	-- 	local randomIndex = math.random(#availableIds)
+	-- 	local randomVehicleId = availableIds[randomIndex]
+	-- 	create_vehicle(randomVehicleId, true, true)
+	-- 	print("Created random vehicle with ID:", randomVehicleId)
+	-- else
+	-- 	print("Error: No vehicle IDs found in availableIds.")
+	-- end
 end
 
 
