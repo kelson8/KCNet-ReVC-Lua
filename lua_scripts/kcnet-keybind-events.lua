@@ -197,18 +197,45 @@ end
 
 -- Set the time scale
 -- game.set_time_scale(0.5)
-----
----
 
 -- Freeze the vehicle position.
 -- local vehicleFrozen = false
 -- vehicle.freeze_position(is_frozen)
 
+-----
+--- Garage testing
+--- TODO Fix this to work right.
+-----
+
+-- Setting a respray garage as a test.
+-- garage.set(leftBottomX, leftBottomY, leftBottomZ, frontX, frontY, rightTopX, rightTopY, rightTopZ, type)
+-- garage.set(-886.157, -115.158, 9.992, -882.699, -108.312, -876.7, -119.83, 15.58, garage_enums.eGarageType.GARAGE_RESPRAY)
+
+-- TODO Test this, not sure of what the id number is for this..
+-- Trying to use 0 seems to break it in my lua scripts.
+-- It gives a lua error in the console with 0, and that is probably what this garage is.
+-- garage.open(1)
+-- garage.close(1)
+
+
+-- local garage_id = 2
+
+-- if garage.is_open(garage_id) then
+-- 	print("Garage with id " .. garage_id .. " is open")
+-- else
+-- 	print("Garage with id " .. garage_id .. " is closed")
+-- end
 
 
 
+-- garage.is_open(1)
+-- garage.is_closed(1)
+
+-- garge.change_type(1, 2)
 
 
+----
+---
 --
 
 

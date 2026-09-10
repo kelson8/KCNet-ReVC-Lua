@@ -61,13 +61,11 @@ Any functions without a usage below are just getter or setter functions and don'
 | player.set_position | Set the players position. | player.set_position({x = 25, y = 25, z = 25}) |
 | player.get_health | Get the players current health  | |
 | player.heal | Set the players health to max |  |
-| player.enable_never_wanted | Enable never wanted. | |
-| player.disable_never_wanted | Disable never wanted. | |
-| player.enable_infinite_health | Enable infinite health. | |
-| player.disable_infinite_health | Disable infinite health. | |
+| player.set_never_wanted | Toggle never wanted. | player.set_never_wanted(true)  |
+| player.set_infinite_health | Toggle infinite health. |  player.set_infinite_health(true) |
 | player.set_respawn_point | Set the players respawn point. | |
 | player.cancel_override_restart | Cancel an override restart point. | |
-| player.enable_lose_weapons_on_death | Enable losing weapons on death. |  |
+| player.lose_weapons_on_death | Toggle losing weapons on death. | player.lose_weapons_on_death(true)  |
 | player.disable_lose_weapons_on_death | Disable losing weapons on death. | |
 | player.log_coords | Log the players coordinates | |
 | player.log_heading | Log the players heading. | |

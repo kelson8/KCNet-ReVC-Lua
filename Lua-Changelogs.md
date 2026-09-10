@@ -27,3 +27,18 @@ feat: Change lua scripts a bit and update with new functions
 * Add vehicle.freeze_position function for freezing the vehicle in place.
 
 * Update readme, add Lua-Changelogs.md, and add gitignore.
+
+# Latest - 1.2.12-4a
+
+feat: Move some function toggles and remove enable/disable methods
+
+* Makes functions like 'player.enable_never_wanted', into 'player.set_never_wanted(true)'.
+
+* Add blip testing, this can now set a blip onto the map.
+
+* I changed some of the toggles to just be one function instead of having two for each toggle option.
+
+* Set the players spawn point to one of the pay n spray garages for testing.
+
+* Add garage testing into kcnet-keybind-events.lua.
+

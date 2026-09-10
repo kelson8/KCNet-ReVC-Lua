@@ -55,6 +55,15 @@ GameLocations = {
         },
         heading = 0.0
     },
+
+    -- Pay N Spray garages
+    payNSpray1 = {
+        pos = {
+            x = -863.353,
+            y = -125.406,
+            z = 11.078
+        }
+    }
 }
 
 -- -- Set the area to place the player with the 'F9' keybind here.

@@ -9,6 +9,10 @@ local oldSpawn = GameLocations.oldSpawn
 local airport = GameLocations.airport
 local policeStation = GameLocations.policeStation
 local construction_site = GameLocations.constructionSiteVehicle
+local payNSpray1 = GameLocations.payNSpray1
+
+
+local blipPos = { x = airport.pos.x, y = airport.pos.y, z = airport.pos.z }
 
 ---------
 --- New, for testing features.
@@ -94,11 +98,20 @@ end
 -- This only runs once in the init, if there are more then one of the player.create functions they won't do anything.
 -- Fixes some bugs I was having, which was spawning multiple players for me to control lol.
 
-player.create(0, { x = construction_site.pos.x, y = construction_site.pos.y, z = construction_site.pos.z })
+-- player.create(0, { x = construction_site.pos.x, y = construction_site.pos.y, z = construction_site.pos.z })
+
+-- Spawn at the pay n spray I am testing the garage at.
+player.create(0, { x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z })
 
 ----
 --- Misc init features
 ---
+
+-- Test adding a blip on the map.
+-- This works, adds a basic pink destination marker to the map.
+-- TODO Make this able to be stored, and removed
+-- TODO Add multiple of these instead of just one and make them able to be removed.
+-- game.add_blip_for_coord(blipPos)
 
 
 -- Silence all game phones, in case they are running
@@ -167,7 +180,6 @@ function OnTick()
 	-- TODO Fix this game.wait() to work in here, it doesn't work just yet in my scripts.
 	-- game.wait(2000)
 
-
 	-- Would be better to just freeze the clock though, probably less resource intensive.
 end
 
@@ -196,18 +208,20 @@ local lose_weapons = true
 
 -- Toggle losing weapons on death.
 if not lose_weapons then
-	player.disable_lose_weapons_on_death()
+	player.lose_weapons_on_death(false)
 else
-	player.enable_lose_weapons_on_death()
+	player.lose_weapons_on_death(true)
 end
 
 
 -- Blow up all cars cheat
+-- TODO Move into kcnet-keybind-events.lua.
 if blow_up_cars_toggle then
 	blow_up_all_vehicles()
 end
 
 -- Clear the area of any peds and vehicles.
+-- TODO Move into kcnet-keybind-events.lua.
 if clear_area_toggle then
 	world.clear_area(25)
 end
@@ -228,15 +242,17 @@ end
 -- Although these have a cheat activated message, I'll deal with this later.
 -- For now they can manually be disabled with the keybind events or something.
 if enableNeverWanted then
-	player.enable_never_wanted()
+	player.set_never_wanted(true)
 else
-	--     player.disable_never_wanted()
+	-- Only needed to turn it back off.
+	-- player.set_never_wanted(false)
 end
 
+-- TODO Fix this to work with my new format, for some reason it doesn't.
 if enableInfiniteHealth then
-	player.enable_infinite_health()
+	player.set_infinite_health(true)
 else
-	--     player.disable_infinite_health()
+	player.set_infinite_health(false)
 end
 
 -----------
