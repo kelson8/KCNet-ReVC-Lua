@@ -21,6 +21,8 @@ local Result = enum { "Success", "Failure" }
 
 -- Tables to be read from other files.
 
+event_enums = {}
+
 config_enums = {}
 
 garage_enums = {}
@@ -40,6 +42,45 @@ ped_enums = {}
 -- ReVC enums below
 --------------
 ---
+
+----------------
+-- EventList.h
+----------------
+
+event_enums.eEventType = {
+	EVENT_NULL = 0,
+	EVENT_ASSAULT = 1,
+	EVENT_RUN_REDLIGHT = 2,
+	EVENT_ASSAULT_POLICE = 3,
+	EVENT_GUNSHOT = 4,
+	EVENT_INJURED_PED = 5,
+	EVENT_DEAD_PED = 6,
+	EVENT_FIRE = 7,
+	EVENT_STEAL_CAR = 8,
+	EVENT_HIT_AND_RUN = 9,
+	EVENT_HIT_AND_RUN_COP = 10,
+	EVENT_SHOOT_PED = 11,
+	EVENT_SHOOT_COP = 12,
+	EVENT_EXPLOSION = 13,
+	EVENT_PED_SET_ON_FIRE = 14,
+	EVENT_COP_SET_ON_FIRE = 15,
+	EVENT_CAR_SET_ON_FIRE = 16,
+	EVENT_ASSAULT_NASTYWEAPON = 17,
+	EVENT_ASSAULT_NASTYWEAPON_POLICE = 18,
+	EVENT_UNK = 19,
+	EVENT_ICECREAM = 20,
+	EVENT_ATM = 21,
+	EVENT_SHOPSTALL = 22,
+	EVENT_SHOPWINDOW = 23,
+	EVENT_LAST_EVENT = 24
+}
+
+event_enums.eEventEntity = {
+	EVENT_ENTITY_NONE = 0,
+	EVENT_ENTITY_PED = 1,
+	EVENT_ENTITY_VEHICLE = 2,
+	EVENT_ENTITY_OBJECT = 3
+}
 
 ----------------
 -- config.h

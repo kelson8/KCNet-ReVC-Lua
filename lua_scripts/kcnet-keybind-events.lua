@@ -38,8 +38,8 @@ local construction_site = GameLocations.constructionSiteVehicle
 
 -- The current players position.
 -- This adds an offset for spawning vehicles.
--- TODO Make into a player.get_position function later.
-local playerPos = { x = playerX + 5.0, y = playerY + 5.0, z = playerZ + 2.0 }
+
+local playerPos = { x = player.get_position().x + 5.0, y = player.get_position().y + 5.0, z = player.get_position().z + 5.0}
 
 -- TODO Rename this file to freeroam-keybind-events.lua later.
 
@@ -73,6 +73,12 @@ local dbgUnlockAllDoorsInArea = false
 -- Run a random number test function
 local dbgRandomNumberTest = false
 
+-- Teleport to the marker if its set on the map.
+local dbgTeleportToMarker = false
+
+-- Test for adding an explosion
+local dbgAddExplosion = false
+
 -------------------------
 -- Normal game flow, will always be here.
 -------------------------
@@ -92,11 +98,8 @@ local teleportPlayer = false
 -- Player functions
 ------
 
--- Get the players position, this only works in this file
--- Use these globals:
--- playerX
--- playerY
--- playerZ
+-- Get the players position
+-- player.get_position
 
 ------
 -- Vehicle functions
@@ -125,6 +128,15 @@ if teleportPlayer then
 		z = airport.pos.z
 	})
 end
+
+-------------
+-- This works for using my new vector push function from C++.
+-- print("Player position: " ..
+	-- "X: " .. player.get_position().x,
+	-- "Y: " .. player.get_position().y,
+	-- "Z: " .. player.get_position().z
+-- )
+-------------
 
 ----
 -- New format, heal the player
@@ -176,12 +188,6 @@ if dbgUnlockAllDoorsInArea then
 end
 
 -----
--- Get the players position, this only works in this file
--- TODO Move into a CVector value instead of the floats later.
--- print("Player coordinates, X: " .. playerX .. " Y: " .. playerY .. " Z: " .. playerZ)
-
--- TODO REMOVE
--- player.kill()
 
 -- Test, may be changed/removed later.
 -- Currently, gives the players a weapon and tries to have them kill the player.
@@ -280,6 +286,16 @@ if dbgRandomNumberTest then
 	end
 end
 
+-- Telepor to the marker, this works now.
+if dbgTeleportToMarker then
+	player.tp_to_marker()
+end
+
+-- Add an explosion at the players position with sound.
+-- If the boolean for parameter 2 is false, this disables the explosion sound.
+if dbgAddExplosion then
+	game.add_explosion({x = playerPos.x, y = playerPos.y, z = playerPos.z}, true)
+end
 
 
 if create_vehicle_toggle then

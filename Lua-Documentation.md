@@ -35,17 +35,20 @@ This is a list of clothes for the `player.set_clothes` function and a usage for 
 
 ```
 
+**Blip namespace**
+
 **Game namespace**
 
 | Function | Description | Usage |
 | ----- | ---- | ----- |
 | game.cheat | This is a basic cheat code test. | game.cheat("KILLME") -- Kills the player |
-| game.set_hospital_respawn | Sets a wasted respawn point. - DISABLED | game.set_hospital_respawn({x = 25, y = 25, z = 25}) |
-| game.set_police_respawn | Sets a busted respawn point. - DISABLED | game.set_police_respawn({x = 25, y = 25, z = 25}) |
+| game.set_hospital_respawn | Sets a wasted respawn point. | game.set_hospital_respawn({x = 25, y = 25, z = 25}) |
+| game.set_police_respawn | Sets a busted respawn point. | game.set_police_respawn({x = 25, y = 25, z = 25}) |
 | game.start_fire | Start a fire at the specified location. | game.start_fire({x = 25, y = 25, z = 25}) |
 | game.pass_time | Pass the specified time, mostly for wasted and busted scripts. | game.pass_time(720) |
 | game.set_time | Set the game time to the specified hour and minute. | game.set_time(10, 55) |
 | game.set_time_scale | Set the time scale to the specified value, this is untested. | game.set_time_scale(1) |
+| game.add_explosion | Add an explosion at the specified coords, if parameter 2 is true it enables the explosion sound. | game.add_explosion({x = 25, y = 25, z = 25}, true) |
 
 **Player namespace**
 
@@ -60,6 +63,7 @@ Any functions without a usage below are just getter or setter functions and don'
 | player.create | Create the player, mostly for the game init since my scripts take over and don't run the CREATE_PLAYER functions. | player.create(0, {x = 25, y = 25, z = 25}, ) |
 | player.set_position | Set the players position. | player.set_position({x = 25, y = 25, z = 25}) |
 | player.get_health | Get the players current health  | |
+| player.get_position | Get the players current position, access with either `x`, `y` or `z` values.  | player.get_position().x |
 | player.heal | Set the players health to max |  |
 | player.set_never_wanted | Toggle never wanted. | player.set_never_wanted(true)  |
 | player.set_infinite_health | Toggle infinite health. |  player.set_infinite_health(true) |
@@ -74,6 +78,7 @@ Any functions without a usage below are just getter or setter functions and don'
 | player.is_alive | Check if the player is alive. | |
 | player.change_clothes | Change the players clothes | player.change_clothes() |
 | player.get_wanted_level | Get the players current wanted level | |
+| player.tp_to_marker | Teleport the player to the marker if there is one set on the map. | |
 
 
 **Vehicle namespace**
@@ -83,3 +88,11 @@ Any functions without a usage below are just getter or setter functions and don'
 | vehicle.create | Spawn a vehicle for the player | vehicle.create(vehicle_id, {x = 25, y = 25, z = 25}, deleteLastVehicle, warpIntoVehicle) |
 | vehicle.freze_position | Toggle for frezing the vehicles position | vehicle.freeze_position(true) |
 
+**World namespace**
+| Function | Description | Usage |
+| ----- | ---- | ----- |
+| world.blow_up_all_vehicles | Blow up all vehicles near the player. | |
+| world.switch_roads_off | Turn the roads off in the area. | world.switch_roads_off({x = 25, y = 25, z = 25}, {x = 50, y = 50, z = 50}) |
+| world.switch_roads_on | Turn the roads on in the area. | world.switch_roads_on({x = 25, y = 25, z = 25}, {x = 50, y = 50, z = 50}) |
+| world.set_ped_density | Set the ped density, takes a value between 0 and 1.0 | |
+| world.set_vehicle_density | Set the vehicle density, takes a value between 0 and 1.0 | |

@@ -121,7 +121,9 @@ for i = 1, config_enums.eGameLimits.NUMPHONES do
 end
 
 --------------------
--- These functions are disabled and currently crash
+-- I have fixed these functions in v1.2.12-10a.
+-- Well I thought I had these working, they seem to change the spawn once.
+-- Although it's not crashing anymore so I have enabled these in the C++ code.
 --------------------
 
 -- Setup some respawn points, I'm quite sure a max of 8 can be set.
@@ -131,15 +133,17 @@ end
 -- Respawns when wasted
 -----
 
--- game.set_hospital_respawn({x = oldSpawn.pos.x, y = oldSpawn.pos.y, z = oldSpawn.pos.z}, 1.0)
--- game.set_hospital_respawn({x = airport.pos.x, y = airport.pos.y, z = airport.pos.z}, 1.0)
+game.set_hospital_respawn({x = oldSpawn.pos.x, y = oldSpawn.pos.y, z = oldSpawn.pos.z}, 1.0)
+game.set_hospital_respawn({x = airport.pos.x, y = airport.pos.y, z = airport.pos.z}, 1.0)
+game.set_hospital_respawn({x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z}, 1.0)
 
 -- -----
 -- -- Respawns when busted
 -- -----
 
--- game.set_police_respawn({x = oldSpawn.pos.x, y = oldSpawn.pos.y, z = oldSpawn.pos.z}, 1.0)
--- game.set_police_respawn({x = airport.pos.x, y = airport.pos.y, z = airport.pos.z}, 1.0)
+game.set_police_respawn({x = oldSpawn.pos.x, y = oldSpawn.pos.y, z = oldSpawn.pos.z}, 1.0)
+game.set_police_respawn({x = airport.pos.x, y = airport.pos.y, z = airport.pos.z}, 1.0)
+game.set_police_respawn({x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z}, 1.0)
 
 
 --------------------
@@ -160,9 +164,15 @@ end
 -- WARNING do not put anything in here that will crash, such as spawning vehicles or creating the player.
 -- You will spam the command and the game will crash pretty quickly
 --------
+---
+
+-- Seed the random number generator.
+math.randomseed(os.time())
+
 
 -- This runs every frame (called by the C++ Update/Heartbeat)
 function OnTick()
+	-- local random_number = math.random(1, 1000)
 	-- TODO Implement getting player keybinds in lua directly, I should be able to.
 	--     if GetPlayerKey('W') then
 	-- Do something
@@ -180,24 +190,45 @@ function OnTick()
 	-- TODO Fix this game.wait() to work in here, it doesn't work just yet in my scripts.
 	-- game.wait(2000)
 
+	-- This works for kind of a timer, its just for screwing around with though.
+	-- if random_number == 30 then
+		-- Hmm, some fun.. This causes vehicles to randomly blow up.
+		-- world.blow_up_all_vehicles()
+	-- end
+
 	-- Would be better to just freeze the clock though, probably less resource intensive.
+
+	-- Update the coroutine threads.
+	-- TODO Try to fix this to work.
+	-- This is now in freeroam-coroutine-test.lua, since it doesn't work.
+	-- updateThreads(deltaTime * 1000)
 end
 
 --------
 -- Custom functions go below
 --------
 
+--- Cheat toggles for debugging.
 local enableNeverWanted = false
 local enableInfiniteHealth = false
+---
 
--- Set ped density to 0.0
-local disablePeds = false
--- Set vehicle density to 0.0
-local disableVehicles = false
+--- Set ped density to a custom value.
+local toggle_ped_density = true
+local toggle_vehicle_density = true
 
+-- This can be set to 0.0 to disable the peds and vehicles.
+-- These values can be between 0.0 and 1.0, otherwise this won't work.
+local ped_density = 0.5
+local vehicle_density = 0.5
+
+------
+-- These shouldn't be in here.
 local blow_up_cars_toggle = false
 
 local clear_area_toggle = false
+-------
+
 
 -- If this is disabled, you won't lose weapons when busted or wasted.
 local lose_weapons = true
@@ -217,7 +248,7 @@ end
 -- Blow up all cars cheat
 -- TODO Move into kcnet-keybind-events.lua.
 if blow_up_cars_toggle then
-	blow_up_all_vehicles()
+	world.blow_up_all_vehicles()
 end
 
 -- Clear the area of any peds and vehicles.
@@ -226,15 +257,15 @@ if clear_area_toggle then
 	world.clear_area(25)
 end
 
--- Turn the ped density multiplier to 0.0
-if disablePeds then
-	world.disable_peds()
+-- Set the ped density to a custom value.
+if toggle_ped_density then
+	world.set_ped_density(ped_density)
 end
 
--- Turn the vehicle density multiplier to 0.0
+-- Set the vehicle density to a custom value.
 -- TODO Make this disable the emergency vehicles too, I didn't know fire trucks still spawned.
-if disableVehicles then
-	world.disable_vehicles()
+if toggle_vehicle_density then
+	world.set_vehicle_density(vehicle_density)
 end
 
 -- Fixes below here, if game is reloaded with F5 these never get disabled.
