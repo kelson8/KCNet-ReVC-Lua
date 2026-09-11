@@ -102,7 +102,7 @@ These values get read in the game code, and will be reloaded when `F5` is presse
 
 ## KCNet-ReVC Version
 
-Currently, the ReVC code these lua scripts are based on is my internal version `1.2.11-1a` and I have been making breaking changes between some of these minor point releases.
+Currently, the ReVC code these lua scripts are based on is my internal version `1.2.13-3a` and I have been making breaking changes between some of these minor point releases.
 
 I may switch up my internal version numbering later on, currently it just makes a bit of sense to increment the version number especially where I have been making a lot of changes and may need to revert breaking changes.
 
