@@ -50,13 +50,29 @@ This is a list of clothes for the `player.set_clothes` function and a usage for 
 | game.set_time_scale | Set the time scale to the specified value, this is untested. | game.set_time_scale(1) |
 | game.add_explosion | Add an explosion at the specified coords, if parameter 2 is true it enables the explosion sound. | game.add_explosion({x = 25, y = 25, z = 25}, true) |
 
+**Hud namespace**
+| Function | Description | Usage |
+| ----- | ---- | ----- |
+| hud.print_msg | Display a message for the hud, I think this is limited to like 16 characters | hud.print_msg("Message on HUD.") |
+
+**Log namespace**
+These functions log to my lua log file in ReVC.
+
+They get output to the `ViceExtended/logs` folder with the log file being named `KCNet-ReVC-lua.log`.
+
+The below items only take a log message parameter.
+
+| Function | Description | Usage |
+| ----- | ---- | ----- |
+| log.info | Log an info message to the log file. | |
+| log.warning | Log a warning message to the log file. | |
+| log.error | Log a error message to the log file. | |
+| log.current_directory | | |
+
+
 **Player namespace**
 
 Any functions without a usage below are just getter or setter functions and don't take any parameters.
-
-<!-- TODO Implement this -->
-<!-- | player.get_position | | | -->
-
 
 | Function | Description | Usage |
 | ----- | ---- | ----- |
@@ -79,6 +95,11 @@ Any functions without a usage below are just getter or setter functions and don'
 | player.change_clothes | Change the players clothes | player.change_clothes() |
 | player.get_wanted_level | Get the players current wanted level | |
 | player.tp_to_marker | Teleport the player to the marker if there is one set on the map. | |
+| player.give_weapon | Give a specific weapon with the set amount of ammo to the player. | player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_COLT45, 100) |
+| player.remove_weapon | Remove a weapon from the specified slot. | player.remove_weapon(1) |
+| player.give_rc_car | This can give the player an RC car. - DISABLED not working right. | |
+| player.blow_up_vehicle | This will blow up your current vehicle. | |
+| player.is_in_vehicle | This checks if the player is currently in a vehicle. | |
 
 
 **Vehicle namespace**

@@ -132,6 +132,53 @@ function getVehicleNameById(id)
 	return vehiclesById[id]
 end
 
+-- Get a random vehicle ID
+-- This works now!
+-- https://stackoverflow.com/questions/2988246/choose-a-random-item-from-a-table
+-- https://stackoverflow.com/questions/55069135/lua-choose-random-values-from-a-random-chosen-key
+function getRandomVehicleId()
+	-- This works for getting a random vehicle name!
+	-- Insert the keys of the vehicle names into an array
+	local keys = {}
+
+	for key, _ in pairs(vehiclesByName) do
+		table.insert(keys, key)
+	end
+
+	-- Get the amount of possible values
+	local max = #keys
+	local number = math.random(1, max)
+	local selectedKey = keys[number]
+
+	-- Return the value
+	-- return selectedKey
+
+	-- Return the value as a vehicle id
+	-- If needing the vehicle name, just return selectedKey directly.
+	local randomVehicleName = getVehicleIdByName(selectedKey)
+	return randomVehicleName
+end
+
+
+-----------
+-- Random vehicle testing
+-- This can get random vehicles from the vehicle list. 
+-----------
+
+-- Get a random vehicle ID
+-- local random_vehicle_id = getRandomVehicleId()
+
+-- Make sure the value exists.
+-- if random_vehicle_id then
+-- 	print("The random vehicle id is " .. random_vehicle_id)
+-- else
+-- 	print("Error, the random vehicle ID was blank.")
+-- end
+
+--
+
+-----------
+
 -- local infernusId = getVehicleIdByName("Infernus")
 -- -- log_info("ID of Infernus:", infernusId)
 -- print("ID of Infernus:", infernusId) -- Output: ID of Infernus: 411

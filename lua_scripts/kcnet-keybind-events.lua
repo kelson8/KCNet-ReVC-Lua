@@ -79,6 +79,26 @@ local dbgTeleportToMarker = false
 -- Test for adding an explosion
 local dbgAddExplosion = false
 
+------
+-- Make the peds and cops ignore the player
+local dbgEveryoneIgnorePlayer = false
+
+local dbgPoliceIgnorePlayer = false
+
+
+--- Change players skin, I may rename this function later.
+local dbgChangeClothes = false
+
+-- Remove all weapons from the player.
+local dbgRemoveAllWeapons = false
+
+-- Give the player an rc car
+-- This is disabled in the games code until I fix it.
+-- So it won't have any effect.
+-- local dbgGiveRcCar = true
+
+-----------
+
 -------------------------
 -- Normal game flow, will always be here.
 -------------------------
@@ -298,9 +318,12 @@ if dbgAddExplosion then
 end
 
 
+
 if create_vehicle_toggle then
-	local vehicle_id = getVehicleIdByName("Infernus")
+	-- local vehicle_id = getVehicleIdByName("Infernus")
 	-- local vehicle_id = getVehicleIdByName("Romero's Hearse")
+
+	local vehicle_id = getRandomVehicleId()
 	local vehicle_name = getVehicleNameById(vehicle_id)
 
 	local vehicle_id_msg = "Vehicle ID: " .. vehicle_id .. " name " .. vehicle_name
@@ -309,7 +332,7 @@ if create_vehicle_toggle then
 	print(vehicle_id_msg)
 
 	-- Display the message to the screen.
-	-- 	print_msg(vehicle_id_msg)
+	-- 	hud.print_msg(vehicle_id_msg)
 
 	print("Spawned ID " .. vehicle_id)
 	-- Well this crashes it..
@@ -379,22 +402,94 @@ if blow_up_vehicles_cheat then
 	blow_up_all_vehicles()
 end
 
--- This will crash normally, with my new clothes changing function it will try and
---  check if the clothes exist first, if not it will log an error and just not do anything
---  which prevents crashing.
--- change_clothes("TT")
+-------
+-- Make the peds and cops ignore the player
+-------
 
--- This works fine for changing clothes.
--- change_clothes("Sonny Forelli")
+-- Make everyone ignore the player.
+if dbgEveryoneIgnorePlayer then
+	player.everyone_ignore(true)
+else
+	player.everyone_ignore(false)
+end
 
--- New for namespace testing
--- newtest.loginfo("Test123")
+-- Make police ignore the player.
+if dbgPoliceIgnorePlayer then
+	player.police_ignore(true)
+else
+	player.police_ignore(false)
+end
+
+-------
+-- Change clothes
+-------
+
+if dbgChangeClothes then
+	player.change_clothes("Sonny Forelli")
+end
+
+-------
+-- Remove weapon test
+-------
+
+-- Parameter is the slot to remove the weapon from.
+-- player.remove_weapon(0)
+
+-- Amount of weapon slots for player to remove from
+-- This works!
+-- I guess instead of doing the loops in C++, I should handle them in the lua scripts when I can.
+if dbgRemoveAllWeapons then
+	for i = 1, 10 do
+		player.remove_weapon(i)
+	end
+end
+
+-----------------------------------------------
+--- New tests and functions as of v1.2.13-2a.
+-----------------------------------------------
+
+-- Give the player an rc car.
+
+-- This works! But it doesn't disable the players control they still move around.
+-- And to drive the RC Car forward you need to use the 'Left Shift' key instead of 'W'
+-- Well this is somewhat glitchy so I disabled it in the C++ code.
+-- It doesn't remove the old RC cars and will just keep spawning them.
+-- if dbgGiveRcCar and not player.is_in_vehicle() then
+-- 	player.give_rc_car()
+-- end
+
+--- Check if player is in a vehicle.
+-- if player.is_in_vehicle() then
+-- 	print("You are in a vehicle.")
+-- else
+-- 	print("You are not in a vehicle")
+-- end
+
+--- Test log outputs.
+-- Well these don't work for some reason, I guess I'll fix them later.
+-- log.info("Info message")
+-- log.warning("Warning message")
+-- log.error("Error message")
+
+--- Output a hud message, I think this can only go up to 16 characters but I'm not sure.
+--- This may crash if the text is too long.
+-- hud.print_msg("Test Hud Msg")
+
+-- 
+
+
+-- Blow up vehicle has been enabled, now you can blow up your vehicle you are in with this.
+-- player.blow_up_vehicle()
+
+-----------------------------------------------
+
+-------
+-- Internal TCP Server testing
+-- This may be used for a small multiplayer test or something else.
+-------
 
 -- New for TCP server testing, sending message from client (the ReVC game)
 -- send_msg_tcp_server("Message from lua on ReVC")
 
 -- Send the players health to the TcpServer
 -- send_msg_tcp_server("[ReVC]: Players health: " .. player_health())
-
--- Get the players health
--- print("[ReVC]: Players health: " .. player_health())

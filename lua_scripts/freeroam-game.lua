@@ -55,6 +55,14 @@ gbReloadLuaScriptWithKeybind = true
 -- This can be very useful for debugging.
 gbDisplayPosn = false
 
+-- If the emergency vehicles are disabled.
+-- This should stop firetrucks, ambulances, and police vehicles from spawning for crimes.
+-- TODO Test this.
+gbDisableEmergencyVehicleSpawning = false
+
+-- This enables infinite ammo for the player.
+gbInfiniteAmmoCheat = false
+
 --------
 -- Game Init
 -- Runs on game startup
@@ -102,6 +110,10 @@ end
 
 -- Spawn at the pay n spray I am testing the garage at.
 player.create(0, { x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z })
+
+-- This gives the player a weapon with some ammo
+-- You can use any weapons from the eWeaponType enum in freeroam-enums.lua.
+player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_COLT45, 100)
 
 ----
 --- Misc init features
@@ -220,7 +232,9 @@ local toggle_vehicle_density = true
 -- This can be set to 0.0 to disable the peds and vehicles.
 -- These values can be between 0.0 and 1.0, otherwise this won't work.
 local ped_density = 0.5
+-- local ped_density = 0.0
 local vehicle_density = 0.5
+-- local vehicle_density = 0.0
 
 ------
 -- These shouldn't be in here.

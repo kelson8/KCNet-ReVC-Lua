@@ -2,7 +2,7 @@
 This below will be my internal version numbering for ReVC.
 
 
-# Latest - 1.2.11-3a
+# 1.2.11-3a
 
 feat: Change lua scripts a bit and update with new functions
 
@@ -28,7 +28,7 @@ feat: Change lua scripts a bit and update with new functions
 
 * Update readme, add Lua-Changelogs.md, and add gitignore.
 
-# Latest - 1.2.12-4a
+# 1.2.12-4a
 
 feat: Move some function toggles and remove enable/disable methods
 
@@ -42,7 +42,7 @@ feat: Move some function toggles and remove enable/disable methods
 
 * Add garage testing into kcnet-keybind-events.lua.
 
-# Latest 1.2.12-6a
+# 1.2.12-6a
 
 * Add world.switch_roads_on and world.switch_roads_off to lua functions.
 
@@ -52,11 +52,11 @@ feat: Move some function toggles and remove enable/disable methods
 
 * Add event enums to freeroam-enums.lua.
 
-# Latest 1.2.12-7a
+# 1.2.12-7a
 
 * Add player.get_position, which returns the players position as a CVector.
 
-# Latest 1.2.12-12a
+# 1.2.12-12a
 
 * Add game.add_explosion, I have fixed this to work.
 
@@ -69,5 +69,25 @@ feat: Move some function toggles and remove enable/disable methods
 * I removed the playerX, playerY, and playerZ globals from the C++ code, so I removed them in kcnet-keybind-events.lua.
 
 * Add event enums into freeroam-enums.lua.
+
+* Update changelogs and documentation.
+
+# Latest 1.2.13-1a
+
+feat: Add give and remove weapon functions
+
+* I added these and now you can give weapons, and remove weapons from a specific slot.
+
+* Setup a random vehicle spawner with the getRandomVehicleId function.
+
+* Add hud namespace and print message to hud function.
+
+* Add log namespace to log to the ReVC lua log files.
+
+* Add blowing up current vehicle, and is in vehicle check to lua.
+
+* Add toggles for everyone ignores player, and police ignore player in kcnet-keybind-events.lua.
+
+* Disable some items in the eWeaponType enum, these are invalid and would probably crash anyways.
 
 * Update changelogs and documentation.
