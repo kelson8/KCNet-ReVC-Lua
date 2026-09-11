@@ -87,12 +87,18 @@ There needs to be some crash protection implemented with the tick function.
 
 There are some global values that get read from the `freeroam-game.lua` script like in the original scripts.
 
+These globals are all boolean toggles and either accept a true or false value.
+
 These values get read in the game code, and will be reloaded when `F5` is pressed to reload, or a new game is started.
 
 | Global Toggle | Description |
 | ------ | ------ |
 | gbVehiclesDontCatchFireWhenTurningOver | If this is enabled, vehicles won't catch fire when turning upside down. |
 | gbReloadLuaScriptWithKeybind  | If this is enabled you can press `F5` to reload the game, if it isn't you can still press `New Game` in the pause menu. |
+| gbDisplayPosn | Display the position in the game when playing, useful for debugging. |
+| gbDisableEmergencyVehicleSpawning | Disable emergency vehicles from spawning, sometimes with vehicles disabled they will still spawn without this. |
+| gbInfiniteAmmoCheat | Enables infinite ammo for the player. |
+| gbFadeOnDeath | Toggle for fading the game camera when the player dies or is wasted, by default this is true and is only a required value if you want to turn it off. |
 
 ## KCNet-ReVC Version
 
@@ -111,6 +117,12 @@ There may be a basic json save/load system in the future that saves a very small
 Since I can modify just about everything in ReVC, I may try to implement chaos mod features that can activate random actions also.
 
 I will be adding a `Lua-Documentation.md` file in the future that will contain info about the Lua functions that can be called, the parameters they take and other useful lua features for this ReVC build.
+
+# Libraries
+
+This lua project is now using the [DKJson](https://dkolf.de/dkjson-lua/) lua library for reading my json save file.
+
+The DKJson project file is located here `lua_scripts/lib/dkjson.lua`, which is licensed under MIT.
 
 # License
 

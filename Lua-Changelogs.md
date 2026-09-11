@@ -1,6 +1,11 @@
 
-This below will be my internal version numbering for ReVC.
+This is a list of lua changelogs for my KCNet-ReVC-Lua game build.
 
+The below list will be my internal version numbering for ReVC, if there are some version numbers skipped it's because I didn't change very much in the lua scripts or it was mostly just bug fixes or something.
+
+This will be updated when I make a lot of changes to these scripts, add new functions into the ReVC code to be used in the lua scripts, or when I add new globals to toggle specific hard coded features on and off.
+
+# 1.2.11
 
 # 1.2.11-3a
 
@@ -27,6 +32,8 @@ feat: Change lua scripts a bit and update with new functions
 * Add vehicle.freeze_position function for freezing the vehicle in place.
 
 * Update readme, add Lua-Changelogs.md, and add gitignore.
+
+# 1.2.12
 
 # 1.2.12-4a
 
@@ -72,6 +79,8 @@ feat: Move some function toggles and remove enable/disable methods
 
 * Update changelogs and documentation.
 
+# 1.2.13
+
 # Latest 1.2.13-1a
 
 feat: Add give and remove weapon functions
@@ -91,3 +100,16 @@ feat: Add give and remove weapon functions
 * Disable some items in the eWeaponType enum, these are invalid and would probably crash anyways.
 
 * Update changelogs and documentation.
+
+# Latest 1.2.13-3a
+
+feat: Add json loading with dkjson and types.lua
+
+* I added json loading to load from my custom save format.
+
+* Add an example save named 'kcnet-revc-save.json'.
+
+* Add new globals to readme.
+
+* Update changelogs and documentation.
+

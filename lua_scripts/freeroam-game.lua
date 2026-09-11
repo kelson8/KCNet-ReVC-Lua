@@ -4,6 +4,12 @@ dofile("ViceExtended/lua_scripts/freeroam-locations.lua")
 -- Add new enums for freeroam-game.lua
 dofile("ViceExtended/lua_scripts/freeroam-enums.lua")
 
+-----------
+-- WARNING
+-- If there are any errors in this file, ReVC will crash because this script spawns the player.
+-- Like the original game scripts, my ReVC build doesn't spawn the player directly in the games code but in here.
+-----------
+
 -- Obtained from freeroam-locations.lua
 local oldSpawn = GameLocations.oldSpawn
 local airport = GameLocations.airport
@@ -63,6 +69,13 @@ gbDisableEmergencyVehicleSpawning = false
 -- This enables infinite ammo for the player.
 gbInfiniteAmmoCheat = false
 
+-- This toggles fading the player when they die and get busted.
+-- If this is false, they won't fade and it'll spawn the player quicker.
+-- By default, this is enabled in the game code.
+-- If this is not here, it will still be set to true by default.
+-- So it's not required, but I will document it in here.
+gbFadeOnDeath = true
+
 --------
 -- Game Init
 -- Runs on game startup
@@ -109,6 +122,7 @@ end
 -- player.create(0, { x = construction_site.pos.x, y = construction_site.pos.y, z = construction_site.pos.z })
 
 -- Spawn at the pay n spray I am testing the garage at.
+-- TODO Make this spawn the player at the coordinates in the JSON save file that I am testing.
 player.create(0, { x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z })
 
 -- This gives the player a weapon with some ammo
@@ -310,7 +324,7 @@ end
 
 -- Currently this can be called by adding it into the kcnet-keybind-events.lua file and pressing 'F9'.
 -- Vehicle ID, posX, posY, posZ, Delete last vehicle, Warp into vehicle.
--- create_vehicle(145, spawnX + 10, spawnY + 10, spawnZ + 2, false, false)
+-- vehicle_util.create_vehicle(145, spawnX + 10, spawnY + 10, spawnZ + 2, false, false)
 -- TODO Fix this to work in the freeroam-game.lua script.
 
 -- Wait, if I reload with F5 or start a new game, this spawns in? Is it just not working on init or something?
@@ -318,7 +332,7 @@ end
 
 -- I have tried everything but this doesn't seem to want to work in here, I'll fix it later.
 
--- create_vehicle(145, airportX + 10.0, airportY + 10.0, airportZ + 2.0, false, false)
+-- vehicle_util.create_vehicle(145, airportX + 10.0, airportY + 10.0, airportZ + 2.0, false, false)
 local vehicle_spawn_pos = {
 	x = construction_site.pos.x + 5.0,
 	y = construction_site.pos.y + 5.0,

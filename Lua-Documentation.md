@@ -12,6 +12,16 @@ start_fire({x = 25, y = 25, z = 25})
 
 Anything that I have with `DISABLED` in the description below, is a function that is not working yet or unused.
 
+**List of lua types**
+
+If you look in `lua_scripts/types.lua` you will find a list of types for the lua language server, this will contain things like CVector, and other variables that can be labelled to make things a bit easier.
+
+**Json save loading**
+
+I now have the [DKJson](https://dkolf.de/dkjson-lua/) library for lua to load values from my custom save format, I will use this in the future for some debugging and creating a test for a custom save file format in ReVC.
+
+This will only run if the main game scripts are disabled in my code, so it doesn't write garbage data to a real ReVC save.
+
 **List of clothes**
 
 This is a list of clothes for the `player.set_clothes` function and a usage for it.

@@ -12,7 +12,7 @@ local construction_site = GameLocations.constructionSiteVehicle
 
 create_player(0, construction_site.pos.x, construction_site.pos.y, construction_site.pos.z)
 
-create_vehicle(145, construction_site.pos.x, construction_site.pos.y, construction_site.pos.z, false, false)
+vehicle_util.create_vehicle(145, construction_site.pos.x, construction_site.pos.y, construction_site.pos.z, false, false)
 ]]
 
 GameLocations = {

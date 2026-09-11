@@ -23,6 +23,8 @@ local Result = enum { "Success", "Failure" }
 
 event_enums = {}
 
+font_enums = {}
+
 config_enums = {}
 
 garage_enums = {}
@@ -80,6 +82,19 @@ event_enums.eEventEntity = {
 	EVENT_ENTITY_PED = 1,
 	EVENT_ENTITY_VEHICLE = 2,
 	EVENT_ENTITY_OBJECT = 3
+}
+
+----------------
+-- Font.h
+----------------
+
+-- Font type enums for drawing the fonts.
+font_enums.eFontTypes = {
+	FONT_BANK = 1,
+	FONT_STANDARD = 2,
+	FONT_HEADING = 3,
+	FONT_JAPANESE = 4 -- Only enabled if 'MORE_LANGUAGES' is on in config.h, which it seems to be in my ReVC build.
+	-- MAX_FONTS = FONT_HEADING
 }
 
 ----------------

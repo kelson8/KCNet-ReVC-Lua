@@ -13,6 +13,16 @@ dofile("ViceExtended/lua_scripts/freeroam-functions.lua")
 -- New for enums, which will be used in my freeroam and other scripts.
 dofile("ViceExtended/lua_scripts/freeroam-enums.lua")
 
+-- New for json testing from my save file format
+dofile("ViceExtended/lua_scripts/lib/dkjson.lua")
+
+-- For package path
+-- TODO Test this later.
+-- package.path = package.path .. ";ViceExtended/lua_scripts/lib/?.lua"
+
+-- local json = require ("dkjson")
+local json = dofile("ViceExtended/lua_scripts/lib/dkjson.lua")
+
 ------
 -- Prefix for logging values to the console.
 ------
@@ -97,6 +107,9 @@ local dbgRemoveAllWeapons = false
 -- So it won't have any effect.
 -- local dbgGiveRcCar = true
 
+-- Test for reading my custom save format
+local dbgReadCustomSave = false
+
 -----------
 
 -------------------------
@@ -132,7 +145,7 @@ local teleportPlayer = false
 -- TODO Fix this to not place the vehicle in a building or a wall.
 -- TODO Check if area is safe to spawn.
 
--- create_vehicle(vehicle id, CVector pos, delete last vehicle, warp into vehicle)
+-- vehicle_util.create_vehicle(vehicle id, CVector pos, delete last vehicle, warp into vehicle)
 -- Example:
 -- vehicle.create(id, {x = 2, y = 2, z = 2}, false, false)
 
@@ -354,42 +367,7 @@ if create_vehicle_toggle then
 	-- 	true -- Should this warp the player into the vehicle, works fine now unless it's spammed.
 	-- )
 
-	create_vehicle(vehicle_id, { x = playerPos.x, y = playerPos.y, z = playerPos.z }, true, true)
-
-
-
-	-- TODO Fix this below, should create a random vehicle.
-	-- To create a random vehicle from the available IDs (keys):
-	-- print(vehicles)
-	-- print("Inspecting vehicles table:")
-	-- for k, v in pairs(vehicles) do
-	--   print("Key:", k, "Value:", v)
-	-- end
-
-	-- local availableIds = {}
-	-- print("Before loop - availableIds:", availableIds) -- Check if it's an empty table initially
-
-	-- -- Populate availableIds with vehicle IDs
-	-- for id, name in pairs(vehicles) do
-	-- 	print("Inside loop - ID:", id, "Name:", name)
-	-- 	table.insert(availableIds, id)
-	-- 	print("Inside loop - availableIds:", availableIds)
-	-- end
-
-	-- print("After loop - availableIds:", availableIds) -- Check the final content
-
-	-- -- This print doesn't run but it shows nil if i comment the above code out.
-	-- -- print(availableIds)
-
-	-- -- Select a random ID and create the vehicle
-	-- if #availableIds > 0 then -- Ensure there are IDs in the table
-	-- 	local randomIndex = math.random(#availableIds)
-	-- 	local randomVehicleId = availableIds[randomIndex]
-	-- 	create_vehicle(randomVehicleId, true, true)
-	-- 	print("Created random vehicle with ID:", randomVehicleId)
-	-- else
-	-- 	print("Error: No vehicle IDs found in availableIds.")
-	-- end
+	vehicle_util.create_vehicle(vehicle_id, { x = playerPos.x, y = playerPos.y, z = playerPos.z }, true, true)
 end
 
 
@@ -482,6 +460,25 @@ end
 -- player.blow_up_vehicle()
 
 -----------------------------------------------
+
+
+
+-- This works now! Reads from my custom save json format.
+-- I will use this later for respawning me where I last was pretty much.
+-- Requires the ViceExtended subfolder since the games root folder isn't in lua_scripts.
+if dbgReadCustomSave then
+	local save_file_path = "ViceExtended/kcnet-revc-save.json"
+
+	local save_file, err = file_util.read_json_file(save_file_path)
+	if not save_file then
+		print(err)
+		return
+	end
+
+	-- This works! I can print these values
+	print(save_file.stats.health)
+end
+
 
 -------
 -- Internal TCP Server testing
