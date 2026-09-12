@@ -1,0 +1,48 @@
+{
+    "format": "revc-freeroam",
+    "game": {
+        "area": 0,
+        "level": 1,
+        "time": {
+            "hours": 13,
+            "millisecondsPerMinute": 1000,
+            "minutes": 51
+        },
+        "weather": {
+            "forced": 4,
+            "interpolation": 0.8602777719497681,
+            "list": 0,
+            "new": 4,
+            "old": 4
+        }
+    },
+    "player": {
+        "position": {
+            "x": -348.6330871582031,
+            "y": -611.4387817382813,
+            "z": 10.353123664855957
+        }
+    },
+    "stats": {
+        "armor": 0.0,
+        "boats_exploded": 0,
+        "bullets_that_hit": 1,
+        "days_passed": 0,
+        "distance_traveled_by_bike": 0.0,
+        "distance_traveled_by_boat": 0.0,
+        "distance_traveled_by_car": 0.0,
+        "distance_traveled_by_golf_cart": 0.0,
+        "distance_traveled_by_helicopter": 0.0,
+        "distance_traveled_by_plane": 0.0,
+        "distance_traveled_on_foot": 69.89283752441406,
+        "health": 100.0,
+        "helis_destroyed": 0,
+        "kgs_of_explosives_used": 0,
+        "money": 16,
+        "peds_killed_by_others": 0,
+        "peds_killed_by_player": 1,
+        "rounds_fired_by_player": 3,
+        "vehicles_exploded": 0
+    },
+    "version": 1
+}

@@ -4,9 +4,13 @@
 -- To use in another script:
 -- dofile("ViceExtended/lua_scripts/freeroam-functions.lua")
 
+blip_util = {}
+
 file_util = {}
 -- save_util = {}
 vehicle_util = {}
+
+local current_blip = nil
 
 -- New for json testing from my save file format
 -- dofile("ViceExtended/lua_scripts/lib/dkjson.lua")
@@ -16,6 +20,35 @@ vehicle_util = {}
 -- package.path = package.path .. ";ViceExtended/lua_scripts/lib/?.lua"
 
 local json = dofile("ViceExtended/lua_scripts/lib/dkjson.lua")
+
+------------
+-- Blip
+-- TODO Try to fix these.
+------------
+---
+
+
+-- function blip_util.set_blip(coords)
+-- 	if current_blip ~= nil then
+-- 		game.remove_blip(current_blip)
+-- 		current_blip = nil
+-- 	end
+
+-- 	current_blip = game.add_blip_for_coord(
+-- 		coords,
+-- 		radar_enums.eRadarSprite.RADAR_SPRITE_SAVE,
+-- 		false
+-- 	)
+
+-- 	return current_blip
+-- end
+
+-- function blip_util.remove_blip()
+-- 	if current_blip ~= nil then
+-- 		game.remove_blip(current_blip)
+-- 		current_blip = nil
+-- 	end
+-- end
 
 -------------
 -- File util
@@ -77,6 +110,6 @@ function vehicle_util.create_vehicle(id, pos, deletePreviousVehicle, warpIntoVeh
 			z = pos.z
 		},
 		deletePreviousVehicle, -- Should this remove the previous vehicle, now this works for removing the last spawned vehicle.
-		warpIntoVehicle     -- Should this warp the player into the vehicle, works fine now unless it's spammed.
+		warpIntoVehicle  -- Should this warp the player into the vehicle, works fine now unless it's spammed.
 	)
 end

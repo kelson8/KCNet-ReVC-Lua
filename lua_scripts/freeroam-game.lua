@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local
 -- This format works with my setup! I had to have a subdirectory for it.
 dofile("ViceExtended/lua_scripts/freeroam-locations.lua")
 
@@ -21,7 +22,7 @@ local construction_site = GameLocations.constructionSiteVehicle
 local payNSpray1 = GameLocations.payNSpray1
 
 
-local blipPos = { x = airport.pos.x, y = airport.pos.y, z = airport.pos.z }
+
 
 ---------
 --- New, for testing features.
@@ -152,7 +153,14 @@ if read_position_from_save then
 	end
 
 
+	--------
 	-- All required save values
+	-- TODO Move these into the freeroam-functions file later to be read from.
+	--------
+	local forcedWeather = save_file.game.weather.forced
+	local oldWeather = save_file.game.weather.old
+	local newWeather = save_file.game.weather.new
+
 	local playerX = save_file.player.position.x
 	local playerY = save_file.player.position.y
 	local playerZ = save_file.player.position.z
@@ -162,13 +170,61 @@ if read_position_from_save then
 
 	-- Stats
 	-- TODO Use these later, I will need to add more first.
-	-- local playerHealth = save_file.stats.health
-	-- local playerArmor = save_file.stats.armor
+	local playerHealth = save_file.stats.health
+	local playerArmor = save_file.stats.armor
 	-- local playerMoney = save_file.stats.money
 
+	local boatsExploded = save_file.stats.boats_exploded
+	local helisExploded = save_file.stats.helis_destroyed
+	local carsExploded = save_file.stats.vehicles_exploded
+
+	-- Peds killed
+	local killsSinceLastCheckpoint = save_file.stats.kills_since_last_checkpoint
+	local headsPopped = save_file.stats.heads_popped
+	local peopleKilledByPlayer = save_file.stats.peds_killed_by_player
+	local peopleKilledByOthers = save_file.stats.peds_killed_by_others
+	local totalKills = save_file.stats.total_kills
+
+	local daysPassed = save_file.stats.days_passed
+
+	local wantedStarsAttained = save_file.stats.wanted_stars_attained
+	local wantedStarsEvaded = save_file.stats.wanted_stars_evaded
+
+	local bulletsThatHit = save_file.stats.bullets_that_hit
+
+	-- Distance travelled
+	local distanceTravelledByBike = save_file.stats.distance_traveled_by_bike
+	local distanceTravelledByBoat = save_file.stats.distance_traveled_by_boat
+	local distanceTravelledByCar = save_file.stats.distance_traveled_by_car
+	local distanceTravelledByGolfCar = save_file.stats.distance_traveled_by_golf_cart
+	local distanceTravelledByHelicopter = save_file.stats.distance_traveled_by_helicopter
+	local distanceTravelledByPlane = save_file.stats.distance_traveled_by_plane
+	local distanceTravelledOnFoot = save_file.stats.distance_traveled_on_foot
+
+	local firesExtinguished = save_file.stats.fires_extinguished
+	local timesArrested = save_file.stats.times_arrested
+	local timesDied = save_file.stats.times_died
+	local timesDrowned = save_file.stats.times_drowned
+
+	local tiresPopped = save_file.stats.tires_popped
+
+
+	local seagullsKilled = save_file.stats.seagulls_killed
+
+	-- Longest stoppies and other stats.
+	local longest2WheelDistance = save_file.stats.longest_2_wheel_distance
+	local longest2WheelTime = save_file.stats.longest_2_wheel_time
+	local longestStoppieDistance = save_file.stats.longest_stoppie_distance
+	local longestStoppieTime = save_file.stats.longest_stoppie_time
+	local longestWheelieDistance = save_file.stats.longest_wheelie_distance
+	local longestWheelieTime = save_file.stats.longest_wheelie_time
+
+	-----
+	-- Save file version and format.
 	local saveFileVersion = save_file.version
 	local saveFileFormat = save_file.format
 	--
+	-------
 
 	-- TODO Add error handling to this.
 	-- If the version or save format is changed or invalid it shouldn't try to load or save that file.
@@ -186,11 +242,73 @@ if read_position_from_save then
 	-- TODO Setup these below.
 	-- Set the players heading
 
-	-- Set the players health
+	-- Set the players health and armor
+	-- This works for setting the players health and armor.
+	-- player.set_health(playerHealth)
+	-- player.set_armor(playerArmor)
+
+	-------------------------------
+	--- Stat loading
+	-------------------------------
 
 	-- Save and restore some stats such as how many peds were wasted, how many times the player was wasted and more.
+	-- player.set_stat(stat_enums.eStatType.CARS_EXPLODED)
+	player.set_stat(stat_enums.eStatType.CARS_EXPLODED, carsExploded)
+	player.set_stat(stat_enums.eStatType.BOATS_EXPLODED, boatsExploded)
+	player.set_stat(stat_enums.eStatType.HELIS_DESTROYED, helisExploded)
+
+	-- Setting distance travelled.
+	player.set_stat(stat_enums.eStatType.DISTANCE_TRAVELLED_BY_BIKE, distanceTravelledByBike)
+	player.set_stat(stat_enums.eStatType.DISTANCE_TRAVELLED_BY_BOAT, distanceTravelledByBoat)
+	player.set_stat(stat_enums.eStatType.DISTANCE_TRAVELLED_BY_CAR, distanceTravelledByCar)
+	player.set_stat(stat_enums.eStatType.DISTANCE_TRAVELLED_BY_GOLF_CART, distanceTravelledByGolfCar)
+	player.set_stat(stat_enums.eStatType.DISTANCE_TRAVELLED_BY_HELICOPTOR, distanceTravelledByHelicopter)
+	player.set_stat(stat_enums.eStatType.DISTANCE_TRAVELLED_BY_PLANE, distanceTravelledByPlane)
+	player.set_stat(stat_enums.eStatType.DISTANCE_TRAVELLED_ON_FOOT, distanceTravelledOnFoot)
+
+	player.set_stat(stat_enums.eStatType.WANTED_STARS_ATTAINED, wantedStarsAttained)
+	player.set_stat(stat_enums.eStatType.WANTED_STARS_EVADED, wantedStarsEvaded)
+
+	player.set_stat(stat_enums.eStatType.BULLETS_THAT_HIT, bulletsThatHit)
+
+	player.set_stat(stat_enums.eStatType.TYRES_POPPED, tiresPopped)
+
+	player.set_stat(stat_enums.eStatType.SEAGULLS_KILLED, seagullsKilled)
+
+	-- Peds killed
+	player.set_stat(stat_enums.eStatType.HEADS_POPPED, headsPopped)
+	player.set_stat(stat_enums.eStatType.PEOPLE_KILLED_BY_OTHERS, peopleKilledByOthers)
+	player.set_stat(stat_enums.eStatType.PEOPLE_KILLED_BY_PLAYER, peopleKilledByPlayer)
+	player.set_stat(stat_enums.eStatType.TOTAL_LEGITIMATE_KILLS, totalKills)
+	player.set_stat(stat_enums.eStatType.KILLS_SINCE_LAST_CHECKPOINT, killsSinceLastCheckpoint)
+
+
+	-- Longest stoppie, 2 wheels and more
+	player.set_stat(stat_enums.eStatType.LONGEST_2_WHEEL_DIST, longest2WheelDistance)
+	player.set_stat(stat_enums.eStatType.LONGEST_2_WHEEL, longest2WheelTime)
+	player.set_stat(stat_enums.eStatType.LONGEST_STOPPIE_DIST, longestStoppieDistance)
+	player.set_stat(stat_enums.eStatType.LONGEST_STOPPIE, longestStoppieTime)
+	player.set_stat(stat_enums.eStatType.LONGEST_WHEELIE_DIST, longestWheelieDistance)
+	player.set_stat(stat_enums.eStatType.LONGEST_WHEELIE, longestWheelieTime)
+
+	player.set_stat(stat_enums.eStatType.FIRES_EXTINGUISHED, firesExtinguished)
+
+	-- Times died and other stuff.
+	player.set_stat(stat_enums.eStatType.TIMES_ARRESTED, timesArrested)
+	player.set_stat(stat_enums.eStatType.TIMES_DIED, timesDied)
+	player.set_stat(stat_enums.eStatType.TIMES_DROWNED, timesDrowned)
+
+	-- Days passed
+	player.set_stat(stat_enums.eStatType.DAYS_PASSED, daysPassed)
+
+	------------------------
+	-- End setting stats
+	------------------------
 
 	-- Set the previous weather
+	game.force_weather(newWeather)
+	game.force_weather_now(newWeather)
+
 
 	-- Set the game time
 	game.set_time(gameHour, gameMinute)
@@ -209,15 +327,25 @@ end
 -- You can use any weapons from the eWeaponType enum in freeroam-enums.lua.
 player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_COLT45, 100)
 
+
 ----
 --- Misc init features
 ---
 
--- Test adding a blip on the map.
--- This works, adds a basic pink destination marker to the map.
--- TODO Make this able to be stored, and removed
--- TODO Add multiple of these instead of just one and make them able to be removed.
--- game.add_blip_for_coord(blipPos)
+-----------------
+-- Disable some ped roads on the map
+-- A lot of these values came from the decompiled game scripts.
+-- TODO Fix this to work, it doesn't seem to do anything.
+-- This is currently disabled in the game code.
+
+
+-- Back of mansion.
+-- world.switch_ped_roads_off({x = -395.6, y = -658.6, z = 0.0}, { x = -363.2, y = -636.7, z = 32.0})
+
+------------------
+
+
+
 
 
 -- Silence all game phones, in case they are running

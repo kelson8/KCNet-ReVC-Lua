@@ -19,3 +19,6 @@ lua_scripts/kcnet-events.lua
 lua_scripts/kcnet-init.lua
 
 stats.txt
+
+# This gets changed often when I am debugging the game.
+kcnet-revc-save.json

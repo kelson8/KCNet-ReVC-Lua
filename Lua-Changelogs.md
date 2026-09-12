@@ -7,7 +7,7 @@ This will be updated when I make a lot of changes to these scripts, add new func
 
 # 1.2.11
 
-# 1.2.11-3a
+### 1.2.11-3a
 
 feat: Change lua scripts a bit and update with new functions
 
@@ -35,7 +35,7 @@ feat: Change lua scripts a bit and update with new functions
 
 # 1.2.12
 
-# 1.2.12-4a
+### 1.2.12-4a
 
 feat: Move some function toggles and remove enable/disable methods
 
@@ -49,7 +49,7 @@ feat: Move some function toggles and remove enable/disable methods
 
 * Add garage testing into kcnet-keybind-events.lua.
 
-# 1.2.12-6a
+### 1.2.12-6a
 
 * Add world.switch_roads_on and world.switch_roads_off to lua functions.
 
@@ -59,11 +59,11 @@ feat: Move some function toggles and remove enable/disable methods
 
 * Add event enums to freeroam-enums.lua.
 
-# 1.2.12-7a
+### 1.2.12-7a
 
 * Add player.get_position, which returns the players position as a CVector.
 
-# 1.2.12-12a
+### 1.2.12-12a
 
 * Add game.add_explosion, I have fixed this to work.
 
@@ -81,7 +81,7 @@ feat: Move some function toggles and remove enable/disable methods
 
 # 1.2.13
 
-# Latest 1.2.13-1a
+### 1.2.13-1a
 
 feat: Add give and remove weapon functions
 
@@ -101,7 +101,7 @@ feat: Add give and remove weapon functions
 
 * Update changelogs and documentation.
 
-# Latest 1.2.13-3a
+### 1.2.13-3a
 
 feat: Add json loading with dkjson and types.lua
 
@@ -113,7 +113,7 @@ feat: Add json loading with dkjson and types.lua
 
 * Update changelogs and documentation.
 
-### Latest 1.2.13-5a
+### 1.2.13-5a
 
 feat: Add types for json save format, fix lua scripts
 
@@ -122,3 +122,24 @@ feat: Add types for json save format, fix lua scripts
 * Add weather options into game namespace.
 
 * Update changelogs and documentation.
+
+### Latest 1.2.13-9a
+
+feat: Add stat load system, and blip testing
+
+* I now have a stat save/load system working, currently you cannot save in lua just yet and only in my mod menu.
+
+* Added most stats to be loaded in lua from the freeroam-game.lua file.
+
+* Added types for the stats in types.lua
+
+* Add test for creating objects, this crashes so it's disabled internally.
+
+* Add set health, set armor, and get armor functions, previously I just had the heal function.
+
+* Add stat enums, audio enums, and radar enums to freeroam-enums.lua.
+
+* Add kcnet-revc-save.json to gitignore, and make kcnet-revc-save-example.json for use with repo.
+
+* Update changelog, and documentation.
+

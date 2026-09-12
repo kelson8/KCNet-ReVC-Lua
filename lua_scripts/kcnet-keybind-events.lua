@@ -37,11 +37,23 @@ local oldSpawn = GameLocations.oldSpawn
 local airport = GameLocations.airport
 local policeStation = GameLocations.policeStation
 local construction_site = GameLocations.constructionSiteVehicle
+local payNSpray1 = GameLocations.payNSpray1
 
 -- The current players position.
 -- This adds an offset for spawning vehicles.
 
+--@type CVector
 local playerPos = { x = player.get_position().x + 5.0, y = player.get_position().y + 5.0, z = player.get_position().z + 5.0}
+
+local currentBlip1 = nil
+local currentBlip2 = nil
+
+local blipPos = { x = airport.pos.x, y = airport.pos.y, z = airport.pos.z }
+local payNSprayBlipPos = { x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z }
+
+-- No wonder this always creates the blips, it never checks if they exist first in the C++ code I guess.
+-- blips.blip1 = game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false)
+-- blips.blip2 = game.add_blip_for_coord(payNSprayBlipPos, radar_enums.eRadarSprite.RADAR_SPRITE_PROPERTY, false)
 
 -- TODO Rename this file to freeroam-keybind-events.lua later.
 
@@ -106,7 +118,26 @@ local dbgReadCustomSave = false
 local dbgBlowUpCurrentVehicle = false
 
 -- Test for setting the weather.
-local dbgSetWeather = true
+local dbgSetWeather = false
+
+-- Test for creating an object on the map.
+-- Disabled in game code, currently crashes it.
+local dbgCreateObject = false
+
+-- Test with new set_health and armor functions.
+-- These work.
+local dbgHealthTest = false
+
+
+-- Testing with blips on the map.
+-- Currently, these cannot be removed.
+local dbgBlipTest = false
+
+-- Setting and getting the players stats as a test for my save system.
+-- I can now set the player stats with this.
+-- Although I haven't tested all of them I might want.
+local dbgStatTest = false
+
 
 -----------
 
@@ -503,6 +534,59 @@ if dbgSetWeather then
 
 	-- Set if hurricanes are allowed
 	-- game.set_allow_hurricanes(true)
+end
+
+-- TODO Test this.
+-- Test for creating an object on the map.
+-- Well this just crashes it, I don't think I'm spawning the object right.
+if dbgCreateObject then
+	world.create_object_no_offset({x = playerPos.x + 3, y = playerPos.y + 3, z = playerPos.z})
+end
+
+-- Test for new health functions, I only had heal on here before.
+-- These work now.
+if dbgHealthTest then
+	player.set_health(200)
+	player.set_armor(150)
+
+	print(player.get_health())
+	print(player.get_armor())
+end
+
+
+
+-- TODO Fix this to be able to be removed, currently I cannot remove the blip.
+if dbgBlipTest then
+	-- Test adding a blip on the map.
+	-- Now this can set the blip sprite, and if the destination has a route marker that gets drawn for it.
+	-- TODO Make this able to be stored, and removed
+	-- TODO Add multiple of these instead of just one and make them able to be removed.
+	-- Well this only works for one blip I guess.
+	-- Adding another one does nothing.
+
+	-- blip_util.set_blip(blipPos)
+
+	-- local blip1 = game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false)
+	-- game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false)
+
+	-- TODO Try to fix this format to remove the blips.
+	if currentBlip1 ~= nil then
+		game.remove_blip(currentBlip1)
+		print(currentBlip1)
+	else
+		currentBlip1 = game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false)
+	end
+
+	-- print(blip1)
+	-- local blip2 = game.add_blip_for_coord(payNSprayBlipPos, radar_enums.eRadarSprite.RADAR_SPRITE_PROPERTY, false)
+
+	-- game.remove_blip(blip1)
+	-- game.remove_blip(blip2)
+end
+
+-- Test for setting the players stats.
+if dbgStatTest then
+	player.set_stat(stat_enums.eStatType.ROUNDS_FIRED_BY_PLAYER, 2000)
 end
 
 -------

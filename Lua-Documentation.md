@@ -64,6 +64,7 @@ This is a list of clothes for the `player.set_clothes` function and a usage for 
 | game.set_time | Set the game time to the specified hour and minute. | game.set_time(10, 55) |
 | game.set_time_scale | Set the time scale to the specified value, this is untested. | game.set_time_scale(1) |
 | game.add_explosion | Add an explosion at the specified coords, if parameter 2 is true it enables the explosion sound. | game.add_explosion({x = 25, y = 25, z = 25}, true) |
+| game.add_blip_for_coord | This sets a blip at the coordinates with a custom sprite and if the blip should have a route set to it. | game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_BIKER, false) |
 
 **Hud namespace**
 | Function | Description | Usage |
@@ -94,11 +95,15 @@ Any functions without a usage below are just getter or setter functions and don'
 | player.create | Create the player, mostly for the game init since my scripts take over and don't run the CREATE_PLAYER functions. | player.create(0, {x = 25, y = 25, z = 25}, ) |
 | player.set_position | Set the players position. | player.set_position({x = 25, y = 25, z = 25}) |
 | player.get_health | Get the players current health  | |
+| player.set_health | Set the players health.  | |
+| player.get_armor | Get the players current armor.  | |
+| player.set_armor | Set the players armor  | |
 | player.get_position | Get the players current position, access with either `x`, `y` or `z` values.  | player.get_position().x |
 | player.heal | Set the players health to max |  |
 | player.set_never_wanted | Toggle never wanted. | player.set_never_wanted(true)  |
 | player.set_infinite_health | Toggle infinite health. |  player.set_infinite_health(true) |
 | player.set_respawn_point | Set the players respawn point. | |
+| player.set_stat | Set a stat for the player. | player.set_stat(stat_enums.eStatType.DISTANCE_TRAVELLED_ON_FOOT, 20.5) |
 | player.cancel_override_restart | Cancel an override restart point. | |
 | player.lose_weapons_on_death | Toggle losing weapons on death. | player.lose_weapons_on_death(true)  |
 | player.disable_lose_weapons_on_death | Disable losing weapons on death. | |
@@ -128,7 +133,9 @@ Any functions without a usage below are just getter or setter functions and don'
 | Function | Description | Usage |
 | ----- | ---- | ----- |
 | world.blow_up_all_vehicles | Blow up all vehicles near the player. | |
-| world.switch_roads_off | Turn the roads off in the area. | world.switch_roads_off({x = 25, y = 25, z = 25}, {x = 50, y = 50, z = 50}) |
-| world.switch_roads_on | Turn the roads on in the area. | world.switch_roads_on({x = 25, y = 25, z = 25}, {x = 50, y = 50, z = 50}) |
+| world.switch_roads_off | Turn the roads off in the area for vehicles. | world.switch_roads_off({x = 25, y = 25, z = 25}, {x = 50, y = 50, z = 50}) |
+| world.switch_roads_on | Turn the roads on in the area for vehicles. | world.switch_roads_on({x = 25, y = 25, z = 25}, {x = 50, y = 50, z = 50}) |
+| world.switch_ped_roads_off | Turn the roads off in the area for peds. | world.switch_ped_roads_off({x = 25, y = 25, z = 25}, {x = 50, y = 50, z = 50}) |
+| world.switch_ped_roads_on | Turn the roads on in the area for peds. | world.switch_ped_roads_on({x = 25, y = 25, z = 25}, {x = 50, y = 50, z = 50}) |
 | world.set_ped_density | Set the ped density, takes a value between 0 and 1.0 | |
 | world.set_vehicle_density | Set the vehicle density, takes a value between 0 and 1.0 | |
