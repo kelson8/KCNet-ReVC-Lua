@@ -21,7 +21,12 @@ local policeStation = GameLocations.policeStation
 local construction_site = GameLocations.constructionSiteVehicle
 local payNSpray1 = GameLocations.payNSpray1
 
-
+-- If this is turned off, this script won't attempt to load the save data from kcnet-revc-save.json.
+-- Otherwise it will attempt to load the save data.
+-- I plan on using the saved stats for like a high score system or something.
+-- Also, to keep track of how long you have had 1-6 stars and more stats.
+-- I will be adding a lot to this once I figure this out and some events and objectives to play with.
+local loadStats = true
 
 
 ---------
@@ -71,7 +76,7 @@ gbDisplayPosn = true
 gbDisableEmergencyVehicleSpawning = false
 
 -- This enables infinite ammo for the player.
-gbInfiniteAmmoCheat = false
+gbInfiniteAmmoCheat = true
 
 -- This toggles fading the player when they die and get busted.
 -- If this is false, they won't fade and it'll spawn the player quicker.
@@ -191,6 +196,7 @@ if read_position_from_save then
 	local wantedStarsEvaded = save_file.stats.wanted_stars_evaded
 
 	local bulletsThatHit = save_file.stats.bullets_that_hit
+	local explosivesUsed = save_file.stats.kgs_of_explosives_used
 
 	-- Distance travelled
 	local distanceTravelledByBike = save_file.stats.distance_traveled_by_bike
@@ -251,8 +257,11 @@ if read_position_from_save then
 	--- Stat loading
 	-------------------------------
 
+	-- Stop the game loading here if the stats shouldn't be loaded.
+	-- The game will still run fine, but it won't load any stats.
+	if not loadStats then return end
+
 	-- Save and restore some stats such as how many peds were wasted, how many times the player was wasted and more.
-	-- player.set_stat(stat_enums.eStatType.CARS_EXPLODED)
 	player.set_stat(stat_enums.eStatType.CARS_EXPLODED, carsExploded)
 	player.set_stat(stat_enums.eStatType.BOATS_EXPLODED, boatsExploded)
 	player.set_stat(stat_enums.eStatType.HELIS_DESTROYED, helisExploded)
@@ -276,7 +285,7 @@ if read_position_from_save then
 	player.set_stat(stat_enums.eStatType.SEAGULLS_KILLED, seagullsKilled)
 
 	-- Peds killed
-	player.set_stat(stat_enums.eStatType.HEADS_POPPED, headsPopped)
+	-- player.set_stat(stat_enums.eStatType.HEADS_POPPED, headsPopped)
 	player.set_stat(stat_enums.eStatType.PEOPLE_KILLED_BY_OTHERS, peopleKilledByOthers)
 	player.set_stat(stat_enums.eStatType.PEOPLE_KILLED_BY_PLAYER, peopleKilledByPlayer)
 	player.set_stat(stat_enums.eStatType.TOTAL_LEGITIMATE_KILLS, totalKills)
@@ -291,7 +300,7 @@ if read_position_from_save then
 	player.set_stat(stat_enums.eStatType.LONGEST_WHEELIE_DIST, longestWheelieDistance)
 	player.set_stat(stat_enums.eStatType.LONGEST_WHEELIE, longestWheelieTime)
 
-	player.set_stat(stat_enums.eStatType.FIRES_EXTINGUISHED, firesExtinguished)
+	-- player.set_stat(stat_enums.eStatType.FIRES_EXTINGUISHED, firesExtinguished)
 
 	-- Times died and other stuff.
 	player.set_stat(stat_enums.eStatType.TIMES_ARRESTED, timesArrested)
@@ -300,6 +309,9 @@ if read_position_from_save then
 
 	-- Days passed
 	player.set_stat(stat_enums.eStatType.DAYS_PASSED, daysPassed)
+
+	-- Explosives
+	player.set_stat(stat_enums.eStatType.KGS_OF_EXPLOSIVES_USED, explosivesUsed)
 
 	------------------------
 	-- End setting stats

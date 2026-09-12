@@ -6,6 +6,8 @@
 
 blip_util = {}
 
+cheat_functions = {}
+
 file_util = {}
 -- save_util = {}
 vehicle_util = {}
@@ -50,6 +52,61 @@ local json = dofile("ViceExtended/lua_scripts/lib/dkjson.lua")
 -- 	end
 -- end
 
+------------
+-- Cheat functions
+------------
+
+--- Runs weapon cheat 1.
+function cheat_functions.weapon_cheat1()
+	local weaponAmmo = 100
+	-- This gives the player a weapon with some ammo
+	-- You can use any weapons from the eWeaponType enum in freeroam-enums.lua.
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_BRASSKNUCKLE, 1)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_BASEBALLBAT, 1)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_MOLOTOV, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_COLT45, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_SHOTGUN, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_TEC9, 100)
+
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_RUGER, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_SNIPERRIFLE, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_FLAMETHROWER, weaponAmmo)
+end
+
+--- Runs weapon cheat 2.
+function cheat_functions.weapon_cheat2()
+	local weaponAmmo = 100
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_KATANA, 1)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_GRENADE, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_DETONATOR, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_PYTHON, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_STUBBY_SHOTGUN, weaponAmmo)
+
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_SILENCED_INGRAM, weaponAmmo)
+
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_M4, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_LASERSCOPE, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_ROCKETLAUNCHER, weaponAmmo)
+end
+
+--- Runs weapon cheat 3.
+function cheat_functions.weapon_cheat3()
+	local weaponAmmo = 100
+
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_CHAINSAW, 1)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_GRENADE, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_PYTHON, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_SPAS12_SHOTGUN, weaponAmmo)
+
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_MP5, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_M4, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_LASERSCOPE, weaponAmmo)
+	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_MINIGUN, weaponAmmo)
+	-- TODO What is minigun2? I'm not sure what it is for.
+	-- player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_MINIGUN, weaponAmmo)
+
+end
+
 -------------
 -- File util
 -------------
@@ -89,6 +146,12 @@ end
 -- function save_util.save_player_data(filename)
 
 -- end
+
+------------
+-- Player
+------------
+
+
 
 -------------
 -- Vehicle

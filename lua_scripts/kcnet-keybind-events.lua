@@ -589,6 +589,11 @@ if dbgStatTest then
 	player.set_stat(stat_enums.eStatType.ROUNDS_FIRED_BY_PLAYER, 2000)
 end
 
+-- Print the health and armor for testing my new internal format.
+-- print("Health: " .. player.get_health())
+-- print("Armor: " .. player.get_armor())
+
+
 -------
 -- Internal TCP Server testing
 -- This may be used for a small multiplayer test or something else.

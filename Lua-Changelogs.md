@@ -123,7 +123,7 @@ feat: Add types for json save format, fix lua scripts
 
 * Update changelogs and documentation.
 
-### Latest 1.2.13-9a
+### 1.2.13-9a
 
 feat: Add stat load system, and blip testing
 
@@ -143,3 +143,11 @@ feat: Add stat load system, and blip testing
 
 * Update changelog, and documentation.
 
+### Latest 1.2.13-10a
+
+feat: Add toggle for loading stats
+
+* Now the stats loading from the json file can be turned off.
+* Add weapon cheat functions into freeroam-functions.lua
+
+* Update changelog.
