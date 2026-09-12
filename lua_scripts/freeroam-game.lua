@@ -4,6 +4,9 @@ dofile("ViceExtended/lua_scripts/freeroam-locations.lua")
 -- Add new enums for freeroam-game.lua
 dofile("ViceExtended/lua_scripts/freeroam-enums.lua")
 
+-- For functions such as spawning vehicles, lua helper functions.
+dofile("ViceExtended/lua_scripts/freeroam-functions.lua")
+
 -----------
 -- WARNING
 -- If there are any errors in this file, ReVC will crash because this script spawns the player.
@@ -59,7 +62,7 @@ gbReloadLuaScriptWithKeybind = true
 
 -- If the position should be displayed on the screen.
 -- This can be very useful for debugging.
-gbDisplayPosn = false
+gbDisplayPosn = true
 
 -- If the emergency vehicles are disabled.
 -- This should stop firetrucks, ambulances, and police vehicles from spawning for crimes.
@@ -121,9 +124,86 @@ end
 
 -- player.create(0, { x = construction_site.pos.x, y = construction_site.pos.y, z = construction_site.pos.z })
 
--- Spawn at the pay n spray I am testing the garage at.
--- TODO Make this spawn the player at the coordinates in the JSON save file that I am testing.
-player.create(0, { x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z })
+----------------------
+--- New save format
+--- This can load from the kcnet-revc-save.json custom json format
+--- I will be making a save pickup or something later in this but this is all loaded in with lua.
+--- So I can easily modify how this loads without even rebuilding the game code!
+----------------------
+
+-- If this is set, this will read the saved player position from the custom JSON save file.
+-- Otherwise it just sets a debug position to spawn at.
+local read_position_from_save = true
+
+-- This works now! Reads from my custom save json format.
+-- I will use this later for respawning me where I last was pretty much.
+-- Requires the ViceExtended subfolder since the games root folder isn't in lua_scripts.
+
+if read_position_from_save then
+	local save_file_path = "ViceExtended/kcnet-revc-save.json"
+
+	-- If this type value is here, it uses the type defined in types.lua.
+	-- Since I modified the read_json_file function, this doesn't seem to be needed so I'll comment it out.
+	-- -@type RevcSave
+	local save_file, err = file_util.read_json_file(save_file_path)
+	if not save_file then
+		print(err)
+		return
+	end
+
+
+	-- All required save values
+	local playerX = save_file.player.position.x
+	local playerY = save_file.player.position.y
+	local playerZ = save_file.player.position.z
+
+	local gameHour = save_file.game.time.hours
+	local gameMinute = save_file.game.time.minutes
+
+	-- Stats
+	-- TODO Use these later, I will need to add more first.
+	-- local playerHealth = save_file.stats.health
+	-- local playerArmor = save_file.stats.armor
+	-- local playerMoney = save_file.stats.money
+
+	local saveFileVersion = save_file.version
+	local saveFileFormat = save_file.format
+	--
+
+	-- TODO Add error handling to this.
+	-- If the version or save format is changed or invalid it shouldn't try to load or save that file.
+	if saveFileVersion == custom_save.eSaveVersion.save_version then
+		print("The save version is valid")
+	end
+
+	if saveFileFormat == custom_save.eSaveVersion.save_format then
+		print("The save file format is valid")
+	end
+
+	-- Spawn the player at the coordinates set in the save file.
+	player.create(0, {x = playerX, y = playerY, z = playerZ})
+
+	-- TODO Setup these below.
+	-- Set the players heading
+
+	-- Set the players health
+
+	-- Save and restore some stats such as how many peds were wasted, how many times the player was wasted and more.
+
+	-- Set the previous weather
+
+	-- Set the game time
+	game.set_time(gameHour, gameMinute)
+
+else
+	-- If the save file isn't going to be used, this below is set as a manual spawn point.
+
+	-- Spawn at the pay n spray I am testing the garage at.
+	-- TODO Make this spawn the player at the coordinates in the JSON save file that I am testing.
+	player.create(0, { x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z })
+	-- print(save_file.stats.health)
+end
+
 
 -- This gives the player a weapon with some ammo
 -- You can use any weapons from the eWeaponType enum in freeroam-enums.lua.

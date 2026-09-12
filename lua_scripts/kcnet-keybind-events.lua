@@ -13,15 +13,7 @@ dofile("ViceExtended/lua_scripts/freeroam-functions.lua")
 -- New for enums, which will be used in my freeroam and other scripts.
 dofile("ViceExtended/lua_scripts/freeroam-enums.lua")
 
--- New for json testing from my save file format
-dofile("ViceExtended/lua_scripts/lib/dkjson.lua")
 
--- For package path
--- TODO Test this later.
--- package.path = package.path .. ";ViceExtended/lua_scripts/lib/?.lua"
-
--- local json = require ("dkjson")
-local json = dofile("ViceExtended/lua_scripts/lib/dkjson.lua")
 
 ------
 -- Prefix for logging values to the console.
@@ -109,6 +101,12 @@ local dbgRemoveAllWeapons = false
 
 -- Test for reading my custom save format
 local dbgReadCustomSave = false
+
+-- Blow up the current vehicle you are in.
+local dbgBlowUpCurrentVehicle = false
+
+-- Test for setting the weather.
+local dbgSetWeather = true
 
 -----------
 
@@ -456,12 +454,7 @@ end
 -- 
 
 
--- Blow up vehicle has been enabled, now you can blow up your vehicle you are in with this.
--- player.blow_up_vehicle()
-
 -----------------------------------------------
-
-
 
 -- This works now! Reads from my custom save json format.
 -- I will use this later for respawning me where I last was pretty much.
@@ -469,16 +462,48 @@ end
 if dbgReadCustomSave then
 	local save_file_path = "ViceExtended/kcnet-revc-save.json"
 
+	-- If this type value is here, it uses the type defined in types.lua.
+	-- Since I modified the read_json_file function, this doesn't seem to be needed so I'll comment it out.
+	-- -@type RevcSave
 	local save_file, err = file_util.read_json_file(save_file_path)
 	if not save_file then
 		print(err)
 		return
 	end
 
-	-- This works! I can print these values
+	-- This works! I can print these values, now this has auto complete from the JSON save format.
+	-- print(save_file.stats.health)
+	-- print(save_file.player.position.x)
 	print(save_file.stats.health)
 end
 
+-- Blow up vehicle has been enabled, now you can blow up your vehicle you are in with this.
+if dbgBlowUpCurrentVehicle then
+	player.blow_up_vehicle()
+end
+-- 
+
+-- This can set the weather from the weather enums.
+-- TODO Make this get a random value from the weather enums.
+if dbgSetWeather then
+
+	game.force_weather(weather_enums.eWeatherType.WEATHER_SUNNY)
+	game.force_weather_now(weather_enums.eWeatherType.WEATHER_SUNNY)
+	-- game.force_weather(weather_enums.eWeatherType.WEATHER_RAINY)
+
+	-- game.force_weather_now(weather_enums.eWeatherType.WEATHER_RAINY)
+
+
+	-- Release the weather type.
+	-- game.release_weather()
+
+	-- TODO Implement this
+	-- Get the current weather type
+	-- game.get_weather()
+
+	-- Set if hurricanes are allowed
+	-- game.set_allow_hurricanes(true)
+end
 
 -------
 -- Internal TCP Server testing

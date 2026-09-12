@@ -31,6 +31,8 @@ garage_enums = {}
 
 weapon_enums = {}
 
+weather_enums = {}
+
 -- clothes_enums = {}
 
 player_enums = {}
@@ -39,6 +41,23 @@ player_info_enums = {}
 ped_enums = {}
 
 -- vehicle_enums = {}
+
+--------------
+--- Custom enums below
+--------------
+---
+
+custom_save = {}
+
+-- These should match what is set in the games code.
+-- If this is changed, loading/saving might not work.
+custom_save.eSaveVersion = {
+	save_format = "revc-freeroam",
+	save_version = 1
+}
+
+-- revc-freeroam
+
 
 --------------
 -- ReVC enums below
@@ -331,6 +350,23 @@ garage_enums.eStoredCarFlags = {
 	FLAG_EXPLOSIONPROOF = 0x4,
 	FLAG_COLLISIONPROOF = 0x8,
 	FLAG_MELEEPROOF = 0x10,
+}
+
+----------------
+--- Weather.h
+----------------
+
+weather_enums.eWeatherType = {
+	-- WEATHER_RANDOM = -1,
+	WEATHER_SUNNY = 0,
+	WEATHER_CLOUDY = 1,
+	WEATHER_RAINY = 2,
+	WEATHER_FOGGY = 3,
+	WEATHER_EXTRA_SUNNY = 4,
+	WEATHER_HURRICANE = 5,
+	WEATHER_TOTAL = 6,
+
+	-- WEATHER_EXTRACOLOURS = 6
 }
 
 ----------------

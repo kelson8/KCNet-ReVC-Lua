@@ -56,6 +56,11 @@ This is a list of clothes for the `player.set_clothes` function and a usage for 
 | game.set_police_respawn | Sets a busted respawn point. | game.set_police_respawn({x = 25, y = 25, z = 25}) |
 | game.start_fire | Start a fire at the specified location. | game.start_fire({x = 25, y = 25, z = 25}) |
 | game.pass_time | Pass the specified time, mostly for wasted and busted scripts. | game.pass_time(720) |
+| game.force_weather | Set the weather to the game. | Takes a value from my weather_enums table. |
+| game.force_weather_now | Set the weather to the game now. | Takes a value from my weather_enums table. |
+| game.release_weather | Release the weather for the game. | |
+| game.get_weather - DISABLED - Not Implemented | Get the current weather type. | |
+| game.set_allow_hurricanes | This toggle sets if hurricanes should be enabled.  | |
 | game.set_time | Set the game time to the specified hour and minute. | game.set_time(10, 55) |
 | game.set_time_scale | Set the time scale to the specified value, this is untested. | game.set_time_scale(1) |
 | game.add_explosion | Add an explosion at the specified coords, if parameter 2 is true it enables the explosion sound. | game.add_explosion({x = 25, y = 25, z = 25}, true) |

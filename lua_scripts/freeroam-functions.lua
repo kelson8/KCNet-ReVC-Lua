@@ -8,6 +8,14 @@ file_util = {}
 -- save_util = {}
 vehicle_util = {}
 
+-- New for json testing from my save file format
+-- dofile("ViceExtended/lua_scripts/lib/dkjson.lua")
+
+-- For package path
+-- TODO Test this later.
+-- package.path = package.path .. ";ViceExtended/lua_scripts/lib/?.lua"
+
+local json = dofile("ViceExtended/lua_scripts/lib/dkjson.lua")
 
 -------------
 -- File util
@@ -17,9 +25,9 @@ vehicle_util = {}
 -- local function read_json_file(filename)
 
 --- Read from a json file for the custom JSON save format.
----@param filename any The json file to read from.
----@return nil
----@return string
+---@param filename string The json file to read from.
+---@return RevcSave|nil data
+---@return string|nil error
 function file_util.read_json_file(filename)
 	local file, err = io.open(filename, "r")
 

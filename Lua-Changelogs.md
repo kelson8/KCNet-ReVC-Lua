@@ -113,3 +113,12 @@ feat: Add json loading with dkjson and types.lua
 
 * Update changelogs and documentation.
 
+### Latest 1.2.13-5a
+
+feat: Add types for json save format, fix lua scripts
+
+* I had to move the dkjson.lua dofile line into freeroam-functions.
+
+* Add weather options into game namespace.
+
+* Update changelogs and documentation.
