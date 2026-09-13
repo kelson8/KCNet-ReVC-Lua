@@ -158,4 +158,6 @@ feat: Update set_ped_objectives function
 
 * Now this can set custom actions on the peds in the area, instead of hardcoding specific ones.
 
+* Make some variables and comments a bit more clear on the save system.
+
 * Update changelog and documentation.
