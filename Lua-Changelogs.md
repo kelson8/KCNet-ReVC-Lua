@@ -143,7 +143,7 @@ feat: Add stat load system, and blip testing
 
 * Update changelog, and documentation.
 
-### Latest 1.2.13-10a
+### 1.2.13-10a
 
 feat: Add toggle for loading stats
 
@@ -151,3 +151,11 @@ feat: Add toggle for loading stats
 * Add weapon cheat functions into freeroam-functions.lua
 
 * Update changelog.
+
+### Latest 1.2.13-13a
+
+feat: Update set_ped_objectives function
+
+* Now this can set custom actions on the peds in the area, instead of hardcoding specific ones.
+
+* Update changelog and documentation.

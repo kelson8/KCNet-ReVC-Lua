@@ -21,13 +21,12 @@ local policeStation = GameLocations.policeStation
 local construction_site = GameLocations.constructionSiteVehicle
 local payNSpray1 = GameLocations.payNSpray1
 
--- If this is turned off, this script won't attempt to load the save data from kcnet-revc-save.json.
--- Otherwise it will attempt to load the save data.
--- I plan on using the saved stats for like a high score system or something.
--- Also, to keep track of how long you have had 1-6 stars and more stats.
--- I will be adding a lot to this once I figure this out and some events and objectives to play with.
-local loadStats = true
+-- If this is set, this will read the saved player position from the custom JSON save file.
+-- Otherwise it just sets a debug position to spawn at.
 
+-- If this is set, it will load the custom save file.
+-- Which is named 'kcnet-revc-save.json'.
+local read_save_data = true
 
 ---------
 --- New, for testing features.
@@ -137,15 +136,11 @@ end
 --- So I can easily modify how this loads without even rebuilding the game code!
 ----------------------
 
--- If this is set, this will read the saved player position from the custom JSON save file.
--- Otherwise it just sets a debug position to spawn at.
-local read_position_from_save = true
-
 -- This works now! Reads from my custom save json format.
 -- I will use this later for respawning me where I last was pretty much.
 -- Requires the ViceExtended subfolder since the games root folder isn't in lua_scripts.
 
-if read_position_from_save then
+if read_save_data then
 	local save_file_path = "ViceExtended/kcnet-revc-save.json"
 
 	--------
@@ -161,7 +156,7 @@ if read_position_from_save then
 
 	-- Spawn the player at the coordinates set in the save file.
 	-- player.create(0, {x = playerX, y = playerY, z = playerZ})
-	player.create(0, {x = storedPlayerPosition.x, y = storedPlayerPosition.y, z = storedPlayerPosition.z})
+	player.create(0, { x = storedPlayerPosition.x, y = storedPlayerPosition.y, z = storedPlayerPosition.z })
 
 	-- This works for loading the stats from the function!
 	-- Cleans up the freeroam-game.lua file quite a bit.
@@ -223,17 +218,17 @@ end
 -- Respawns when wasted
 -----
 
-game.set_hospital_respawn({x = oldSpawn.pos.x, y = oldSpawn.pos.y, z = oldSpawn.pos.z}, 1.0)
-game.set_hospital_respawn({x = airport.pos.x, y = airport.pos.y, z = airport.pos.z}, 1.0)
-game.set_hospital_respawn({x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z}, 1.0)
+game.set_hospital_respawn({ x = oldSpawn.pos.x, y = oldSpawn.pos.y, z = oldSpawn.pos.z }, 1.0)
+game.set_hospital_respawn({ x = airport.pos.x, y = airport.pos.y, z = airport.pos.z }, 1.0)
+game.set_hospital_respawn({ x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z }, 1.0)
 
 -- -----
 -- -- Respawns when busted
 -- -----
 
-game.set_police_respawn({x = oldSpawn.pos.x, y = oldSpawn.pos.y, z = oldSpawn.pos.z}, 1.0)
-game.set_police_respawn({x = airport.pos.x, y = airport.pos.y, z = airport.pos.z}, 1.0)
-game.set_police_respawn({x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z}, 1.0)
+game.set_police_respawn({ x = oldSpawn.pos.x, y = oldSpawn.pos.y, z = oldSpawn.pos.z }, 1.0)
+game.set_police_respawn({ x = airport.pos.x, y = airport.pos.y, z = airport.pos.z }, 1.0)
+game.set_police_respawn({ x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z }, 1.0)
 
 
 --------------------
@@ -282,8 +277,8 @@ function OnTick()
 
 	-- This works for kind of a timer, its just for screwing around with though.
 	-- if random_number == 30 then
-		-- Hmm, some fun.. This causes vehicles to randomly blow up.
-		-- world.blow_up_all_vehicles()
+	-- Hmm, some fun.. This causes vehicles to randomly blow up.
+	-- world.blow_up_all_vehicles()
 	-- end
 
 	-- Would be better to just freeze the clock though, probably less resource intensive.

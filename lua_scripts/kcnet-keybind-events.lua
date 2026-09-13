@@ -139,6 +139,10 @@ local dbgBlipTest = false
 local dbgStatTest = false
 
 
+-- Teleport the player to a random position.
+-- TODO Fix this to work right.
+local dbgTeleportRandomPosn = false
+
 -----------
 
 -------------------------
@@ -253,7 +257,10 @@ end
 
 -- Test, may be changed/removed later.
 -- Currently, gives the players a weapon and tries to have them kill the player.
--- world.set_ped_objectives()
+-- Usage (These are all boolean values):
+-- world.set_ped_objectives(give_ped_weapons, attack_player, should_exit_vehicle, kill_peds)
+-- world.set_ped_objectives(true, true, false, false)
+-- 
 
 -- Set the game time.
 -- game.set_time(10, 55)
@@ -593,6 +600,10 @@ end
 -- print("Health: " .. player.get_health())
 -- print("Armor: " .. player.get_armor())
 
+-- Teleport the player to a random position.
+if dbgTeleportRandomPosn then
+	player_functions.random_position()
+end
 
 -------
 -- Internal TCP Server testing

@@ -12,7 +12,11 @@ cheat_functions = {}
 file_util = {}
 player_functions = {}
 
--- Toggle loading the stats for the player here.
+-- If this is turned off, this script won't attempt to load the save data from kcnet-revc-save.json.
+-- Otherwise it will attempt to load the save data.
+-- I plan on using the saved stats for like a high score system or something.
+-- Also, to keep track of how long you have had 1-6 stars and more stats.
+-- I will be adding a lot to this once I figure this out and some events and objectives to play with.
 player_functions.load_stats = true
 
 save_functions = {}

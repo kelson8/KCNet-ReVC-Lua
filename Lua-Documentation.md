@@ -139,3 +139,4 @@ Any functions without a usage below are just getter or setter functions and don'
 | world.switch_ped_roads_on | Turn the roads on in the area for peds. | world.switch_ped_roads_on({x = 25, y = 25, z = 25}, {x = 50, y = 50, z = 50}) |
 | world.set_ped_density | Set the ped density, takes a value between 0 and 1.0 | |
 | world.set_vehicle_density | Set the vehicle density, takes a value between 0 and 1.0 | |
+| world.set_ped_objectives | Set the specified boolean values for the ped objectives, give weapons will give the ped a pistol currently, attack player, exit vehicle and kill peds all do what they say, should be easy to understand what they do. | world.set_ped_objectives(give_ped_weapons, attack_player, should_exit_vehicle, kill_peds) |
