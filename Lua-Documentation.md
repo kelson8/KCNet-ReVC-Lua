@@ -165,3 +165,4 @@ Any functions without a usage below are just getter or setter functions and don'
 | world.set_vehicle_density | Set the vehicle density, takes a value between 0 and 1.0 | |
 | world.set_ped_objectives | Set the specified boolean values for the ped objectives, give weapons will give the ped a pistol currently, attack player, exit vehicle and kill peds all do what they say, should be easy to understand what they do. | world.set_ped_objectives(give_ped_weapons, attack_player, should_exit_vehicle, kill_peds) |
 | world.fade_camera | Fade the games camera in and out, currently without a game.wait function I cannot fade out then back in since it goes too fast. | world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_OUT) |
+| world.set_marker | Set the worlds target marker to a specified X, and Y coordinate if not already set. | world.set_marker({x = 25, y = 25}) |

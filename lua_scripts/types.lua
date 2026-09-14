@@ -67,6 +67,14 @@
 ---@class SavePlayer
 ---@field position CVector
 
+
+--------------------------------
+-- Map data
+--------------------------------
+
+---@class MapBlip
+---@field target_marker CVector2D
+
 --------------------------------
 -- Player stats
 --------------------------------
@@ -127,3 +135,4 @@
 ---@field player SavePlayer
 ---@field stats SaveStats
 ---@field version integer
+---@field map MapBlip

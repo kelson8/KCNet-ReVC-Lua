@@ -351,6 +351,9 @@ function player_functions.load_save_stats(file)
 	local longestWheelieDistance = save_file.stats.longest_wheelie_distance
 	local longestWheelieTime = save_file.stats.longest_wheelie_time
 
+	-- Target marker
+	local targetMarkerPos = { x = save_file.map.target_marker.x, y = save_file.map.target_marker.y }
+
 	-----
 	-- Save file version and format.
 	local saveFileVersion = save_file.version
@@ -445,6 +448,10 @@ function player_functions.load_save_stats(file)
 	-- Set the game time
 	-- Well this no longer works in here when I moved it..
 	game.set_time(gameHour, gameMinute)
+
+	-- Set the world blip marker if it was stored.
+	-- I got this working in v1.2.14-2a.
+	world.set_marker(targetMarkerPos)
 end
 
 -------------

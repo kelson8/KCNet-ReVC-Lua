@@ -178,7 +178,7 @@ feat: Add blips file and set blips on startup
 
 # 1.2.14
 
-### Latest 1.2.14-1a
+### 1.2.14-1a
 
 feat: Make freeroam-blips store created blip ids
 
@@ -187,5 +187,15 @@ feat: Make freeroam-blips store created blip ids
 * Add camera fade command and enums for fading.
 
 * Add file exists check to freeroam-functions.lua.
+
+* Update changelog and documentation.
+
+### Latest 1.2.14-2a
+
+feat: Make save file load target marker position
+
+* I made this to where it can now load the target marker position.
+
+* Added world.set_marker for setting the marker.
 
 * Update changelog and documentation.
