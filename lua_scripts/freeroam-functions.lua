@@ -125,12 +125,25 @@ function cheat_functions.weapon_cheat3()
 	player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_MINIGUN, weaponAmmo)
 	-- TODO What is minigun2? I'm not sure what it is for.
 	-- player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_MINIGUN, weaponAmmo)
-
 end
 
 -------------
 -- File util
 -------------
+
+--- Check if a file exists
+--- https://stackoverflow.com/questions/4990990/check-if-a-file-exists-with-lua
+---@param file_name string The file to check.
+---@return boolean If the file exists.
+function file_util.does_file_exist(file_name)
+	local f = io.open(file_name, "r")
+	if f ~= nil then
+		io.close(f)
+		return true
+	else
+		return false
+	end
+end
 
 -- Read from a json file for the saves
 -- local function read_json_file(filename)
@@ -199,12 +212,7 @@ function save_functions.validate_save(save)
 	end
 
 	return true
-
-
-
 end
-
-
 
 ------------
 -- Player
@@ -220,8 +228,8 @@ local policeStation = GameLocations.policeStation
 --- TODO Set this up to get where the player is, and set a bounds for this.
 function player_functions.random_position()
 	-- local minTeleport = {x = 25, y = 25, z = 20}
-	local minTeleport = {x = airport.pos.x, y = airport.pos.y, z = airport.pos.z}
-	local maxTeleport = {x = policeStation.pos.x, y = policeStation.pos.y, z = policeStation.pos.z}
+	local minTeleport = { x = airport.pos.x, y = airport.pos.y, z = airport.pos.z }
+	local maxTeleport = { x = policeStation.pos.x, y = policeStation.pos.y, z = policeStation.pos.z }
 	-- local maxTeleport = {x = 50, y = 50, z = 25}
 	-- local maxTeleport = {x = 50, y = 50, z = 25}
 
@@ -234,7 +242,6 @@ function player_functions.random_position()
 	-- TODO Make this get a random position from the list above.
 
 	player.set_position(randomPosition)
-
 end
 
 --------------
@@ -243,10 +250,10 @@ end
 --------------
 
 --- Load the saved position for the player
---- 
+---
 --- This is separate so I can load the player before the stats.
 --- Otherwise the game will crash.
---- 
+---
 ---@param file string
 -- -@return CVector
 function player_functions.get_saved_position(file)
@@ -261,10 +268,8 @@ function player_functions.get_saved_position(file)
 	local playerZ = save_file.player.position.z
 
 
-	return {x = playerX, y = playerY, z = playerZ}
+	return { x = playerX, y = playerY, z = playerZ }
 end
-
-
 
 --- Load the stats for the player
 ---

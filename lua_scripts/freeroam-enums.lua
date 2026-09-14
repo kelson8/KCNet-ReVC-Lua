@@ -21,6 +21,8 @@ local Result = enum { "Success", "Failure" }
 
 audio_enums = {}
 
+camera_enums = {}
+
 event_enums = {}
 
 font_enums = {}
@@ -36,6 +38,8 @@ radar_enums = {}
 weapon_enums = {}
 
 weather_enums = {}
+
+world_enums = {}
 
 -- clothes_enums = {}
 
@@ -289,6 +293,17 @@ font_enums.eFontTypes = {
 	FONT_HEADING = 3,
 	FONT_JAPANESE = 4 -- Only enabled if 'MORE_LANGUAGES' is on in config.h, which it seems to be in my ReVC build.
 	-- MAX_FONTS = FONT_HEADING
+}
+
+----------------
+--- Camera.h
+----------------
+
+camera_enums.eFadeDirection = {
+	-- Direction
+	FADE_NONE = -1,
+	FADE_OUT = 0,
+	FADE_IN = 1
 }
 
 ----------------
@@ -633,6 +648,8 @@ weather_enums.eWeatherType = {
 
 	-- WEATHER_EXTRACOLOURS = 6
 }
+
+
 
 ----------------
 -- PedType.h

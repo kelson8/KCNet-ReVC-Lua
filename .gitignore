@@ -25,3 +25,6 @@ kcnet-revc-save.json
 
 # I might add these later.
 lua_scripts/extra_functions
+
+# Auto generated files.
+lua_scripts/current_blip.txt

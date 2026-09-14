@@ -176,3 +176,16 @@ feat: Add blips file and set blips on startup
 
 * Update changelog and documentation.
 
+# 1.2.14
+
+### Latest 1.2.14-1a
+
+feat: Make freeroam-blips store created blip ids
+
+* Now freeroam-blips will store each blip ID so I can easily delete it elsewhere in the code.
+
+* Add camera fade command and enums for fading.
+
+* Add file exists check to freeroam-functions.lua.
+
+* Update changelog and documentation.

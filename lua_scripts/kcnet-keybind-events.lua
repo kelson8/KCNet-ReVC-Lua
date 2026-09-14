@@ -28,6 +28,10 @@ dofile("ViceExtended/lua_scripts/freeroam-blips.lua")
 --- KCNet Freeroam - Keybind events with F9
 -----------------------
 
+-- This prints all globals.
+-- https://www.lua.org/pil/14.html
+-- for n in pairs(_G) do print(n) end
+
 ------
 -- Prefix for logging values to the console.
 ------
@@ -150,6 +154,9 @@ local dbgStatTest = false
 -- Teleport the player to a random position.
 -- TODO Fix this to work right.
 local dbgTeleportRandomPosn = false
+
+-- Camera fade testing, this mostly works but it's too fast to run fade out and in at once without a timer.
+local dbgCameraFadeTest = false
 
 -----------
 
@@ -570,12 +577,23 @@ end
 
 
 
--- TODO Fix this to be able to be removed, currently I cannot remove the blip.
--- This gets loaded in 
+-- This works for removing the blip that is created with freeroam-game.lua now.
 if dbgBlipTest then
 	-- Moved into freeroam-game.lua, I think I have to load it on init instead of in here.
-	print(map_blips.currentBlip1)
-	print(map_blips.currentBlip1Set)
+
+	-- This works for deleting the blip now!
+	-- Although I am only storing one of them in the text file, I can probably put more on multiple lines.
+	-- TODO Make this store and read from a json file with this format:
+	----
+	--- {
+	--- 	blip1_id: 1,
+	--- 	blip1_id: 2,
+	--- }
+	---
+	---
+	current_blip = map_blips.get_current_blip()
+	print(current_blip)
+	game.remove_blip(current_blip)
 end
 
 -- Test for setting the players stats.
@@ -590,6 +608,15 @@ end
 -- Teleport the player to a random position.
 if dbgTeleportRandomPosn then
 	player_functions.random_position()
+end
+
+-- Test for fading the camera in and out, probably won't work without a timer.
+-- This works!
+-- If I run these one at a time it'll work, I will need to implement the wait timer like in the original scripts.
+-- Otherwise this won't work properly for teleports in my lua scripts.
+if dbgCameraFadeTest then
+	world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_OUT)
+	world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_IN)
 end
 
 -------
