@@ -18,7 +18,7 @@ Anything that I have with `DISABLED` in the description below, is a function tha
 
 Optionally, with lua you can compile your scripts, this will prevent the script from easily being changed, and the game will still load these.
 
-I may eventually require the `freeroam-game.lua` to be compiled n the future to be loaded to more mimic the `main.scm` binary format, the code won't be closed I'll just make a script that converts the `freeroam-game.lua` source file to a compiled `freeroam-game.luac` file. 
+I may eventually require the `freeroam-game.lua` to be compiled in the future to be loaded to more mimic the `main.scm` binary format, the code won't be closed I'll just make a script that converts the `freeroam-game.lua` source file to a compiled `freeroam-game.luac` file. 
 
 All of the other scripts will still be uncompiled, but I have no current plans on doing this currently.
 
