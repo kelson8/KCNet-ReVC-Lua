@@ -8,11 +8,22 @@ dofile("ViceExtended/lua_scripts/freeroam-enums.lua")
 -- For functions such as spawning vehicles, lua helper functions.
 dofile("ViceExtended/lua_scripts/freeroam-functions.lua")
 
+-- Debug testing
+-- dofile("ViceExtended/lua_scripts/extra_functions/test_disable_road_blocks.lua")
+
+-- New for blips
+dofile("ViceExtended/lua_scripts/freeroam-blips.lua")
+
 -----------
 -- WARNING
 -- If there are any errors in this file, ReVC will crash because this script spawns the player.
 -- Like the original game scripts, my ReVC build doesn't spawn the player directly in the games code but in here.
 -----------
+
+-----------------------
+--- KCNet Freeroam - Main Game init script.
+-----------------------
+
 
 -- Obtained from freeroam-locations.lua
 local oldSpawn = GameLocations.oldSpawn
@@ -95,26 +106,24 @@ gbFadeOnDeath = true
 -- I'll need to fix this OnInit function so it doesn't try to spawn in more player peds or crash.
 --------
 
+
 function OnInit()
-	-- TODO Make this function only be allowed in the init, the player should only ever be created once.
-	-- Although my code has protections in place so this doesn't run more then once.
+	-- TODO Use this function for variables that should only ever be set on startup.
+	-- It now can create the player in here, although it'll break my game if I start a new game or load a save.
+	-- So I won't use this just yet.
 
-	-- Init player, spawn them in.
+	-- New for setting up blips on the map.
+	-- Currently these cannot be modified but they do show up now.
+	-- TODO Load these from json list later.
+	map_blips.setup()
 
-	-- To find a spawn position, look into the GameLocations table in freeroam-locations.lua.
+	-- TODO Implement these below
+	-- Save pickups, which save to my custom json file.
 
-	-- Spawn at the custom spawn in the middle of the map.
-	-- player.create(0, {x = oldSpawn.pos.x, y = oldSpawn.pos.y, z = oldSpawn.pos.z})
+	-- Fix the turn_ped_roads_off functions so I can disable the roads where peds shouldn't be.
 
-	-- Spawn at the airport.
-	-- player.create(0, {x = airport.pos.x, y = airport.pos.y, z = airport.pos.z})
+	-- Spawning objects, I haven't figured this out in the code yet.
 
-	-- Spawn at the police station.
-	-- player.create(0, {x = policeStation.pos.x, y = policeStation.pos.y, z = policeStation.pos.z})
-
-	-- Spawn at the construction site.
-
-	-- player.create(0, {x = construction_site.pos.x, y = construction_site.pos.y, z = construction_site.pos.z})
 end
 
 -- Spawn in the player, mostly for spawning without the .scm scripts
@@ -177,6 +186,7 @@ end
 -- This gives the player a weapon with some ammo
 -- You can use any weapons from the eWeaponType enum in freeroam-enums.lua.
 player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_COLT45, 100)
+player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_KATANA, 1)
 
 
 ----
@@ -192,6 +202,7 @@ player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_COLT45, 100)
 
 -- Back of mansion.
 -- world.switch_ped_roads_off({x = -395.6, y = -658.6, z = 0.0}, { x = -363.2, y = -636.7, z = 32.0})
+
 
 ------------------
 
@@ -255,6 +266,8 @@ game.set_police_respawn({ x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSp
 math.randomseed(os.time())
 
 
+
+------------------
 -- This runs every frame (called by the C++ Update/Heartbeat)
 function OnTick()
 	-- local random_number = math.random(1, 1000)

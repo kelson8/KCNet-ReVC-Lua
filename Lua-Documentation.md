@@ -6,11 +6,27 @@ Anytime I say namespaces I normally mean tables in lua.
 
 The values below that are in tables like this, are using CVectors, so they require the x, y, and z parameters or it won't work.
 
+This project is using Lua version 5.4.7
+
 ```lua
 start_fire({x = 25, y = 25, z = 25})
 ```
 
 Anything that I have with `DISABLED` in the description below, is a function that is not working yet or unused.
+
+**Compiling lua scripts**
+
+Optionally, with lua you can compile your scripts, this will prevent the script from easily being changed, and the game will still load these.
+
+I may eventually require the `freeroam-game.lua` to be compiled n the future to be loaded to more mimic the `main.scm` binary format, the code won't be closed I'll just make a script that converts the `freeroam-game.lua` source file to a compiled `freeroam-game.luac` file. 
+
+All of the other scripts will still be uncompiled, but I have no current plans on doing this currently.
+
+To compile a script:
+
+```bash
+luac -s -o freeroam-game.luac freeroam-game.lua
+```
 
 **List of lua types**
 
@@ -46,6 +62,14 @@ This is a list of clothes for the `player.set_clothes` function and a usage for 
 ```
 
 **Blip namespace**
+
+Any options in this blip namespace currently cannot be removed just yet until I fix that to work properly.
+These take a blip position with a CVector from my types.lua, so an X, Y, and Z value.
+
+| Function | Description | Usage |
+| ----- | ---- | ----- |
+| game.add_blip_for_coord | This can add a blip to the coord, currently only supported in freeroam-game.lua, mostly uses the same format as [ADD_BLIP_FOR_COORD_OLD](https://library.sannybuilder.com/#/vc/script/extensions/default/0167) | game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false) |
+
 
 **Game namespace**
 

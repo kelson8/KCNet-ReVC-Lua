@@ -1,8 +1,6 @@
 
 -- List of enums for future use in my Lua scripts.
 
--- TODO Make these work for my scripts later, for now this is just a placeholder file.
-
 -- Source - https://stackoverflow.com/a/77170992
 -- Posted by Maldus
 -- Retrieved 2026-09-06, License - CC BY-SA 4.0

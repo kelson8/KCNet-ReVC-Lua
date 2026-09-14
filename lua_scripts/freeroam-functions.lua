@@ -5,6 +5,16 @@
 -- dofile("ViceExtended/lua_scripts/freeroam-functions.lua")
 dofile("ViceExtended/lua_scripts/freeroam-locations.lua")
 
+-- New for reading from my save format and other json files like lists of locations.
+local json = dofile("ViceExtended/lua_scripts/lib/dkjson.lua")
+
+
+-- TODO Try to make fading work in my lua scripts for teleporting the player
+-- I will be giving the scripts more control once I implement more, so you can load collisions and more.
+-- I plan on re-creating my teleport function in lua from the C++ code.
+
+-- COMMAND_DO_FADE
+
 blip_util = {}
 
 cheat_functions = {}
@@ -25,14 +35,12 @@ vehicle_util = {}
 
 local current_blip = nil
 
--- New for json testing from my save file format
--- dofile("ViceExtended/lua_scripts/lib/dkjson.lua")
+
 
 -- For package path
 -- TODO Test this later.
 -- package.path = package.path .. ";ViceExtended/lua_scripts/lib/?.lua"
 
-local json = dofile("ViceExtended/lua_scripts/lib/dkjson.lua")
 
 --- I can add a deprecated message to a function with this, could be useful for later when I get a more stable API.
 -- -@deprecated

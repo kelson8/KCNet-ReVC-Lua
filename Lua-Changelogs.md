@@ -152,7 +152,7 @@ feat: Add toggle for loading stats
 
 * Update changelog.
 
-### Latest 1.2.13-13a
+### 1.2.13-13a
 
 feat: Update set_ped_objectives function
 
@@ -161,3 +161,18 @@ feat: Update set_ped_objectives function
 * Make some variables and comments a bit more clear on the save system.
 
 * Update changelog and documentation.
+
+### Latest 1.2.13-14a
+
+feat: Add blips file and set blips on startup
+
+* Now blips work in my freeroam, although currently they cannot be modified or removed.
+
+* Add freeroam-blips.lua for a list of blips.
+
+* Add new tests into freeroam-coroutine-test.lua.
+
+* Add lua_scripts/extra_functions to gitignore for now.
+
+* Update changelog and documentation.
+

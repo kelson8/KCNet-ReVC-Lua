@@ -22,3 +22,6 @@ stats.txt
 
 # This gets changed often when I am debugging the game.
 kcnet-revc-save.json
+
+# I might add these later.
+lua_scripts/extra_functions

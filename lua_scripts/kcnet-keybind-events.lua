@@ -13,7 +13,20 @@ dofile("ViceExtended/lua_scripts/freeroam-functions.lua")
 -- New for enums, which will be used in my freeroam and other scripts.
 dofile("ViceExtended/lua_scripts/freeroam-enums.lua")
 
+-- New, for radar blips and other stuff that should only ever be setup once.
+-- Hmm, I can't put this here I'll just spawn infinite players lol.
+-- I'm not sure how to check the ID of this then.
+-- I guess my new code no longer checks if only one player is spawned, oops.
+-- TODO Fix this to only ever spawn one player if the game is running..
+-- dofile("ViceExtended/lua_scripts/freeroam-game.lua")
 
+-- New for blips
+dofile("ViceExtended/lua_scripts/freeroam-blips.lua")
+
+
+-----------------------
+--- KCNet Freeroam - Keybind events with F9
+-----------------------
 
 ------
 -- Prefix for logging values to the console.
@@ -45,21 +58,15 @@ local payNSpray1 = GameLocations.payNSpray1
 --@type CVector
 local playerPos = { x = player.get_position().x + 5.0, y = player.get_position().y + 5.0, z = player.get_position().z + 5.0}
 
-local currentBlip1 = nil
-local currentBlip2 = nil
-
-local blipPos = { x = airport.pos.x, y = airport.pos.y, z = airport.pos.z }
-local payNSprayBlipPos = { x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z }
-
--- No wonder this always creates the blips, it never checks if they exist first in the C++ code I guess.
--- blips.blip1 = game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false)
--- blips.blip2 = game.add_blip_for_coord(payNSprayBlipPos, radar_enums.eRadarSprite.RADAR_SPRITE_PROPERTY, false)
 
 -- TODO Rename this file to freeroam-keybind-events.lua later.
 
 ------
 -- Toggles
 ------
+---
+
+-- player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_COLT45, 100)
 
 -------------------------
 -- Debug, may be disabled in the future.
@@ -128,15 +135,16 @@ local dbgCreateObject = false
 -- These work.
 local dbgHealthTest = false
 
-
--- Testing with blips on the map.
--- Currently, these cannot be removed.
+-- This just attempts to print the blip value, it doesn't get stored but gets set in OnInit.
+-- The blips get set in OnInit in freeroam-game.lua.
 local dbgBlipTest = false
 
 -- Setting and getting the players stats as a test for my save system.
 -- I can now set the player stats with this.
 -- Although I haven't tested all of them I might want.
 local dbgStatTest = false
+
+
 
 
 -- Teleport the player to a random position.
@@ -563,32 +571,11 @@ end
 
 
 -- TODO Fix this to be able to be removed, currently I cannot remove the blip.
+-- This gets loaded in 
 if dbgBlipTest then
-	-- Test adding a blip on the map.
-	-- Now this can set the blip sprite, and if the destination has a route marker that gets drawn for it.
-	-- TODO Make this able to be stored, and removed
-	-- TODO Add multiple of these instead of just one and make them able to be removed.
-	-- Well this only works for one blip I guess.
-	-- Adding another one does nothing.
-
-	-- blip_util.set_blip(blipPos)
-
-	-- local blip1 = game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false)
-	-- game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false)
-
-	-- TODO Try to fix this format to remove the blips.
-	if currentBlip1 ~= nil then
-		game.remove_blip(currentBlip1)
-		print(currentBlip1)
-	else
-		currentBlip1 = game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false)
-	end
-
-	-- print(blip1)
-	-- local blip2 = game.add_blip_for_coord(payNSprayBlipPos, radar_enums.eRadarSprite.RADAR_SPRITE_PROPERTY, false)
-
-	-- game.remove_blip(blip1)
-	-- game.remove_blip(blip2)
+	-- Moved into freeroam-game.lua, I think I have to load it on init instead of in here.
+	print(map_blips.currentBlip1)
+	print(map_blips.currentBlip1Set)
 end
 
 -- Test for setting the players stats.

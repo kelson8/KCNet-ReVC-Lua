@@ -67,6 +67,7 @@ Not all of these are in use just yet for my freeroam scripts, some are required 
 
 | File | Description |
 | ----- | --------- |
+| freeroam-blips.lua | This is used for handling the blips in my scripts. |
 | freeroam-enums.lua | Contains a list of enums that I will use for functions such as animations, ped states, ped ids, vehicle models and more which will be used in the future. |
 | freeroam-functions.lua | Contains a list of lua helper functions, mostly for documenting what can be done and for use with my scripts. |
 | freeroam-game.lua | This spawns the player and does other game init functions that the `main.scm` normally would take care of. |
@@ -102,7 +103,7 @@ These values get read in the game code, and will be reloaded when `F5` is presse
 
 ## KCNet-ReVC Version
 
-Currently, the ReVC code these lua scripts are based on is my internal version `1.2.13-9a` and I have been making breaking changes between some of these minor point releases.
+Currently, the ReVC code these lua scripts are based on is my internal version `1.2.13-14a` and I have been making breaking changes between some of these minor point releases.
 
 I may switch up my internal version numbering later on, currently it just makes a bit of sense to increment the version number especially where I have been making a lot of changes and may need to revert breaking changes.
 
