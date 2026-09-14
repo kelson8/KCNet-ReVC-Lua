@@ -20,6 +20,8 @@ blip_util = {}
 cheat_functions = {}
 
 file_util = {}
+log_util = {}
+
 player_functions = {}
 
 -- If this is turned off, this script won't attempt to load the save data from kcnet-revc-save.json.
@@ -180,6 +182,25 @@ end
 -- function save_util.save_player_data(filename)
 
 -- end
+
+------------
+--- Log util
+------------
+---
+---
+
+--- This will log a message with my custom prefix for the KCNet freeroam.
+---@param message string The message to print to the console.
+function log_util.print_msg(message)
+	print("[KCNet-ReVC-Lua]: " .. message)
+end
+
+--- This will log an error message with my custom prefix for the KCNet freeroam.
+---@param message string The message to print to the console.
+function log_util.print_error(message)
+	print("[KCNet-ReVC-Lua][Error]: " .. message)
+end
+
 
 ------------
 -- Save file validation
@@ -364,11 +385,17 @@ function player_functions.load_save_stats(file)
 	-- TODO Add error handling to this.
 	-- If the version or save format is changed or invalid it shouldn't try to load or save that file.
 	if saveFileVersion == custom_save.eSaveVersion.save_version then
-		print("[KCNet-ReVC-Lua]: The save version is valid")
+		log_util.print_msg("The save version is valid")
+	else
+		log_util.print_error("The save version is invalid! Cannot load the save file!")
+		return
 	end
 
 	if saveFileFormat == custom_save.eSaveVersion.save_format then
-		print("[KCNet-ReVC-Lua]: The save file format is valid")
+		log_util.print_msg("The save file format is valid")
+	else
+		log_util.print_error("The save file format is invalid! Cannot load the save file!")
+		return
 	end
 
 	-- Set the players health and armor

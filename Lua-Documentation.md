@@ -76,6 +76,8 @@ These take a blip position with a CVector from my types.lua, so an X, Y, and Z v
 | Function | Description | Usage |
 | ----- | ---- | ----- |
 | game.cheat | This is a basic cheat code test. | game.cheat("KILLME") -- Kills the player |
+| game.get_minute | Get the current game time minute | |
+| game.get_hour | Get the current game time hour. | |
 | game.set_hospital_respawn | Sets a wasted respawn point. | game.set_hospital_respawn({x = 25, y = 25, z = 25}) |
 | game.set_police_respawn | Sets a busted respawn point. | game.set_police_respawn({x = 25, y = 25, z = 25}) |
 | game.start_fire | Start a fire at the specified location. | game.start_fire({x = 25, y = 25, z = 25}) |
@@ -89,6 +91,9 @@ These take a blip position with a CVector from my types.lua, so an X, Y, and Z v
 | game.set_time_scale | Set the time scale to the specified value, this is untested. | game.set_time_scale(1) |
 | game.add_explosion | Add an explosion at the specified coords, if parameter 2 is true it enables the explosion sound. | game.add_explosion({x = 25, y = 25, z = 25}, true) |
 | game.add_blip_for_coord | This sets a blip at the coordinates with a custom sprite and if the blip should have a route set to it. | game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_BIKER, false) |
+| game.override_next_restart | Override the next restart for the game, this will spawn at this location instead of a wasted/busted respawn point. | game.override_next_restart({x = airport.pos.x, y = airport.pos.y, z = airport.pos.z}, airport.heading) |
+| game.cancel_override_restart | This cancels an overridden spawn point | |
+
 
 **Hud namespace**
 | Function | Description | Usage |
@@ -122,10 +127,12 @@ Any functions without a usage below are just getter or setter functions and don'
 | player.set_health | Set the players health.  | |
 | player.get_armor | Get the players current armor.  | |
 | player.set_armor | Set the players armor  | |
+| player.get_money | Get the players current amount of money.  | |
 | player.get_position | Get the players current position, access with either `x`, `y` or `z` values.  | player.get_position().x |
 | player.heal | Set the players health to max |  |
 | player.set_never_wanted | Toggle never wanted. | player.set_never_wanted(true)  |
 | player.set_infinite_health | Toggle infinite health. |  player.set_infinite_health(true) |
+| player.set_money | Set the players money. |  player.set_money(2000) |
 | player.set_respawn_point | Set the players respawn point. | |
 | player.set_stat | Set a stat for the player. | player.set_stat(stat_enums.eStatType.DISTANCE_TRAVELLED_ON_FOOT, 20.5) |
 | player.cancel_override_restart | Cancel an override restart point. | |
@@ -166,3 +173,5 @@ Any functions without a usage below are just getter or setter functions and don'
 | world.set_ped_objectives | Set the specified boolean values for the ped objectives, give weapons will give the ped a pistol currently, attack player, exit vehicle and kill peds all do what they say, should be easy to understand what they do. | world.set_ped_objectives(give_ped_weapons, attack_player, should_exit_vehicle, kill_peds) |
 | world.fade_camera | Fade the games camera in and out, currently without a game.wait function I cannot fade out then back in since it goes too fast. | world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_OUT) |
 | world.set_marker | Set the worlds target marker to a specified X, and Y coordinate if not already set. | world.set_marker({x = 25, y = 25}) |
+| world.set_car_generator | Sets a car generator up in the world, example usage in kcnet-keybind-events under 'dbgCarGeneratorsTest' | |
+| world.toggle_car_generator | Toggles the specified car generator, Param1: The car generator ID, Param2: 0 is off, and 101 is on  | world.toggle_car_generator(car_generator, 101) |

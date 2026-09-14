@@ -190,12 +190,32 @@ feat: Make freeroam-blips store created blip ids
 
 * Update changelog and documentation.
 
-### Latest 1.2.14-2a
+### 1.2.14-2a
 
 feat: Make save file load target marker position
 
 * I made this to where it can now load the target marker position.
 
 * Added world.set_marker for setting the marker.
+
+* Update changelog and documentation.
+
+### Latest 1.2.14-3a
+
+feat: Add more functions to lua
+
+I added these below to be run in my scripts:
+
+* game.get_minute
+* game.get_hour
+
+* player.get_money
+* player.set_money
+
+* world.set_car_generator
+* world.toggle_car_generator
+
+* Add log util into functions, which can print to the console with my message text.
+* Add original wasted and busted locations and add a toggle for turning them on in freeroam-game.lua.
 
 * Update changelog and documentation.

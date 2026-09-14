@@ -103,7 +103,7 @@ These values get read in the game code, and will be reloaded when `F5` is presse
 
 ## KCNet-ReVC Version
 
-Currently, the ReVC code these lua scripts are based on is my internal version `1.2.14-2a` and I have been making breaking changes between some of these minor point releases.
+Currently, the ReVC code these lua scripts are based on is my internal version `1.2.14-3a` and I have been making breaking changes between some of these minor point releases.
 
 I may switch up my internal version numbering later on, currently it just makes a bit of sense to increment the version number especially where I have been making a lot of changes and may need to revert breaking changes.
 
@@ -111,7 +111,7 @@ I may switch up my internal version numbering later on, currently it just makes 
 
 If I ever get enough experience with it, and can do it I might make a multiplayer for ReVC using lua as the scripting like what [MTA San Andreas](https://multitheftauto.com/) does, but that will be a long way off I still have to make some of the scripts work and fix the bugs I have currently.
 
-I plan on making most of the game functions along with my custom functions able to be called in the lua scripts, and to be able to easily modify functions already in the game such as what weapons the police spawn with, and other stuff to mess aroudn with.
+I plan on making most of the game functions along with my custom functions able to be called in the lua scripts, and to be able to easily modify functions already in the game such as what weapons the police spawn with, and other stuff to mess around with.
 
 There may be a basic json save/load system in the future that saves a very small set of stats to a `revc-freeroam-save.json` file using the [nlohmann json](https://github.com/nlohmann/json) library, this would mostly be for keeping like a high score system or something I'm not really sure yet.
 

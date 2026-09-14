@@ -64,8 +64,6 @@ custom_save.eSaveVersion = {
 	save_version = 1
 }
 
--- revc-freeroam
-
 -- misc_enums.h
 --------------
 ---

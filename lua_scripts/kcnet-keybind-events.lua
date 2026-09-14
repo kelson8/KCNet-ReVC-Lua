@@ -158,6 +158,12 @@ local dbgTeleportRandomPosn = false
 -- Camera fade testing, this mostly works but it's too fast to run fade out and in at once without a timer.
 local dbgCameraFadeTest = false
 
+-- Car generators test, I need to figure out how to store these.
+local dbgCarGeneratorsTest = false
+
+-- Testing overriding the respawn points for the game.
+local dbgOverrideRestartTest = true
+
 -----------
 
 -------------------------
@@ -617,6 +623,64 @@ end
 if dbgCameraFadeTest then
 	world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_OUT)
 	world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_IN)
+end
+
+-------------------
+--- Clock testing
+-------------------
+
+-- Show the game time.
+-- https://devforum.roblox.com/t/how-do-i-remove-decimals/405222
+-- local game_clock = math.floor(game.get_hour() + 0.5) .. ":" .. math.floor(game.get_minute() + 0.5)
+
+-- print(game_clock)
+
+-------------------
+--- Money testing
+-------------------
+
+-- print("Current $: " .. player.get_money())
+
+-- player.set_money(1000)
+-- print("New $: " .. player.get_money())
+
+-- I can make this give the player a random amount of money.
+-- for i = 1, 100000 do
+	-- player.set_money(math.random(1, 100000))
+-- end
+
+-- player.set_money(math.random(1, 100000))
+
+-- Test for car generators, these work but I have disabled them until I setup a better system for storing these.
+
+if dbgCarGeneratorsTest then
+	-- log_util.print_msg("Car generators not enabled!")
+	-- TODO Make this return the int from the car generators, so I can toggle it also.
+	world.create_car_generator({x = airport.pos.x, y = airport.pos.y, z = airport.pos.z},
+	airport.heading, 145, 1, 1,
+	true, 0,
+	0, 0, 10000)
+
+	-- This works now! The car generator values start at 0.
+	-- Maybe I can store these in my save file like the original game does.
+	world.switch_car_generator(0, 101)
+end
+
+if dbgOverrideRestartTest then
+	-- Override the spawn point, so instead of a wasted/busted respawn the player spawns here.
+
+	local beachRespawn = { x = 664.173, y = -623.533, z = 11.071}
+
+	-- game.override_next_restart({x = beachRespawn.x, y = beachRespawn.y, z = beachRespawn.z},
+	-- airport.heading)
+
+	-- log_util.print_msg("Spawn has been overridden to X: " .. beachRespawn.x ..
+	-- 				  " Y: " .. beachRespawn.y ..
+	-- 				  " Z: " .. beachRespawn.z)
+
+	-- Cancel an overridden spawn point
+	game.cancel_override_restart()
+	log_util.print_msg("Cancelled override for spawn point.")
 end
 
 -------

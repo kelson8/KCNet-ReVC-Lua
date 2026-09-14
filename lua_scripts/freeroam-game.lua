@@ -32,6 +32,21 @@ local policeStation = GameLocations.policeStation
 local construction_site = GameLocations.constructionSiteVehicle
 local payNSpray1 = GameLocations.payNSpray1
 
+-- Hospitals/police stations from scripts.
+local hospital1 = GameLocations.hospital1
+local hospital2 = GameLocations.hospital2
+local hospital3 = GameLocations.hospital3
+local hospital4 = GameLocations.hospital4
+
+local policeSt1 = GameLocations.policeSt1
+local policeSt2 = GameLocations.policeSt2
+local policeSt3 = GameLocations.policeSt3
+local policeSt4 = GameLocations.policeSt4
+
+-- If this is enabled, my freeroam will spawn you near the hospitals and police stations that are in the scripts.
+local use_original_spawns = false
+
+
 -- If this is set, this will read the saved player position from the custom JSON save file.
 -- Otherwise it just sets a debug position to spawn at.
 
@@ -206,24 +221,24 @@ player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_KATANA, 1)
 
 ------------------
 
-
-
-
-
 -- Silence all game phones, in case they are running
 -- TODO Test this, it should work on game start, it doesn't crash so I'll leave this enabled.
 for i = 1, config_enums.eGameLimits.NUMPHONES do
 	game.turn_phone_off(i)
 end
 
+----------------------------------
+--- Respawns when wasted/busted
+--- There can only be a max of 8 of these.
+----------------------------------
+
 --------------------
 -- I have fixed these functions in v1.2.12-10a.
--- Well I thought I had these working, they seem to change the spawn once.
--- Although it's not crashing anymore so I have enabled these in the C++ code.
 --------------------
 
 -- Setup some respawn points, I'm quite sure a max of 8 can be set.
 -- TODO Setup a random number generator for random spawns, I could just do it in the lua scripts.
+-- Actually, I would need to run the override next restart since the hospital respawns take over.
 
 -----
 -- Respawns when wasted
@@ -233,22 +248,34 @@ game.set_hospital_respawn({ x = oldSpawn.pos.x, y = oldSpawn.pos.y, z = oldSpawn
 game.set_hospital_respawn({ x = airport.pos.x, y = airport.pos.y, z = airport.pos.z }, 1.0)
 game.set_hospital_respawn({ x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z }, 1.0)
 
--- -----
--- -- Respawns when busted
--- -----
+------
+-- Load the game script hospital respawns
+if use_original_spawns then
+	game.set_hospital_respawn({ x = hospital1.pos.x, y = hospital1.pos.y, z = hospital1.pos.z }, hospital1.heading)
+	game.set_hospital_respawn({ x = hospital2.pos.x, y = hospital2.pos.y, z = hospital2.pos.z }, hospital2.heading)
+	game.set_hospital_respawn({ x = hospital3.pos.x, y = hospital3.pos.y, z = hospital3.pos.z }, hospital3.heading)
+	game.set_hospital_respawn({ x = hospital4.pos.x, y = hospital4.pos.y, z = hospital4.pos.z }, hospital4.heading)
+end
+------
+
+-----
+-- Respawns when busted
+-----
 
 game.set_police_respawn({ x = oldSpawn.pos.x, y = oldSpawn.pos.y, z = oldSpawn.pos.z }, 1.0)
 game.set_police_respawn({ x = airport.pos.x, y = airport.pos.y, z = airport.pos.z }, 1.0)
 game.set_police_respawn({ x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z }, 1.0)
 
+------
+-- Load the game script busted respawns
+if use_original_spawns then
+	game.set_police_respawn({ x = policeSt1.pos.x, y = policeSt1.pos.y, z = policeSt1.pos.z }, policeSt1.heading)
+	game.set_police_respawn({ x = policeSt2.pos.x, y = policeSt2.pos.y, z = policeSt2.pos.z }, policeSt2.heading)
+	game.set_police_respawn({ x = policeSt3.pos.x, y = policeSt3.pos.y, z = policeSt3.pos.z }, policeSt3.heading)
+	game.set_police_respawn({ x = policeSt4.pos.x, y = policeSt4.pos.y, z = policeSt4.pos.z }, policeSt4.heading)
+end
 
---------------------
--- End functions are disabled and currently crash
---------------------
-
-
-
-
+------
 
 --------
 -- End REQUIRED

@@ -62,8 +62,91 @@ GameLocations = {
             x = -863.353,
             y = -125.406,
             z = 11.078
-        }
-    }
+        },
+        heading = 0.0
+    },
+
+    ------
+    -- Values below are from the main.scm.
+    ------
+
+    -- Hospitals
+    -- Island 1
+    hospital1 = {
+        pos = {
+            x = 493.5,
+            y = 703.1,
+            z = 11.1
+        },
+        heading = 90.0
+    },
+
+    hospital2 = {
+        pos = {
+            x = -108.3,
+            y = -974.4,
+            z = 9.4
+        },
+        heading = 283.9
+    },
+
+    -- Island 2
+    hospital3 = {
+        pos = {
+            x = -822.7,
+            y = 1157.9,
+            z = 10.1
+        },
+        heading = 4.0
+    },
+
+    hospital4 = {
+        pos = {
+            x = -885.2,
+            y = -470.4,
+            z = 12.1
+        },
+        heading = 276.0
+    },
+
+    -- Police stations
+    -- Island 1
+    policeSt1 = {
+        pos = {
+            x = 508.9,
+            y = 506.8,
+            z = 10.3
+        },
+        heading = 174.0
+    },
+
+    policeSt2 = {
+        pos = {
+            x = 398.8,
+            y = -469.7,
+            z = 10.7
+        },
+        heading = 323.0
+    },
+
+    -- Island 2
+    policeSt3 = {
+        pos = {
+            x = -659.5,
+            y = 760.4,
+            z = 10.5
+        },
+        heading = 133.0
+    },
+
+    policeSt4 = {
+        pos = {
+            x = -871.9,
+            y = -682.3,
+            z = 10.2
+        },
+        heading = 328.1
+    },
 }
 
 -- -- Set the area to place the player with the 'F9' keybind here.
