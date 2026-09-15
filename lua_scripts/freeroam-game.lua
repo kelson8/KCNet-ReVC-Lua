@@ -336,6 +336,9 @@ end
 --- Cheat toggles for debugging.
 local enableNeverWanted = false
 local enableInfiniteHealth = false
+
+-- Added in v1.2.14-4a
+local enableInfiniteSprint = false
 ---
 
 --- Set ped density to a custom value.
@@ -349,14 +352,6 @@ local ped_density = 0.5
 local vehicle_density = 0.5
 -- local vehicle_density = 0.0
 
-------
--- These shouldn't be in here.
-local blow_up_cars_toggle = false
-
-local clear_area_toggle = false
--------
-
-
 -- If this is disabled, you won't lose weapons when busted or wasted.
 local lose_weapons = true
 
@@ -369,19 +364,6 @@ if not lose_weapons then
 	player.lose_weapons_on_death(false)
 else
 	player.lose_weapons_on_death(true)
-end
-
-
--- Blow up all cars cheat
--- TODO Move into kcnet-keybind-events.lua.
-if blow_up_cars_toggle then
-	world.blow_up_all_vehicles()
-end
-
--- Clear the area of any peds and vehicles.
--- TODO Move into kcnet-keybind-events.lua.
-if clear_area_toggle then
-	world.clear_area(25)
 end
 
 -- Set the ped density to a custom value.
@@ -413,6 +395,12 @@ else
 	player.set_infinite_health(false)
 end
 
+if enableInfiniteSprint then
+	player.set_infinite_sprint(true)
+else
+	player.set_infinite_sprint(false)
+end
+
 -----------
 -- End Toggles
 -----------
@@ -432,11 +420,11 @@ end
 -- I have tried everything but this doesn't seem to want to work in here, I'll fix it later.
 
 -- vehicle_util.create_vehicle(145, airportX + 10.0, airportY + 10.0, airportZ + 2.0, false, false)
-local vehicle_spawn_pos = {
-	x = construction_site.pos.x + 5.0,
-	y = construction_site.pos.y + 5.0,
-	z = construction_site.pos.z + 2.0
-}
+-- local vehicle_spawn_pos = {
+-- 	x = construction_site.pos.x + 5.0,
+-- 	y = construction_site.pos.y + 5.0,
+-- 	z = construction_site.pos.z + 2.0
+-- }
 
 -- vehicle.create(145, {
 -- 	x = construction_site.pos.x + 5.0,

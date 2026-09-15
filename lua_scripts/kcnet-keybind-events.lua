@@ -519,12 +519,10 @@ end
 -- I will use this later for respawning me where I last was pretty much.
 -- Requires the ViceExtended subfolder since the games root folder isn't in lua_scripts.
 if dbgReadCustomSave then
-	local save_file_path = "ViceExtended/kcnet-revc-save.json"
-
 	-- If this type value is here, it uses the type defined in types.lua.
 	-- Since I modified the read_json_file function, this doesn't seem to be needed so I'll comment it out.
 	-- -@type RevcSave
-	local save_file, err = file_util.read_json_file(save_file_path)
+	local save_file, err = file_util.read_json_file(file_util.save_path)
 	if not save_file then
 		print(err)
 		return

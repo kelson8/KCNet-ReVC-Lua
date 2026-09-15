@@ -132,6 +132,7 @@ Any functions without a usage below are just getter or setter functions and don'
 | player.heal | Set the players health to max |  |
 | player.set_never_wanted | Toggle never wanted. | player.set_never_wanted(true)  |
 | player.set_infinite_health | Toggle infinite health. |  player.set_infinite_health(true) |
+| player.set_infinite_sprint | Toggle infinite sprint. |  player.set_infinite_sprint(true) |
 | player.set_money | Set the players money. |  player.set_money(2000) |
 | player.set_respawn_point | Set the players respawn point. | |
 | player.set_stat | Set a stat for the player. | player.set_stat(stat_enums.eStatType.DISTANCE_TRAVELLED_ON_FOOT, 20.5) |

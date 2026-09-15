@@ -200,7 +200,7 @@ feat: Make save file load target marker position
 
 * Update changelog and documentation.
 
-### Latest 1.2.14-3a
+### 1.2.14-3a
 
 feat: Add more functions to lua
 
@@ -217,5 +217,22 @@ I added these below to be run in my scripts:
 
 * Add log util into functions, which can print to the console with my message text.
 * Add original wasted and busted locations and add a toggle for turning them on in freeroam-game.lua.
+
+* Update changelog and documentation.
+
+### Latest 1.2.14-4a
+
+feat: Update lua scripts
+
+* Add toggle for setting marker in save.
+* Make the save system load the players money.
+
+* Move the save file path into freeroam-functions.
+
+* Add most function types into types.lua for usages, not all of these are fixed in this file yet.
+
+* Add toggle for infinite sprint with 'player.set_infinite_sprint'
+
+* Add MD5 library for later usage in this project.
 
 * Update changelog and documentation.

@@ -31,6 +31,11 @@ player_functions = {}
 -- I will be adding a lot to this once I figure this out and some events and objectives to play with.
 player_functions.load_stats = true
 
+-- If this is enabled, it will load the saved marker from the save data if it exists.
+-- Otherwise, it will just not display any user placed marker on the map.
+-- I have this currently disabled by default, so it doesn't always load a marker.
+player_functions.load_saved_marker = false
+
 save_functions = {}
 -- save_util = {}
 vehicle_util = {}
@@ -133,6 +138,8 @@ end
 -- File util
 -------------
 
+file_util.save_path = "ViceExtended/kcnet-revc-save.json"
+
 --- Check if a file exists
 --- https://stackoverflow.com/questions/4990990/check-if-a-file-exists-with-lua
 ---@param file_name string The file to check.
@@ -204,22 +211,27 @@ end
 
 ------------
 -- Save file validation
--- TODO Test this.
+-- This says the save is valid in the below test! I guess it works
+-- I should use this.
 ------------
 
 ---@param save RevcSave
 ---@return boolean valid
 ---@return string? error_message
 function save_functions.validate_save(save)
-	if type(safe) ~= "table" then
+	if type(save) ~= "table" then
 		return false, "Save data is not a table"
 	end
 
+	-- If wanting to use custom save versions, disable this below and switch to the lua enum.
+	-- This currently reads from my ReVC code.
 	if save.version ~= EXPECTED_SAVE_VERSION then
+	-- if save.version ~= custom_save.eSaveVersion.save_version then
 		return false, "Invalid save version"
 	end
 
 	if save.format ~= EXPECTED_SAVE_FORMAT then
+	-- if save.format ~= custom_save.eSaveVersion.save_format then
 		return false, "Invalid save format"
 	end
 
@@ -234,6 +246,29 @@ function save_functions.validate_save(save)
 
 	return true
 end
+
+-------
+--- Test for save being valid
+--- This works!
+-------
+
+
+local function test_save_validate(file)
+	local save_file, err = file_util.read_json_file(file)
+	if not save_file then
+		print(err)
+		return
+	end
+
+	local is_save_valid = save_functions.validate_save(save_file)
+	if is_save_valid then
+		log_util.print_msg("ReVC Freeroam save was valid!")
+	else
+		log_util.print_error("ReVC Freeroam save was invalid!")
+	end
+end
+
+-- test_save_validate(file_util.save_path)
 
 ------------
 -- Player
@@ -324,6 +359,7 @@ function player_functions.load_save_stats(file)
 	-- Currently these don't get loaded, although I could enable them.
 	local playerHealth = save_file.stats.health
 	local playerArmor = save_file.stats.armor
+	local playerMoney = save_file.stats.money
 	-- local playerMoney = save_file.stats.money
 
 	local boatsExploded = save_file.stats.boats_exploded
@@ -409,6 +445,7 @@ function player_functions.load_save_stats(file)
 
 	-- Stop the game loading here if the stats shouldn't be loaded.
 	-- The game will still run fine, but it won't load any stats.
+	-- Useful for debugging and testing, so the stats don't get corrupted.
 	if not player_functions.load_stats then return end
 
 	-- Save and restore some stats such as how many peds were wasted, how many times the player was wasted and more.
@@ -471,14 +508,18 @@ function player_functions.load_save_stats(file)
 	game.force_weather(newWeather)
 	game.force_weather_now(newWeather)
 
-
 	-- Set the game time
-	-- Well this no longer works in here when I moved it..
 	game.set_time(gameHour, gameMinute)
 
-	-- Set the world blip marker if it was stored.
-	-- I got this working in v1.2.14-2a.
-	world.set_marker(targetMarkerPos)
+	if player_functions.load_saved_marker then
+		-- Set the world blip marker if it was stored.
+		-- I got this working in v1.2.14-2a.
+		world.set_marker(targetMarkerPos)
+	end
+
+	-- New, for setting the players money.
+	player.set_money(playerMoney)
+
 end
 
 -------------

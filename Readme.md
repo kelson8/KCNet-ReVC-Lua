@@ -103,7 +103,7 @@ These values get read in the game code, and will be reloaded when `F5` is presse
 
 ## KCNet-ReVC Version
 
-Currently, the ReVC code these lua scripts are based on is my internal version `1.2.14-3a` and I have been making breaking changes between some of these minor point releases.
+Currently, the ReVC code these lua scripts are based on is my internal version `1.2.14-4a` and I have been making breaking changes between some of these minor point releases.
 
 I may switch up my internal version numbering later on, currently it just makes a bit of sense to increment the version number especially where I have been making a lot of changes and may need to revert breaking changes.
 
@@ -124,6 +124,8 @@ I will be adding a `Lua-Documentation.md` file in the future that will contain i
 This lua project is now using the [DKJson](https://dkolf.de/dkjson-lua/) lua library for reading my json save file.
 
 The DKJson project file is located here `lua_scripts/lib/dkjson.lua`, which is licensed under MIT.
+
+MD5 library from this MIT licensed project [md5.lua](https://github.com/kikito/md5.lua), which is located here `lua_scripts/lib/md5.lua`.
 
 # License
 

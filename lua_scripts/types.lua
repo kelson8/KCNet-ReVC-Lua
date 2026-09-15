@@ -4,6 +4,133 @@
 
 ---@meta
 
+
+
+--------------------------------
+-- Functions
+--------------------------------
+
+
+---@meta
+
+---@alias number_or_integer number
+---@alias WeatherType integer
+---@alias RadarSprite integer
+---@alias WeaponType integer
+---@alias StatType integer
+---@alias FadeDirection integer
+---@alias PhoneType integer
+
+---@class GameAPI
+---@field add_blip_for_coord fun(position: CVector, sprite: RadarSprite, set_route: boolean)
+---@field cheat fun(code: string)
+---@field get_minute fun(): integer
+---@field get_hour fun(): integer
+---@field set_hospital_respawn fun(position: CVector, heading: number)
+---@field set_police_respawn fun(position: CVector, heading: number)
+---@field start_fire fun(position: CVector)
+---@field pass_time fun(minutes: integer)
+---@field force_weather fun(weather: WeatherType)
+---@field force_weather_now fun(weather: WeatherType)
+---@field release_weather fun()
+---@field get_weather fun(): WeatherType
+---@field set_allow_hurricanes fun(enabled: boolean)
+---@field set_time fun(hour: integer, minute: integer)
+---@field set_time_scale fun(scale: number)
+---@field add_explosion fun(position: CVector, play_sound: boolean)
+---@field override_next_restart fun(position: CVector, heading: number)
+---@field cancel_override_restart fun()
+---@field turn_phone_off fun(type: PhoneType)
+
+---@class HudAPI
+---@field print_msg fun(message: string)
+
+---@class LogAPI
+---@field info fun(message: string)
+---@field warning fun(message: string)
+---@field error fun(message: string)
+---@field current_directory fun(): string
+
+---@class PlayerAPI
+---@field create fun(player_id: integer, position: CVector)
+---@field set_position fun(position: CVector)
+---@field get_health fun(): number
+---@field set_health fun(health: number)
+---@field get_armor fun(): number
+---@field set_armor fun(armor: number)
+---@field get_money fun(): integer
+---@field get_position fun(): CVector
+---@field heal fun()
+---@field set_never_wanted fun(enabled: boolean)
+---@field set_infinite_sprint fun(enabled: boolean)
+---@field set_infinite_health fun(enabled: boolean)
+---@field set_money fun(amount: integer)
+---@field set_respawn_point fun(position: CVector)
+---@field set_stat fun(stat: StatType, value: number)
+---@field cancel_override_restart fun()
+---@field lose_weapons_on_death fun(enabled: boolean)
+---@field disable_lose_weapons_on_death fun()
+---@field log_coords fun()
+---@field log_heading fun()
+---@field kill_wanted fun()
+---@field kill fun()
+---@field is_alive fun(): boolean
+---@field change_clothes fun(clothes?: string)
+---@field get_wanted_level fun(): integer
+---@field tp_to_marker fun()
+---@field give_weapon fun(weapon: WeaponType, ammo: integer)
+---@field remove_weapon fun(slot: integer)
+---@field give_rc_car fun()
+---@field blow_up_vehicle fun()
+---@field is_in_vehicle fun(): boolean
+
+---@class VehicleAPI
+---@field create fun(vehicle_id: integer, position: CVector, delete_last_vehicle: boolean, warp_into_vehicle: boolean)
+---@field freeze_position fun(enabled: boolean)
+
+---@class WorldAPI
+---@field blow_up_all_vehicles fun()
+---@field switch_roads_off fun(minimum: CVector, maximum: CVector)
+---@field switch_roads_on fun(minimum: CVector, maximum: CVector)
+---@field switch_ped_roads_off fun(minimum: CVector, maximum: CVector)
+---@field switch_ped_roads_on fun(minimum: CVector, maximum: CVector)
+---@field set_ped_density fun(density: number)
+---@field set_vehicle_density fun(density: number)
+---@field set_ped_objectives fun(
+---    give_ped_weapons: boolean,
+---    attack_player: boolean,
+---    should_exit_vehicle: boolean,
+---    kill_peds: boolean)
+---)
+---@field fade_camera fun(duration: number, direction: FadeDirection)
+---@field set_marker fun(position: CVector)
+---@field set_car_generator fun(...)
+---@field toggle_car_generator fun(generator_id: integer, state: integer)
+
+---@type GameAPI
+game = {}
+
+---@type HudAPI
+hud = {}
+
+---@type LogAPI
+log = {}
+
+---@type PlayerAPI
+player = {}
+
+---@type VehicleAPI
+vehicle = {}
+
+---@type WorldAPI
+world = {}
+
+
+---
+
+
+
+
 --------------------------------
 --- Vectors
 --------------------------------
