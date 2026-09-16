@@ -263,7 +263,7 @@ feat: Add object spawning
 
 * Update changelog, and documentation.
 
-### Latest 1.2.14-7a
+### 1.2.14-7a
 
 feat: Add wait timers like original scripts
 
@@ -276,3 +276,17 @@ feat: Add wait timers like original scripts
 * Update readme.
 
 * Update changelog, and documentation.
+
+### Latest 1.2.14-8a
+
+feat: Add pickups to the game
+
+* Now there is a basic save pickup at the bridge where I spawn, it doesn't fade the camera yet but it does get re-created like in the original scripts.
+
+* Add pickup enums.
+
+* Added most of the pickup functions that were in the original scripts.
+
+* Move some config options into freeroam-config.lua.
+
+* Update changelog and documentation.

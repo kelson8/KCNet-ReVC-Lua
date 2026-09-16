@@ -70,10 +70,13 @@ Not all of these are in use just yet for my freeroam scripts, some are required 
 | File | Description |
 | ----- | --------- |
 | freeroam-blips.lua | This is used for handling the blips in my scripts. |
+| freeroam-config.lua | Has a list of config options for the freeroam. |
 | freeroam-enums.lua | Contains a list of enums that I will use for functions such as animations, ped states, ped ids, vehicle models and more which will be used in the future. |
 | freeroam-functions.lua | Contains a list of lua helper functions, mostly for documenting what can be done and for use with my scripts. |
 | freeroam-game.lua | This spawns the player and does other game init functions that the `main.scm` normally would take care of. |
 | freeroam-locations.lua | This is a list of locations that can be used in all of the scripts, currently used for spawning the player and spawning vehicles in `kcnet-keybind-events.lua`. |
+| freeroam-objects.lua | This is a list of objects that spawn in, such as the barriers and gates. |
+| freeroam-pickups.lua | This is a list of pickups that spawn in, such as the save pickups and weapon pickups. |
 | kcnet-busted.lua | Events that run when you get busted, can set the time to pass with freeroam mode. |
 | kcnet-wasted.lua | Events that run when you get wasted, can set the time to pass with freeroam mode. |
 | kcnet-keybind-events.lua | Events in this file will run when the F9 key is pressed, I may make this keybind configurable later. |
@@ -117,7 +120,7 @@ This list will be updated as I find more bugs in my ReVC build.
 
 ## KCNet-ReVC Version
 
-Currently, the ReVC code these lua scripts are based on is my internal version `1.2.14-7a` and I have been making breaking changes between some of these minor point releases.
+Currently, the ReVC code these lua scripts are based on is my internal version `1.2.14-8a` and I have been making breaking changes between some of these minor point releases.
 
 I may switch up my internal version numbering later on, currently it just makes a bit of sense to increment the version number especially where I have been making a lot of changes and may need to revert breaking changes.
 

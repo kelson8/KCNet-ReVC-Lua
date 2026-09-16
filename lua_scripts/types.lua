@@ -23,6 +23,8 @@
 ---@alias GarageType integer
 ---@alias ObjectId integer
 ---@alias ObjectHandle integer
+---@alias PickupModel integer
+---@alias PickupType integer
 
 ---@class GameAPI
 ---@field add_blip_for_coord fun(position: CVector, sprite: RadarSprite, set_route: boolean)
@@ -45,6 +47,12 @@
 ---@field cancel_override_restart fun()
 ---@field turn_phone_off fun(type: PhoneType)
 ---@field wait fun(miliseconds: number)
+---@field create_pickup fun(position: CVector, model: PickupModel, type: PickupType)
+---@field create_money_pickup fun(position: CVector, amount: number)
+---@field remove_pickup fun(pickup_handle: number)
+---@field has_pickup_been_colleted fun(pickup_handle: number)
+---@field is_any_pickup_at_coords fun(position: CVector)
+---@field create_hidden_package fun(position: CVector)
 
 ---@class GarageAPI
 ---@field set fun(leftBottomX: number, leftBottomY: number, leftBottomZ: number, frontX: number, frontY: number, rightTopX: number, rightTopY: number, rightTopZ: number, type: GarageType): number

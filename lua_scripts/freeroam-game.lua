@@ -20,6 +20,12 @@ dofile("ViceExtended/lua_scripts/freeroam-garages.lua")
 -- New for objects on the map
 dofile("ViceExtended/lua_scripts/freeroam-objects.lua")
 
+-- New for pickups on the map, such as save pickups and weapon pickups
+dofile("ViceExtended/lua_scripts/freeroam-pickups.lua")
+
+-- For most configs that I will use now.
+dofile("ViceExtended/lua_scripts/freeroam-config.lua")
+
 -----------
 -- WARNING
 -- If there are any errors in this file, ReVC will crash because this script spawns the player.
@@ -49,19 +55,8 @@ local policeSt2 = GameLocations.policeSt2
 local policeSt3 = GameLocations.policeSt3
 local policeSt4 = GameLocations.policeSt4
 
--- If this is enabled, my freeroam will spawn you near the hospitals and police stations that are in the scripts.
 local use_original_spawns = false
 
--- Lock the game time with the while loop.
--- This is for testing the new game.wait function
-local lock_game_time = false
-
--- If this is set, this will read the saved player position from the custom JSON save file.
--- Otherwise it just sets a debug position to spawn at.
-
--- If this is set, it will load the custom save file.
--- Which is named 'kcnet-revc-save.json'.
-local read_save_data = true
 
 -- If this is set, most of the road blocks will block the islands like in the original scripts.
 -- This is mostly for testing, currently I cannot disable the vehicle roads in these areas.
@@ -157,6 +152,18 @@ function OnInit()
 		object_util.setup_road_blocks()
 	end
 
+	-- Setup pickups, some of these get set back in the OnTick function when picked up
+
+	-- Save pickups, these run in the loop also and respawn the pickup.
+	map_pickups.create_save_markers()
+
+	-- Setup the money pickups, these will only spawn once.
+	-- So far this is just for testing.
+	-- map_pickups.money_pickups()
+
+	-- Create testing hidden package pickups
+	-- map_pickups.hidden_package_pickups()
+
 	-- TODO Implement these below
 	-- Save pickups, which save to my custom json file.
 
@@ -164,62 +171,20 @@ function OnInit()
 
 	-- Spawning objects, I haven't figured this out in the code yet.
 
-end
 
--- Spawn in the player, mostly for spawning without the .scm scripts
--- This works in here now!
--------
--- REQUIRED if DISABLE_GAME_SCRIPTS is toggled on in the game code, otherwise it won't spawn the player.
--- Locations are stored in freeroam-locations.lua, and more can be added.
--------
+	-- This works in here now!
 
--- This only runs once in the init, if there are more then one of the player.create functions they won't do anything.
--- Fixes some bugs I was having, which was spawning multiple players for me to control lol.
+	-- This only runs once in the init, if there are more then one of the player.create functions they won't do anything.
+	-- Fixes some bugs I was having, which was spawning multiple players for me to control lol.
 
--- player.create(0, { x = construction_site.pos.x, y = construction_site.pos.y, z = construction_site.pos.z })
-
-----------------------
---- New save format
---- This can load from the kcnet-revc-save.json custom json format
---- I will be making a save pickup or something later in this but this is all loaded in with lua.
---- So I can easily modify how this loads without even rebuilding the game code!
-----------------------
-
--- This works now! Reads from my custom save json format.
--- I will use this later for respawning me where I last was pretty much.
--- Requires the ViceExtended subfolder since the games root folder isn't in lua_scripts.
-
-if read_save_data then
-	local save_file_path = "ViceExtended/kcnet-revc-save.json"
-
-	--------
-	-- Player position to load spawn at.
-	--------
-
-	local storedPlayerPosition = player_functions.get_saved_position(save_file_path)
-
-	-- The game will crash here, the player position wasn't found.
-	if not storedPlayerPosition then
-		return
-	end
-
-	-- Spawn the player at the coordinates set in the save file.
-	-- player.create(0, {x = playerX, y = playerY, z = playerZ})
-	player.create(0, { x = storedPlayerPosition.x, y = storedPlayerPosition.y, z = storedPlayerPosition.z })
-
-	-- This works for loading the stats from the function!
-	-- Cleans up the freeroam-game.lua file quite a bit.
-	player_functions.load_save_stats(save_file_path)
-
-	-- TODO Setup these below.
-	-- Set the players heading
-else
-	-- If the save file isn't going to be used, this below is set as a manual spawn point.
-
-	-- Spawn at the pay n spray I am testing the garage at.
-	-- TODO Make this spawn the player at the coordinates in the JSON save file that I am testing.
-	player.create(0, { x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z })
-	-- print(save_file.stats.health)
+	-------
+	-- REQUIRED if DISABLE_GAME_SCRIPTS is toggled on in the game code, otherwise it won't spawn the player.
+	-- Locations are stored in freeroam-locations.lua, and more can be added.
+	-------
+	-- Putting this at the end, if there are errors above this will probably crash anyways
+	
+	-- Spawn in the player, mostly for spawning without the .scm scripts
+	player_functions.load_player_data()
 end
 
 
@@ -343,7 +308,7 @@ function OnTick()
 	-- This format is actually working!
 	-- I finally got the wait timers to work.
 	-- Main game loop goes here, mimics original scripts.
-	-- while lock_game_time do
+	-- while config.lock_game_time do
 	-- 	game.wait(3000)
 	-- 	game.set_time(10, 55)
 	-- 	-- player.kill_wanted()
@@ -357,6 +322,13 @@ function OnTick()
 
 		game.wait(0)
 
+
+		-----------------------
+		--- Save pickup testing
+		-----------------------
+
+		map_pickups.save_loop()
+
 		-- player_functions.low_health_kill()
 
 		-- Randomly blow up vehicles for some chaos.
@@ -365,14 +337,16 @@ function OnTick()
 		-- Hmm, some fun.. This causes vehicles to randomly blow up.
 		-- world.blow_up_all_vehicles()
 
-		-- world.fade_camera(2000, camera_enums.eFadeDirection.FADE_OUT)
+		--
 		-- game.wait(3000)
-		-- world.fade_camera(2000, camera_enums.eFadeDirection.FADE_IN)
+		--
 	end
 end
 
 --------
 -- Custom functions go below
+-- TODO Move the options for this into freeroam-config.lua
+-- TODO Move these functions elsewhere.
 --------
 
 --- Cheat toggles for debugging.

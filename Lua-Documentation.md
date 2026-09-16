@@ -6,7 +6,7 @@ Anytime I say namespaces I normally mean tables in lua.
 
 The values below that are in tables like this, are using CVectors, so they require the x, y, and z parameters or it won't work.
 
-This project is using Lua version 5.4.7
+This project is using Lua version 5.4.7.
 
 ```lua
 start_fire({x = 25, y = 25, z = 25})
@@ -118,6 +118,12 @@ These take a blip position with a CVector from my types.lua, so an X, Y, and Z v
 | game.remove_object | Remove an object. | game.remove_object(object_handle) |
 | game.set_object_collision | Set an objects collision. | game.set_object_collision(object_handle, state) |
 | game.wait | Run a wait timer like the original scripts, mostly for 'OnTick' in 'freeroam-game.lua' | game.wait(miliseconds) | 
+| game.create_pickup | Add an item pickup to the world, such as a save pickup, this returns the object handle for use. | game.create_pickup(position: CVector, model: PickupModel, type: PickupType)  |
+| game.create_money_pickup | Add a money pickup with an amount, this returns the object handle for use. | game.create_money_pickup(position: CVector, amount: number)  |
+| game.remove_pickup | Remove an item pickup from the world. | game.remove_pickup(pickup_handle) |
+| game.has_pickup_been_colleted | Check if the pickup has been collected | game.has_pickup_been_colleted(pickup_handle) |
+| game.is_any_pickup_at_coords | Check if any pickup is at the specified coords | game.is_any_pickup_at_coords({x = 25, y = 25, z = 25}) |
+| game.create_hidden_package | Create a hidden package pickup at the specified coords. | game.create_hidden_package({x = 25, y = 25, z = 25})  |
 
 **Garage namespace**
 

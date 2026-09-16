@@ -45,8 +45,11 @@ zone_enums = {}
 
 -- clothes_enums = {}
 
+pickup_enums = {}
+
 player_enums = {}
 player_info_enums = {}
+
 
 ped_enums = {}
 
@@ -544,6 +547,33 @@ garage_enums.eStoredCarFlags = {
 	FLAG_EXPLOSIONPROOF = 0x4,
 	FLAG_COLLISIONPROOF = 0x8,
 	FLAG_MELEEPROOF = 0x10,
+}
+
+----------------
+-- Pickups.h
+----------------
+
+pickup_enums.ePickupType = {
+	PICKUP_NONE = 0,
+	PICKUP_IN_SHOP = 1,
+	PICKUP_ON_STREET = 2,
+	PICKUP_ONCE = 3,
+	PICKUP_ONCE_TIMEOUT = 4,
+	PICKUP_ONCE_TIMEOUT_SLOW = 5,
+	PICKUP_COLLECTABLE1 = 6,
+	PICKUP_IN_SHOP_OUT_OF_STOCK = 7,
+	PICKUP_MONEY = 8,
+	PICKUP_MINE_INACTIVE = 9,
+	PICKUP_MINE_ARMED = 10,
+	PICKUP_NAUTICAL_MINE_INACTIVE = 11,
+	PICKUP_NAUTICAL_MINE_ARMED = 12,
+	PICKUP_FLOATINGPACKAGE = 13,
+	PICKUP_FLOATINGPACKAGE_FLOATING = 14,
+	PICKUP_ON_STREET_SLOW = 15,
+	PICKUP_ASSET_REVENUE = 16,
+	PICKUP_PROPERTY_LOCKED = 17,
+	PICKUP_PROPERTY_FORSALE = 18,
+	-- PICKUP_NUMOFTYPES = 19
 }
 
 ----------------

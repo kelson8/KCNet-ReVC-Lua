@@ -1,13 +1,22 @@
 -- This will be a list of functions for my lua scripts that can be called easily
 -- It will document them a bit
 
+------
 -- To use in another script:
 -- dofile("ViceExtended/lua_scripts/freeroam-functions.lua")
+------
+
 dofile("ViceExtended/lua_scripts/freeroam-locations.lua")
+dofile("ViceExtended/lua_scripts/freeroam-config.lua")
 
 -- New for reading from my save format and other json files like lists of locations.
 local json = dofile("ViceExtended/lua_scripts/lib/dkjson.lua")
 
+-----------------------
+--- KCNet Freeroam - General functions
+-----------------------
+
+local payNSpray1 = GameLocations.payNSpray1
 
 -- TODO Try to make fading work in my lua scripts for teleporting the player
 -- I will be giving the scripts more control once I implement more, so you can load collisions and more.
@@ -272,8 +281,53 @@ end
 
 ------------
 -- Player
-
 ------------
+
+
+----------------------
+--- Load the players data from the new json save format.
+--- This can load from the kcnet-revc-save.json custom json format.
+--- I will be making a save pickup or something later in this but this is all loaded in with lua.
+--- So I can easily modify how this loads without even rebuilding the game code.
+--- 
+--- This requires the ViceExtended subfolder since the games root folder isn't in lua_scripts.
+----------------------
+function player_functions.load_player_data()
+	if config.read_save_data then
+		local save_file_path = "ViceExtended/kcnet-revc-save.json"
+
+		--------
+		-- Player position to load spawn at.
+		--------
+
+		local storedPlayerPosition = player_functions.get_saved_position(save_file_path)
+
+		-- The game will crash here, the player position wasn't found.
+		if not storedPlayerPosition then
+			return
+		end
+
+		-- Spawn the player at the coordinates set in the save file.
+		-- player.create(0, {x = playerX, y = playerY, z = playerZ})
+		player.create(0, { x = storedPlayerPosition.x, y = storedPlayerPosition.y, z = storedPlayerPosition.z })
+
+		-- This works for loading the stats from the function!
+		-- Cleans up the freeroam-game.lua file quite a bit.
+		player_functions.load_save_stats(save_file_path)
+
+		-- TODO Setup these below.
+		-- Set the players heading
+	else
+		-- If the save file isn't going to be used, this below is set as a manual spawn point.
+
+		-- Spawn at the pay n spray I am testing the garage at.
+		-- TODO Make this spawn the player at the coordinates in the JSON save file that I am testing.
+		player.create(0, { x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z })
+		-- print(save_file.stats.health)
+	end
+end
+
+
 
 --- Run a fade effect on the player
 --- TODO Fix this to work, currently it doesn't for some reason.
