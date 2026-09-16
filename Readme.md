@@ -14,7 +14,7 @@ I am trying to replicate the function names as they are in the original scripts.
 
 So things like [SET_TIME_OF_DAY](https://library.sannybuilder.com/#/vc/script/extensions/default/00C0) become game.set_time(hour, minute)
 
-There is mostly a full list of documentation for my these ReVC lua scripts in [Lua-Documentation.md](https://github.com/kelson8/KCNet-ReVC-Lua/blob/main/Lua-Documentation.md), I will try to keep this up to date with what all I add.
+There is mostly a full list of documentation for my ReVC lua scripts in [Lua-Documentation.md](https://github.com/kelson8/KCNet-ReVC-Lua/blob/main/Lua-Documentation.md), I will try to keep this up to date with what all I add.
 
 ## About ReVC build
 
