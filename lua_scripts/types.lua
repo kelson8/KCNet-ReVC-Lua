@@ -21,6 +21,8 @@
 ---@alias FadeDirection integer
 ---@alias PhoneType integer
 ---@alias GarageType integer
+---@alias ObjectId integer
+---@alias ObjectHandle integer
 
 ---@class GameAPI
 ---@field add_blip_for_coord fun(position: CVector, sprite: RadarSprite, set_route: boolean)
@@ -114,6 +116,11 @@
 ---@field set_marker fun(position: CVector)
 ---@field set_car_generator fun(...)
 ---@field toggle_car_generator fun(generator_id: integer, state: integer)
+---@field create_object_no_offset fun(position: CVector, object: ObjectId): ObjectHandle
+---@field does_object_exist fun(object_handle: ObjectHandle): boolean
+---@field dont_remove_object fun(object_handle: ObjectHandle)
+---@field remove_object fun(object_handle: ObjectHandle)
+---@field set_object_collision fun(object_handle: ObjectHandle, state: boolean)
 
 ---@type GameAPI
 game = {}

@@ -237,7 +237,7 @@ feat: Update lua scripts
 
 * Update changelog and documentation.
 
-### Latest 1.2.14-5a
+### 1.2.14-5a
 
 feat: Add all garages from scripts
 
@@ -250,3 +250,15 @@ feat: Add all garages from scripts
 * Set ped and vehicle density back to 1.0 by default.
 
 * Update changelog and documentation.
+
+### Latest 1.2.14-6a
+
+feat: Add object spawning
+
+* Enable island roadblocks for a test with objects spawning, by default this is disabled.
+
+* Remove object spawning in kcnet-keybind-events.lua, move to init scripts.
+
+* Add blips for pay n sprays to the map.
+
+* Update changelog, and documentation.

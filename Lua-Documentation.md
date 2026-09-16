@@ -93,6 +93,11 @@ These take a blip position with a CVector from my types.lua, so an X, Y, and Z v
 | game.add_blip_for_coord | This sets a blip at the coordinates with a custom sprite and if the blip should have a route set to it. | game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_BIKER, false) |
 | game.override_next_restart | Override the next restart for the game, this will spawn at this location instead of a wasted/busted respawn point. | game.override_next_restart({x = airport.pos.x, y = airport.pos.y, z = airport.pos.z}, airport.heading) |
 | game.cancel_override_restart | This cancels an overridden spawn point | |
+| game.create_object_no_offset | Create an object at the specified coordinates. | game.create_object_no_offset({ x = -715.082, y = -489.689, z = 12.549 }, 2246) |
+| game.does_object_exist | Check if an object exists. | game.does_object_exist(object_handle) |
+| game.dont_remove_object | Make this object not be removed by the game. | game.dont_remove_object(object_handle) |
+| game.remove_object | Remove an object. | game.remove_object(object_handle) |
+| game.set_object_collision | Set an objects collision. | game.set_object_collision(object_handle, state) |
 
 
 **Garage namespace**

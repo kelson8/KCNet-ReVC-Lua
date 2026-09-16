@@ -17,6 +17,9 @@ dofile("ViceExtended/lua_scripts/freeroam-blips.lua")
 -- New for garages
 dofile("ViceExtended/lua_scripts/freeroam-garages.lua")
 
+-- New for objects on the map
+dofile("ViceExtended/lua_scripts/freeroam-objects.lua")
+
 -----------
 -- WARNING
 -- If there are any errors in this file, ReVC will crash because this script spawns the player.
@@ -56,6 +59,10 @@ local use_original_spawns = false
 -- If this is set, it will load the custom save file.
 -- Which is named 'kcnet-revc-save.json'.
 local read_save_data = true
+
+-- If this is set, most of the road blocks will block the islands like in the original scripts.
+-- This is mostly for testing, currently I cannot disable the vehicle roads in these areas.
+local roadBlocksEnabled = false
 
 ---------
 --- New, for testing features.
@@ -137,6 +144,15 @@ function OnInit()
 
 	-- Setup the garages, moved out of keybind events.
 	garage_util.setup_garages()
+
+	-- Setup some of the objects on the map.
+	-- In the future, I will use this for custom objects.
+	-- object_util.setup_objects()
+
+	-- Setup all of the road blocks on the map
+	if roadBlocksEnabled then
+		object_util.setup_road_blocks()
+	end
 
 	-- TODO Implement these below
 	-- Save pickups, which save to my custom json file.

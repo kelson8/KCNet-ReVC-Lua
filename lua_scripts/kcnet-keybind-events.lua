@@ -23,7 +23,6 @@ dofile("ViceExtended/lua_scripts/freeroam-enums.lua")
 -- New for blips
 dofile("ViceExtended/lua_scripts/freeroam-blips.lua")
 
-
 -----------------------
 --- KCNet Freeroam - Keybind events with F9
 -----------------------
@@ -131,9 +130,6 @@ local dbgBlowUpCurrentVehicle = false
 -- Test for setting the weather.
 local dbgSetWeather = false
 
--- Test for creating an object on the map.
--- Disabled in game code, currently crashes it.
-local dbgCreateObject = false
 
 -- Test with new set_health and armor functions.
 -- These work.
@@ -554,13 +550,6 @@ if dbgSetWeather then
 	-- game.set_allow_hurricanes(true)
 end
 
--- TODO Test this.
--- Test for creating an object on the map.
--- Well this just crashes it, I don't think I'm spawning the object right.
-if dbgCreateObject then
-	world.create_object_no_offset({x = playerPos.x + 3, y = playerPos.y + 3, z = playerPos.z})
-end
-
 -- Test for new health functions, I only had heal on here before.
 -- These work now.
 if dbgHealthTest then
@@ -570,8 +559,6 @@ if dbgHealthTest then
 	print(player.get_health())
 	print(player.get_armor())
 end
-
-
 
 -- This works for removing the blip that is created with freeroam-game.lua now.
 if dbgBlipTest then

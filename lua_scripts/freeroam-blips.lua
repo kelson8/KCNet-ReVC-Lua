@@ -24,8 +24,12 @@ local payNSpray1 = GameLocations.payNSpray1
 -- I'll have to load a list of locations from my json files for this.
 
 local blipPos = { x = airport.pos.x, y = airport.pos.y, z = airport.pos.z }
--- local blipPos1 = { x = oldSpawn.pos.x, y = oldSpawn.pos.y, z = oldSpawn.pos.z }
 local blipPos2 = { x = payNSpray1.pos.x - 25, y = payNSpray1.pos.y, z = payNSpray1.pos.z }
+
+local respray1Blip = { x = -3.8, y = -1265.8, z = 12.0 }
+local respray2Blip = { x = 319.0, y = 441.3, z = 12.0 }
+local respray3Blip = { x = -903.0, y = -1261.1, z = 12.0 }
+local respray4Blip = { x = -876.2, y = -105.5, z = 12.0 }
 
 map_blips = {}
 
@@ -85,7 +89,15 @@ function map_blips.setup()
     -- map_blips.currentBlip1 = game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false)
     local currentBlip1 = game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false)
     -- local currentBlip2 = game.add_blip_for_coord(blipPos1, radar_enums.eRadarSprite.RADAR_SPRITE_HARDWARE, false)
-    local currentBlip2 = game.add_blip_for_coord(blipPos2, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false)
+    -- local currentBlip2 = game.add_blip_for_coord(blipPos2, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false)
+
+    -- Add the respray blips
+    -- TODO Make these short range blips, that is what the game normally does.
+    -- For now it's fine.
+    game.add_blip_for_coord(respray1Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false)
+    game.add_blip_for_coord(respray2Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false)
+    game.add_blip_for_coord(respray3Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false)
+    game.add_blip_for_coord(respray4Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false)
 
     -- Log the current blip id into the file.
     -- This currently works for one value.
