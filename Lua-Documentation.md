@@ -95,6 +95,20 @@ These take a blip position with a CVector from my types.lua, so an X, Y, and Z v
 | game.cancel_override_restart | This cancels an overridden spawn point | |
 
 
+**Garage namespace**
+
+For the below garages, the garage types are from my 'garage_enums.eGarageType' enum, and the garage ID is what gets set when these are setup, they seem to always start at 0.
+
+| Function | Description | Usage |
+| ----- | ---- | ----- |
+| garage.set | Setup a garage at the area with the specified type. | garage.set(leftBottomX, leftBottomY, leftBottomZ, frontX, frontY, rightTopX, rightTopY, rightTopZ, type) |
+| garage.open | Open a garge with the specified garage ID. | garage.open(garage_id) |
+| garage.close | Close a garge with the specified garage ID. | garage.close(garage_id) |
+| garage.is_open | Check if a garage is open with a specified garage ID. | garage.is_open(garage_id) |
+| garage.is_closed | Check if a garage is closed with a specified garage ID. | garage.is_closed(garage_id) |
+| garage.change_type | Change the type of a garage. | garage.change_type(garage_id, type) |
+
+
 **Hud namespace**
 | Function | Description | Usage |
 | ----- | ---- | ----- |

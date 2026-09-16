@@ -300,40 +300,32 @@ end
 
 -----
 --- Garage testing
---- TODO Fix this to work right.
------
+--- 9-15-2026 @ 8:01PM
+--- I have fixed this, the garage doors can be opened.
+--- Currently, this will add more then one garage if the garage.set command is ran.
+--- So I'll just be running this on the game init and manage the garages with the ids.
+--- The list of garages ids, positions and other values will be saved to a JSON file.
+--- 
+--- Well this actually works as a pay n spray when I have enough money, I could use this for something.
+--- 
+-------------------------
+-- These are set in the freeroam-garages.lua script, and shouldn't be messed with in here.
+-- I currently have the garages set to run once on onit.
+-------------------------
 
 -- Setting a respray garage as a test.
 -- garage.set(leftBottomX, leftBottomY, leftBottomZ, frontX, frontY, rightTopX, rightTopY, rightTopZ, type)
--- garage.set(-886.157, -115.158, 9.992, -882.699, -108.312, -876.7, -119.83, 15.58, garage_enums.eGarageType.GARAGE_RESPRAY)
 
--- TODO Test this, not sure of what the id number is for this..
--- Trying to use 0 seems to break it in my lua scripts.
--- It gives a lua error in the console with 0, and that is probably what this garage is.
--- garage.open(1)
--- garage.close(1)
+-- This new format works! I can now return the garage.
+-- I guess it does start at 0.
 
+-- local new_garage = garage.set(-886.157, -115.158, 9.992, -882.699, -108.312, -876.7, -119.83, 15.58, garage_enums.eGarageType.GARAGE_RESPRAY)
 
--- local garage_id = 2
+-- print("New garage ID: " .. new_garage)
 
--- if garage.is_open(garage_id) then
--- 	print("Garage with id " .. garage_id .. " is open")
--- else
--- 	print("Garage with id " .. garage_id .. " is closed")
--- end
-
-
-
--- garage.is_open(1)
--- garage.is_closed(1)
-
--- garge.change_type(1, 2)
-
-
-----
----
 --
 
+-- garge.change_type(1, 2)
 
 ----
 -- Random number testing, using a very basic random number generator in lua.

@@ -149,6 +149,121 @@ GameLocations = {
     },
 }
 
+-- Full list of garages from the scripts.
+-- These replicate the design from here
+-- https://library.sannybuilder.com/#/vc/script/extensions/default/0219-- Except
+-- Although instead of floats, these are vectors
+-- These came from the game scripts.
+GameGarages = {
+    -- The docks
+    respray1 = {
+        ---@type CVector
+        leftBottom = {
+            x = -914.129,
+            y = -1263.54,
+            z = 10.706,
+        },
+        ---@type CVector2D
+        front = {
+            x = -907.137,
+            y = -1246.626,
+        },
+        ---@type CVector
+        rightTop = {
+            x = -906.3,
+            y = -1266.9,
+            z = 14.421,
+        }
+    },
+
+    -- Car show room
+    -- Normally, this one has 'SET_ROTATING_GARAGE_DOOR' activate
+    -- And it uses this function to do that: 'CGarages::SetGarageDoorToRotate'
+    -- I may implement that into my lua scripts later.
+    respray2 = {
+        ---@type CVector
+        leftBottom = {
+            x = -1014.341,
+            y = -857.732,
+            z = 6.325,
+        },
+        ---@type CVector2D
+        front = {
+            x = -1001.315,
+            y = -857.732,
+        },
+        ---@type CVector
+        rightTop = {
+            x = -1014.341,
+            y = -841.532,
+            z = 10.885,
+        }
+    },
+
+    -- Haiti
+    respray3 = {
+        ---@type CVector
+        leftBottom = {
+            x = -886.157,
+            y = -115.158,
+            z = 9.992,
+        },
+        ---@type CVector2D
+        front = {
+            x = -882.699,
+            y = -108.312,
+        },
+        ---@type CVector
+        rightTop = {
+            x = -876.7,
+            y = -119.83,
+            z = 15.58,
+        }
+    },
+
+    -- nbeachbt? Where is this one?
+    respray4 = {
+        ---@type CVector
+        leftBottom = {
+            x = 323.9,
+            y = 427.4,
+            z = 10.0,
+        },
+        ---@type CVector2D
+        front = {
+            x = 326.3,
+            y = 434.5,
+        },
+        ---@type CVector
+        rightTop = {
+            x = 313.9,
+            y = 430.53,
+            z = 15.7,
+        }
+    },
+
+    -- Ocean drive
+    respray5 = {
+        ---@type CVector
+        leftBottom = {
+            x = -7.55,
+            y = -1253.77,
+            z = 9.322,
+        },
+        ---@type CVector2D
+        front = {
+            x = -7.55,
+            y = -1261.2,
+        },
+        ---@type CVector
+        rightTop = {
+            x = 2.64,
+            y = -1253.7,
+            z = 14.4,
+        }
+    }
+}
+
 -- -- Set the area to place the player with the 'F9' keybind here.
 -- mainSpawnX = constructionSiteVehiclePos.x
 

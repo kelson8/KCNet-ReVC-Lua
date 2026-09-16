@@ -20,6 +20,7 @@
 ---@alias StatType integer
 ---@alias FadeDirection integer
 ---@alias PhoneType integer
+---@alias GarageType integer
 
 ---@class GameAPI
 ---@field add_blip_for_coord fun(position: CVector, sprite: RadarSprite, set_route: boolean)
@@ -41,6 +42,13 @@
 ---@field override_next_restart fun(position: CVector, heading: number)
 ---@field cancel_override_restart fun()
 ---@field turn_phone_off fun(type: PhoneType)
+
+---@class GarageAPI
+---@field set fun(leftBottomX: number, leftBottomY: number, leftBottomZ: number, frontX: number, frontY: number, rightTopX: number, rightTopY: number, rightTopZ: number, type: GarageType): number
+---@field close fun(garageId: number)
+---@field open fun(garageId: number)
+---@field is_open fun(garageId: number)
+---@field is_closed fun(garageId: number)
 
 ---@class HudAPI
 ---@field print_msg fun(message: string)

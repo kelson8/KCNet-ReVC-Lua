@@ -220,7 +220,7 @@ I added these below to be run in my scripts:
 
 * Update changelog and documentation.
 
-### Latest 1.2.14-4a
+### 1.2.14-4a
 
 feat: Update lua scripts
 
@@ -234,5 +234,19 @@ feat: Update lua scripts
 * Add toggle for infinite sprint with 'player.set_infinite_sprint'
 
 * Add MD5 library for later usage in this project.
+
+* Update changelog and documentation.
+
+### Latest 1.2.14-5a
+
+feat: Add all garages from scripts
+
+* I have added all of the garages from the original scripts to be used as pay n sprays.
+
+* Add mostly all garage functions for use in my scripts.
+
+* Add eZoneAttribs enum.
+
+* Set ped and vehicle density back to 1.0 by default.
 
 * Update changelog and documentation.

@@ -41,6 +41,8 @@ weather_enums = {}
 
 world_enums = {}
 
+zone_enums = {}
+
 -- clothes_enums = {}
 
 player_enums = {}
@@ -309,6 +311,7 @@ camera_enums.eFadeDirection = {
 ----------------
 
 -- List of useful game limits from config.h, some have been modified
+-- These should be kept in sync with my internal ReVC branch, otherwise things may break.
 config_enums.eGameLimits = {
 	NUMPLAYERS = 1,
 
@@ -317,7 +320,10 @@ config_enums.eGameLimits = {
 	-- MAX_CDIMAGES2 = 32, -- additional cdimages
 	MAX_CDCHANNELS = 5,
 
-	NUMPHONES = 50
+	NUMPHONES = 50,
+
+	-- The max amount of garages, my scripts should check for this if I'm creating them.
+	NUM_GARAGES = 32
 }
 
 
@@ -645,6 +651,24 @@ weather_enums.eWeatherType = {
 	WEATHER_TOTAL = 6,
 
 	-- WEATHER_EXTRACOLOURS = 6
+}
+
+----------------
+-- ZoneCull.h
+----------------
+
+zone_enums.eZoneAttribs = {
+	ATTRZONE_CAMCLOSEIN		= 1,
+	ATTRZONE_STAIRS			= 2,
+	ATTRZONE_1STPERSON		= 4,
+	ATTRZONE_NORAIN			= 8,
+	ATTRZONE_NOPOLICE		= 0x10,
+	ATTRZONE_NOTCULLZONE		= 0x20,
+	ATTRZONE_DOINEEDCOLLISION	= 0x40,
+	ATTRZONE_SUBWAYVISIBLE		= 0x80,
+	ATTRZONE_POLICEABANDONCARS	= 0x100,
+	ATTRZONE_ROOMFORAUDIO		= 0x200,
+	ATTRZONE_WATERFUDGE		= 0x400,
 }
 
 

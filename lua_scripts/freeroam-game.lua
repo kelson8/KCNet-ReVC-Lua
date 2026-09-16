@@ -14,6 +14,9 @@ dofile("ViceExtended/lua_scripts/freeroam-functions.lua")
 -- New for blips
 dofile("ViceExtended/lua_scripts/freeroam-blips.lua")
 
+-- New for garages
+dofile("ViceExtended/lua_scripts/freeroam-garages.lua")
+
 -----------
 -- WARNING
 -- If there are any errors in this file, ReVC will crash because this script spawns the player.
@@ -131,6 +134,9 @@ function OnInit()
 	-- Currently these cannot be modified but they do show up now.
 	-- TODO Load these from json list later.
 	map_blips.setup()
+
+	-- Setup the garages, moved out of keybind events.
+	garage_util.setup_garages()
 
 	-- TODO Implement these below
 	-- Save pickups, which save to my custom json file.
@@ -347,9 +353,11 @@ local toggle_vehicle_density = true
 
 -- This can be set to 0.0 to disable the peds and vehicles.
 -- These values can be between 0.0 and 1.0, otherwise this won't work.
-local ped_density = 0.5
+-- local ped_density = 0.5
+local ped_density = 1.0
 -- local ped_density = 0.0
-local vehicle_density = 0.5
+-- local vehicle_density = 0.5
+local vehicle_density = 1.0
 -- local vehicle_density = 0.0
 
 -- If this is disabled, you won't lose weapons when busted or wasted.
