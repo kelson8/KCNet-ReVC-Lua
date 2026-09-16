@@ -14,6 +14,8 @@ I am trying to replicate the function names as they are in the original scripts.
 
 So things like [SET_TIME_OF_DAY](https://library.sannybuilder.com/#/vc/script/extensions/default/00C0) become game.set_time(hour, minute)
 
+There is mostly a full list of documentation for my these ReVC lua scripts in [Lua-Documentation.md](https://github.com/kelson8/KCNet-ReVC-Lua/blob/main/Lua-Documentation.md), I will try to keep this up to date with what all I add.
+
 ## About ReVC build
 
 **List of changes**
@@ -101,9 +103,21 @@ These values get read in the game code, and will be reloaded when `F5` is presse
 | gbInfiniteAmmoCheat | Enables infinite ammo for the player. |
 | gbFadeOnDeath | Toggle for fading the game camera when the player dies or is wasted, by default this is true and is only a required value if you want to turn it off. |
 
+## Bugs
+
+Current bugs within my ReVC build
+
+* Pressing load game from main menu with my custom code crashes the game.
+* Vehicles and peds spawn in places they shouldn't, the original scripts normally take care of this.
+* Not very many police cars spawn when I have cops, not sure if I did something to effect this.
+* Sometimes opening the ImGui mod menu with `F8` will cause the game to crash, the mouse will also go out of the window bounds.
+
+There may be more bugs that I create while I'm working on this project, I will try to fix the bugs that I have caused later on.
+This list will be updated as I find more bugs in my ReVC build.
+
 ## KCNet-ReVC Version
 
-Currently, the ReVC code these lua scripts are based on is my internal version `1.2.14-6a` and I have been making breaking changes between some of these minor point releases.
+Currently, the ReVC code these lua scripts are based on is my internal version `1.2.14-7a` and I have been making breaking changes between some of these minor point releases.
 
 I may switch up my internal version numbering later on, currently it just makes a bit of sense to increment the version number especially where I have been making a lot of changes and may need to revert breaking changes.
 
@@ -113,11 +127,9 @@ If I ever get enough experience with it, and can do it I might make a multiplaye
 
 I plan on making most of the game functions along with my custom functions able to be called in the lua scripts, and to be able to easily modify functions already in the game such as what weapons the police spawn with, and other stuff to mess around with.
 
-There may be a basic json save/load system in the future that saves a very small set of stats to a `revc-freeroam-save.json` file using the [nlohmann json](https://github.com/nlohmann/json) library, this would mostly be for keeping like a high score system or something I'm not really sure yet.
+There may be a basic json save/load system in the future that saves a very small set of stats to a `revc-freeroam-save.json` file using the [nlohmann json](https://github.com/nlohmann/json) library, this would mostly be for keeping like a high score system or something I'm not really sure yet. - Mostly complete, I need to add saving with save pickups.
 
 Since I can modify just about everything in ReVC, I may try to implement chaos mod features that can activate random actions also.
-
-I will be adding a `Lua-Documentation.md` file in the future that will contain info about the Lua functions that can be called, the parameters they take and other useful lua features for this ReVC build.
 
 # Libraries
 

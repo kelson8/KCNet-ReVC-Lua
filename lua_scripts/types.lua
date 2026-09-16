@@ -44,6 +44,7 @@
 ---@field override_next_restart fun(position: CVector, heading: number)
 ---@field cancel_override_restart fun()
 ---@field turn_phone_off fun(type: PhoneType)
+---@field wait fun(miliseconds: number)
 
 ---@class GarageAPI
 ---@field set fun(leftBottomX: number, leftBottomY: number, leftBottomZ: number, frontX: number, frontY: number, rightTopX: number, rightTopY: number, rightTopZ: number, type: GarageType): number

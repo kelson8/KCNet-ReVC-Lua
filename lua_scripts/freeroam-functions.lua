@@ -275,6 +275,23 @@ end
 
 ------------
 
+--- Run a fade effect on the player
+--- TODO Fix this to work, currently it doesn't for some reason.
+--- @param time number The time for the fade in miliseconds.
+function player_functions.fade_effect(time)
+	world.fade_camera(time, camera_enums.eFadeDirection.FADE_OUT)
+	game.wait(3000)
+	world.fade_camera(time, camera_enums.eFadeDirection.FADE_IN)
+end
+
+--- Kill the player when their health is low
+--- This is mostly a test for the new game.wait command in freeroam-game.lua.
+function player_functions.low_health_kill()
+	if player.get_health() < 60 then
+		player.kill()
+	end
+end
+
 -- Temporary
 
 local airport = GameLocations.airport

@@ -158,7 +158,7 @@ local dbgCameraFadeTest = false
 local dbgCarGeneratorsTest = false
 
 -- Testing overriding the respawn points for the game.
-local dbgOverrideRestartTest = true
+local dbgOverrideRestartTest = false
 
 -----------
 
@@ -598,8 +598,9 @@ end
 -- If I run these one at a time it'll work, I will need to implement the wait timer like in the original scripts.
 -- Otherwise this won't work properly for teleports in my lua scripts.
 if dbgCameraFadeTest then
-	world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_OUT)
-	world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_IN)
+	player_functions.fade_effect(2.0)
+	-- world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_OUT)
+	-- world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_IN)
 end
 
 -------------------

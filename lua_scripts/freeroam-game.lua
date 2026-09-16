@@ -52,6 +52,9 @@ local policeSt4 = GameLocations.policeSt4
 -- If this is enabled, my freeroam will spawn you near the hospitals and police stations that are in the scripts.
 local use_original_spawns = false
 
+-- Lock the game time with the while loop.
+-- This is for testing the new game.wait function
+local lock_game_time = false
 
 -- If this is set, this will read the saved player position from the custom JSON save file.
 -- Otherwise it just sets a debug position to spawn at.
@@ -224,6 +227,7 @@ end
 -- You can use any weapons from the eWeaponType enum in freeroam-enums.lua.
 player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_COLT45, 100)
 player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_KATANA, 1)
+player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_MOLOTOV, 100)
 
 
 ----
@@ -317,7 +321,9 @@ math.randomseed(os.time())
 
 
 ------------------
--- This runs every frame (called by the C++ Update/Heartbeat)
+-- Now this runs all the time only if there is a while true in here.
+-- Somewhat mimics the original scripts and mta sa.
+-- This was fixed to work better in v1.2.14-7a.
 function OnTick()
 	-- local random_number = math.random(1, 1000)
 	-- TODO Implement getting player keybinds in lua directly, I should be able to.
@@ -334,21 +340,35 @@ function OnTick()
 
 	-- game.set_time(10, 55)
 
-	-- TODO Fix this game.wait() to work in here, it doesn't work just yet in my scripts.
-	-- game.wait(2000)
-
-	-- This works for kind of a timer, its just for screwing around with though.
-	-- if random_number == 30 then
-	-- Hmm, some fun.. This causes vehicles to randomly blow up.
-	-- world.blow_up_all_vehicles()
+	-- This format is actually working!
+	-- I finally got the wait timers to work.
+	-- Main game loop goes here, mimics original scripts.
+	-- while lock_game_time do
+	-- 	game.wait(3000)
+	-- 	game.set_time(10, 55)
+	-- 	-- player.kill_wanted()
+	-- 	-- print("DEAD")
 	-- end
 
-	-- Would be better to just freeze the clock though, probably less resource intensive.
+	-- Anything in here will run all the time.
+	while true do
+		-- Well I cannot call functions outside of OnTick in here, at least in other files.
+		-- player_functions.fade_effect(2.0)
 
-	-- Update the coroutine threads.
-	-- TODO Try to fix this to work.
-	-- This is now in freeroam-coroutine-test.lua, since it doesn't work.
-	-- updateThreads(deltaTime * 1000)
+		game.wait(0)
+
+		-- player_functions.low_health_kill()
+
+		-- Randomly blow up vehicles for some chaos.
+
+		-- game.wait(5000)
+		-- Hmm, some fun.. This causes vehicles to randomly blow up.
+		-- world.blow_up_all_vehicles()
+
+		-- world.fade_camera(2000, camera_enums.eFadeDirection.FADE_OUT)
+		-- game.wait(3000)
+		-- world.fade_camera(2000, camera_enums.eFadeDirection.FADE_IN)
+	end
 end
 
 --------

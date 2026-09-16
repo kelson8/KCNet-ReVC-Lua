@@ -14,6 +14,25 @@ start_fire({x = 25, y = 25, z = 25})
 
 Anything that I have with `DISABLED` in the description below, is a function that is not working yet or unused.
 
+**Wait function**
+
+I now have a `game.wait` function that works like in the original scripts which I added in v1.2.14-7a.
+In the `OnTick` function within `freeroam-game.lua` you can run a loop like this
+
+```lua
+function OnTick()
+	-- Anything in here will run all the time.
+	while true do
+		game.wait(0)
+
+		-- Set a 2 second timer
+		game.wait(2000)
+		-- Kill the player if their health is low every 2 seconds.
+		player_functions.low_health_kill()
+	end
+end
+```
+
 **Compiling lua scripts**
 
 Optionally, with lua you can compile your scripts, this will prevent the script from easily being changed, and the game will still load these.
@@ -98,7 +117,7 @@ These take a blip position with a CVector from my types.lua, so an X, Y, and Z v
 | game.dont_remove_object | Make this object not be removed by the game. | game.dont_remove_object(object_handle) |
 | game.remove_object | Remove an object. | game.remove_object(object_handle) |
 | game.set_object_collision | Set an objects collision. | game.set_object_collision(object_handle, state) |
-
+| game.wait | Run a wait timer like the original scripts, mostly for 'OnTick' in 'freeroam-game.lua' | game.wait(miliseconds) | 
 
 **Garage namespace**
 

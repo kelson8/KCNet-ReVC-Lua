@@ -251,7 +251,7 @@ feat: Add all garages from scripts
 
 * Update changelog and documentation.
 
-### Latest 1.2.14-6a
+### 1.2.14-6a
 
 feat: Add object spawning
 
@@ -260,5 +260,19 @@ feat: Add object spawning
 * Remove object spawning in kcnet-keybind-events.lua, move to init scripts.
 
 * Add blips for pay n sprays to the map.
+
+* Update changelog, and documentation.
+
+### Latest 1.2.14-7a
+
+feat: Add wait timers like original scripts
+
+* Now you can use game.wait for functions that require waiting, such as spawning models.
+
+* Remove freeroam-coroutine-test.lua, it wasn't used.
+
+* Add some more functions for testing.
+
+* Update readme.
 
 * Update changelog, and documentation.
