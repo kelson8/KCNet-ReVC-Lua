@@ -279,6 +279,8 @@ feat: Add wait timers like original scripts
 
 ### Latest 1.2.14-8a
 
+**Commit 1**
+
 feat: Add pickups to the game
 
 * Now there is a basic save pickup at the bridge where I spawn, it doesn't fade the camera yet but it does get re-created like in the original scripts.
@@ -288,5 +290,16 @@ feat: Add pickups to the game
 * Added most of the pickup functions that were in the original scripts.
 
 * Move some config options into freeroam-config.lua.
+
+* Update changelog and documentation.
+
+**Commit 2**
+
+feat: Fix fading with pickups
+
+* Make camera fade in and out on save pickup.
+* Make save pickup disable and re-enable players controls.
+
+* Add MIT license header to most scripts.
 
 * Update changelog and documentation.

@@ -102,6 +102,7 @@
 ---@field give_rc_car fun()
 ---@field blow_up_vehicle fun()
 ---@field is_in_vehicle fun(): boolean
+---@field set_control fun(toggle: boolean)
 
 ---@class VehicleAPI
 ---@field create fun(vehicle_id: integer, position: CVector, delete_last_vehicle: boolean, warp_into_vehicle: boolean)

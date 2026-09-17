@@ -117,7 +117,7 @@ These take a blip position with a CVector from my types.lua, so an X, Y, and Z v
 | game.dont_remove_object | Make this object not be removed by the game. | game.dont_remove_object(object_handle) |
 | game.remove_object | Remove an object. | game.remove_object(object_handle) |
 | game.set_object_collision | Set an objects collision. | game.set_object_collision(object_handle, state) |
-| game.wait | Run a wait timer like the original scripts, mostly for 'OnTick' in 'freeroam-game.lua' | game.wait(miliseconds) | 
+| game.wait | Run a wait timer like the original scripts, mostly for 'OnTick' in 'freeroam-game.lua' | game.wait(millisecond ) | 
 | game.create_pickup | Add an item pickup to the world, such as a save pickup, this returns the object handle for use. | game.create_pickup(position: CVector, model: PickupModel, type: PickupType)  |
 | game.create_money_pickup | Add a money pickup with an amount, this returns the object handle for use. | game.create_money_pickup(position: CVector, amount: number)  |
 | game.remove_pickup | Remove an item pickup from the world. | game.remove_pickup(pickup_handle) |
@@ -196,6 +196,7 @@ Any functions without a usage below are just getter or setter functions and don'
 | player.give_rc_car | This can give the player an RC car. - DISABLED not working right. | |
 | player.blow_up_vehicle | This will blow up your current vehicle. | |
 | player.is_in_vehicle | This checks if the player is currently in a vehicle. | |
+| player.set_control | Toggle the players controls on/off, this can disable all controls for stuff like fading. | player.set_control(true) |
 
 
 **Vehicle namespace**
@@ -216,7 +217,7 @@ Any functions without a usage below are just getter or setter functions and don'
 | world.set_ped_density | Set the ped density, takes a value between 0 and 1.0 | |
 | world.set_vehicle_density | Set the vehicle density, takes a value between 0 and 1.0 | |
 | world.set_ped_objectives | Set the specified boolean values for the ped objectives, give weapons will give the ped a pistol currently, attack player, exit vehicle and kill peds all do what they say, should be easy to understand what they do. | world.set_ped_objectives(give_ped_weapons, attack_player, should_exit_vehicle, kill_peds) |
-| world.fade_camera | Fade the games camera in and out, currently without a game.wait function I cannot fade out then back in since it goes too fast. | world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_OUT) |
+| world.fade_camera | Fade the games camera in and out, fixed in v1. | world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_OUT) |
 | world.set_marker | Set the worlds target marker to a specified X, and Y coordinate if not already set. | world.set_marker({x = 25, y = 25}) |
 | world.set_car_generator | Sets a car generator up in the world, example usage in kcnet-keybind-events under 'dbgCarGeneratorsTest' | |
 | world.toggle_car_generator | Toggles the specified car generator, Param1: The car generator ID, Param2: 0 is off, and 101 is on  | world.toggle_car_generator(car_generator, 101) |

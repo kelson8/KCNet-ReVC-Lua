@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: MIT
+-- Copyright (c) 2026 kelson8
+
 -- For loading locations
 dofile("ViceExtended/lua_scripts/freeroam-locations.lua")
 

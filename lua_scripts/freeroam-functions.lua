@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: MIT
+-- Copyright (c) 2026 kelson8
+
 -- This will be a list of functions for my lua scripts that can be called easily
 -- It will document them a bit
 
@@ -308,30 +311,24 @@ function player_functions.load_player_data()
 		end
 
 		-- Spawn the player at the coordinates set in the save file.
-		-- player.create(0, {x = playerX, y = playerY, z = playerZ})
 		player.create(0, { x = storedPlayerPosition.x, y = storedPlayerPosition.y, z = storedPlayerPosition.z })
 
 		-- This works for loading the stats from the function!
 		-- Cleans up the freeroam-game.lua file quite a bit.
 		player_functions.load_save_stats(save_file_path)
 
-		-- TODO Setup these below.
-		-- Set the players heading
 	else
 		-- If the save file isn't going to be used, this below is set as a manual spawn point.
 
-		-- Spawn at the pay n spray I am testing the garage at.
-		-- TODO Make this spawn the player at the coordinates in the JSON save file that I am testing.
+		-- Spawn at the pay n spray I am testing the garages at.
 		player.create(0, { x = payNSpray1.pos.x, y = payNSpray1.pos.y, z = payNSpray1.pos.z })
-		-- print(save_file.stats.health)
 	end
 end
 
 
 
 --- Run a fade effect on the player
---- TODO Fix this to work, currently it doesn't for some reason.
---- @param time number The time for the fade in miliseconds.
+--- @param time number The time for the fade in seconds.
 function player_functions.fade_effect(time)
 	world.fade_camera(time, camera_enums.eFadeDirection.FADE_OUT)
 	game.wait(3000)

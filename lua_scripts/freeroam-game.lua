@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: MIT
+-- Copyright (c) 2026 kelson8
+
 ---@diagnostic disable: unused-local
 -- This format works with my setup! I had to have a subdirectory for it.
 dofile("ViceExtended/lua_scripts/freeroam-locations.lua")
@@ -61,6 +64,18 @@ local use_original_spawns = false
 -- If this is set, most of the road blocks will block the islands like in the original scripts.
 -- This is mostly for testing, currently I cannot disable the vehicle roads in these areas.
 local roadBlocksEnabled = false
+
+-- Random number, this gets generated every second.
+local randomNumber = 0
+
+-- TODO Add check for if the player is shooting, use this
+-- 'pPed->bIsShooting'
+
+-- TODO Add check for other peds shooting.
+
+-- TODO Make ped spawner and vehicle spawner return the *CPed and *CVehicle objects.
+-- This might work for that
+-- https://stackoverflow.com/questions/3481856/sending-variable-pointers-back-and-forth-between-c-and-lua
 
 ---------
 --- New, for testing features.
@@ -317,25 +332,36 @@ function OnTick()
 
 	-- Anything in here will run all the time.
 	while true do
-		-- Well I cannot call functions outside of OnTick in here, at least in other files.
-		-- player_functions.fade_effect(2.0)
-
+		-- Without this the game will crash.
 		game.wait(0)
-
 
 		-----------------------
 		--- Save pickup testing
 		-----------------------
 
+		-- I got fading working for this!
 		map_pickups.save_loop()
+
+		-- game.wait(2000)
+
+
+
+		-- Well I cannot call functions outside of OnTick in here, at least in other files.
+		-- This works here though.
+		-- player_functions.fade_effect(2.0)
 
 		-- player_functions.low_health_kill()
 
 		-- Randomly blow up vehicles for some chaos.
-
-		-- game.wait(5000)
 		-- Hmm, some fun.. This causes vehicles to randomly blow up.
-		-- world.blow_up_all_vehicles()
+
+		-- game.wait(1000)
+		-- randomNumber = math.random(1, 10)
+		-- print("The random number was: " .. randomNumber)
+
+		-- if randomNumber == 6 or randomNumber == 10 then
+			-- world.blow_up_all_vehicles()
+		-- end
 
 		--
 		-- game.wait(3000)

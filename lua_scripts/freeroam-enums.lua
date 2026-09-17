@@ -1,3 +1,5 @@
+-- SPDX-License-Identifier: MIT
+-- Copyright (c) 2026 kelson8
 
 -- List of enums for future use in my Lua scripts.
 

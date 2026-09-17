@@ -1,3 +1,6 @@
+-- SPDX-License-Identifier: MIT
+-- Copyright (c) 2026 kelson8
+
 ---@diagnostic disable: empty-block
 -- Keybind events are in here for when running with F9.
 
