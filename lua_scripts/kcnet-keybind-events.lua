@@ -26,6 +26,9 @@ dofile("ViceExtended/lua_scripts/freeroam-enums.lua")
 -- New for blips
 dofile("ViceExtended/lua_scripts/freeroam-blips.lua")
 
+-- New for markers on the map
+dofile("ViceExtended/lua_scripts/freeroam-markers.lua")
+
 -----------------------
 --- KCNet Freeroam - Keybind events with F9
 -----------------------
@@ -163,6 +166,18 @@ local dbgCarGeneratorsTest = false
 -- Testing overriding the respawn points for the game.
 local dbgOverrideRestartTest = false
 
+-- Sphere testing
+-- I'll need to run this in a loop elsewhere...
+local dbgSphereTest = false
+
+-- Trash on ground toggle testing.
+local dbgSwitchRubbishTest = false
+
+-- This can log the players current coordinates into my json format.
+-- Very useful for copying locations im currently at, instead of manually copying them. 
+-- log.coords_json()
+-- player.set_position({x = 692.181641, y = -418.629639, z = 11.068894})
+
 -----------
 
 -------------------------
@@ -179,6 +194,13 @@ local create_vehicle_toggle = false
 
 -- If the player should teleport to the position set when 'F9' is pressed.
 local teleportPlayer = false
+
+-- TODO REMOVE!! TEST
+
+-- hud.print_msg("Camera fading: " .. tostring(world.get_fading_status()))
+-- log_util.print_msg("Camera fading: " .. tostring(world.get_fading_status()))
+
+--
 
 ------
 -- Player functions
@@ -662,6 +684,17 @@ if dbgOverrideRestartTest then
 	-- Cancel an overridden spawn point
 	game.cancel_override_restart()
 	log_util.print_msg("Cancelled override for spawn point.")
+end
+
+-- TODO Move into a loop in another function.
+if dbgSphereTest then
+	markers.test_marker1_active = not markers.test_marker1_active
+end
+
+-- TODO Test this, should turn the trash such as newspapers on the ground on/off.
+if dbgSwitchRubbishTest then
+	local groundTrashOff = false
+	world.switch_rubbish(not groundTrashOff)
 end
 
 -------

@@ -69,6 +69,7 @@
 ---@field warning fun(message: string)
 ---@field error fun(message: string)
 ---@field current_directory fun(): string
+---@field coords_json fun()
 
 ---@class PlayerAPI
 ---@field create fun(player_id: integer, position: CVector)
@@ -110,10 +111,10 @@
 
 ---@class WorldAPI
 ---@field blow_up_all_vehicles fun()
----@field switch_roads_off fun(minimum: CVector, maximum: CVector)
----@field switch_roads_on fun(minimum: CVector, maximum: CVector)
----@field switch_ped_roads_off fun(minimum: CVector, maximum: CVector)
----@field switch_ped_roads_on fun(minimum: CVector, maximum: CVector)
+---@field switch_roads_off fun(leftBottomX: number, leftBottomY, leftBottomZ: number, rightTopX: number, rightTopY: number, rightTopZ: number)
+---@field switch_roads_on fun(leftBottomX: number, leftBottomY, leftBottomZ: number, rightTopX: number, rightTopY: number, rightTopZ: number)
+---@field switch_ped_roads_off fun(leftBottomX: number, leftBottomY, leftBottomZ: number, rightTopX: number, rightTopY: number, rightTopZ: number)
+---@field switch_ped_roads_on fun(leftBottomX: number, leftBottomY, leftBottomZ: number, rightTopX: number, rightTopY: number, rightTopZ: number)
 ---@field set_ped_density fun(density: number)
 ---@field set_vehicle_density fun(density: number)
 ---@field set_ped_objectives fun(
@@ -123,6 +124,7 @@
 ---    kill_peds: boolean)
 ---)
 ---@field fade_camera fun(duration: number, direction: FadeDirection)
+---@field get_fading_status fun(): boolean
 ---@field set_marker fun(position: CVector)
 ---@field set_car_generator fun(...)
 ---@field toggle_car_generator fun(generator_id: integer, state: integer)
@@ -131,6 +133,8 @@
 ---@field dont_remove_object fun(object_handle: ObjectHandle)
 ---@field remove_object fun(object_handle: ObjectHandle)
 ---@field set_object_collision fun(object_handle: ObjectHandle, state: boolean)
+---@field draw_sphere fun(id: number, position: CVector, radius: number)
+---@field switch_rubbish fun(state: boolean)
 
 ---@type GameAPI
 game = {}

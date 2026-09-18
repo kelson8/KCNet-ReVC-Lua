@@ -25,11 +25,13 @@ audio_enums = {}
 
 camera_enums = {}
 
+config_enums = {}
+
 event_enums = {}
 
-font_enums = {}
+game_enums = {}
 
-config_enums = {}
+font_enums = {}
 
 garage_enums = {}
 
@@ -247,6 +249,37 @@ audio_enums.eAudioType = {
 	TOTAL_AUDIO_TYPES = 14,
 }
 
+----------------
+--- Camera.h
+----------------
+
+camera_enums.eFadeDirection = {
+	-- Direction
+	FADE_NONE = -1,
+	FADE_OUT = 0,
+	FADE_IN = 1
+}
+
+----------------
+-- config.h
+----------------
+
+-- List of useful game limits from config.h, some have been modified
+-- These should be kept in sync with my internal ReVC branch, otherwise things may break.
+config_enums.eGameLimits = {
+	NUMPLAYERS = 1,
+
+	-- Well these can have the same numbers, I didn't think they could.
+	MAX_CDIMAGES = 32, -- additional cdimages
+	-- MAX_CDIMAGES2 = 32, -- additional cdimages
+	MAX_CDCHANNELS = 5,
+
+	NUMPHONES = 50,
+
+	-- The max amount of garages, my scripts should check for this if I'm creating them.
+	NUM_GARAGES = 32
+}
+
 
 ----------------
 -- EventList.h
@@ -301,35 +334,41 @@ font_enums.eFontTypes = {
 }
 
 ----------------
---- Camera.h
+-- Game.h
 ----------------
 
-camera_enums.eFadeDirection = {
-	-- Direction
-	FADE_NONE = -1,
-	FADE_OUT = 0,
-	FADE_IN = 1
+
+game_enums.eLevelName = {
+	-- LEVEL_IGNORE = -1,
+	LEVEL_GENERIC = 0,
+	LEVEL_BEACH = 1,
+	LEVEL_MAINLAND = 2,
+
+	-- NUM_LEVELS
 }
 
-----------------
--- config.h
-----------------
-
--- List of useful game limits from config.h, some have been modified
--- These should be kept in sync with my internal ReVC branch, otherwise things may break.
-config_enums.eGameLimits = {
-	NUMPLAYERS = 1,
-
-	-- Well these can have the same numbers, I didn't think they could.
-	MAX_CDIMAGES = 32, -- additional cdimages
-	-- MAX_CDIMAGES2 = 32, -- additional cdimages
-	MAX_CDCHANNELS = 5,
-
-	NUMPHONES = 50,
-
-	-- The max amount of garages, my scripts should check for this if I'm creating them.
-	NUM_GARAGES = 32
+game_enums.eAreaName = {
+	AREA_MAIN_MAP = 0,
+	AREA_HOTEL = 1,
+	AREA_MANSION = 2,
+	AREA_BANK = 3,
+	AREA_MALL = 4,
+	AREA_STRIP_CLUB = 5,
+	AREA_LAWYERS = 6,
+	AREA_COFFEE_SHOP = 7,
+	AREA_CONCERT_HALL = 8,
+	AREA_STUDIO = 9,
+	AREA_RIFLE_RANGE = 10,
+	AREA_BIKER_BAR = 11,
+	AREA_POLICE_STATION = 12,
+	AREA_EVERYWHERE = 13,
+	AREA_DIRT = 14,
+	AREA_BLOOD = 15,
+	AREA_OVALRING = 16,
+	AREA_MALIBU_CLUB = 17,
+	AREA_PRINT_WORKS = 18
 }
+
 
 
 ----------------

@@ -46,6 +46,17 @@ function garage_util.setup_garages()
     log_util.print_msg("All garages have been setup")
 end
 
+--- Setup the bomb shop garages on the map.
+function garage_util.setup_bomb_garages()
+    local bombShop1 = BombGarages.docks_bomb1
+
+    -- Internally this is normally bomb shop 3, so I'll use that for the enum.
+    garage.set(bombShop1.leftBottom.x, bombShop1.leftBottom.y, bombShop1.leftBottom.z,
+        bombShop1.front.x, bombShop1.front.y,
+        bombShop1.rightTop.x, bombShop1.rightTop.y, bombShop1.rightTop.z,
+        garage_enums.eGarageType.GARAGE_BOMBSHOP3)
+end
+
 --- Toggle a garage
 --- TODO Make this check if the player is in a garage.
 --- If this is toggled while I am inside of a garage, I am softlocked until I use the suicide cheat.

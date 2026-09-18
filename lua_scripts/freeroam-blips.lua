@@ -14,6 +14,8 @@ local policeStation = GameLocations.policeStation
 local construction_site = GameLocations.constructionSiteVehicle
 local payNSpray1 = GameLocations.payNSpray1
 
+local bombGarage1Blip = BombGarages.docks_bomb1.leftBottom
+
 -----------------------
 --- KCNet Freeroam - Blips
 -----------------------
@@ -101,6 +103,8 @@ function map_blips.setup()
     game.add_blip_for_coord(respray2Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false)
     game.add_blip_for_coord(respray3Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false)
     game.add_blip_for_coord(respray4Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false)
+
+    game.add_blip_for_coord(bombGarage1Blip, radar_enums.eRadarSprite.RADAR_SPRITE_BIKERS, false)
 
     -- Log the current blip id into the file.
     -- This currently works for one value.

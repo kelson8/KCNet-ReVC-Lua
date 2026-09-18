@@ -5,7 +5,16 @@ The below list will be my internal version numbering for ReVC, if there are some
 
 This will be updated when I make a lot of changes to these scripts, add new functions into the ReVC code to be used in the lua scripts, or when I add new globals to toggle specific hard coded features on and off.
 
-# 1.2.11
+# Version changelog list
+
+These have been reorganized to make it a bit easier to look through.
+
+Older versions have been put into a collapsible header so this doesn't clutter up the changelogs too much.
+
+<details>
+<summary>
+1.2.11
+</summary>
 
 ### 1.2.11-3a
 
@@ -32,6 +41,14 @@ feat: Change lua scripts a bit and update with new functions
 * Add vehicle.freeze_position function for freezing the vehicle in place.
 
 * Update readme, add Lua-Changelogs.md, and add gitignore.
+
+</details>
+
+<details>
+<summary>
+1.2.12
+</summary>
+
 
 # 1.2.12
 
@@ -78,6 +95,14 @@ feat: Move some function toggles and remove enable/disable methods
 * Add event enums into freeroam-enums.lua.
 
 * Update changelogs and documentation.
+
+</details>
+
+<details>
+<summary>
+1.2.13
+</summary>
+
 
 # 1.2.13
 
@@ -162,7 +187,7 @@ feat: Update set_ped_objectives function
 
 * Update changelog and documentation.
 
-### Latest 1.2.13-14a
+### 1.2.13-14a
 
 feat: Add blips file and set blips on startup
 
@@ -175,6 +200,10 @@ feat: Add blips file and set blips on startup
 * Add lua_scripts/extra_functions to gitignore for now.
 
 * Update changelog and documentation.
+
+</details>
+
+
 
 # 1.2.14
 
@@ -277,7 +306,7 @@ feat: Add wait timers like original scripts
 
 * Update changelog, and documentation.
 
-### Latest 1.2.14-8a
+### 1.2.14-8a
 
 **Commit 1**
 
@@ -301,5 +330,25 @@ feat: Fix fading with pickups
 * Make save pickup disable and re-enable players controls.
 
 * Add MIT license header to most scripts.
+
+* Update changelog and documentation.
+
+### Latest 1.2.14-9a
+
+feat: Update scripts, and add a few
+
+* Add a bomb garage to map and setup a blip for it.
+
+* Add freeroam-markers.lua for later use.
+
+* Add test for setting the ped zone info, car zone info and gang car zone info, this is incomplete.
+
+* Add test for interiors to be used in the future.
+
+* Fix ped and vehicle roads to be able to be toggled.
+
+* Update save pickup handling, should fix a bit of fading issues and glitches.
+
+* Update formatting for switch ped and vehicle roads off to match with the scripts, this seems to fix these.
 
 * Update changelog and documentation.

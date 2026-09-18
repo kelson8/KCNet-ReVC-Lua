@@ -267,6 +267,30 @@ GameGarages = {
     }
 }
 
+-- These should have the bomb garage type
+BombGarages = {
+    -- Docks
+    docks_bomb1 = {
+        ---@type CVector
+        leftBottom = {
+            x = -1163.248,
+            y = -1407.282,
+            z = 10.157,
+        },
+        ---@type CVector2D
+        front = {
+            x = -1178.292,
+            y = -1400.939,
+        },
+        ---@type CVector
+        rightTop = {
+            x = -1159.338,
+            y = -1397.813,
+            z = 16.989,
+        }
+    }
+
+}
 -- -- Set the area to place the player with the 'F9' keybind here.
 -- mainSpawnX = constructionSiteVehiclePos.x
 

@@ -29,6 +29,10 @@ dofile("ViceExtended/lua_scripts/freeroam-pickups.lua")
 -- For most configs that I will use now.
 dofile("ViceExtended/lua_scripts/freeroam-config.lua")
 
+-- New for markers on the map
+-- Currently these do not work properly.
+dofile("ViceExtended/lua_scripts/freeroam-markers.lua")
+
 -----------
 -- WARNING
 -- If there are any errors in this file, ReVC will crash because this script spawns the player.
@@ -158,6 +162,9 @@ function OnInit()
 	-- Setup the garages, moved out of keybind events.
 	garage_util.setup_garages()
 
+	-- Setup the bomb shop garages
+	garage_util.setup_bomb_garages()
+
 	-- Setup some of the objects on the map.
 	-- In the future, I will use this for custom objects.
 	-- object_util.setup_objects()
@@ -186,6 +193,18 @@ function OnInit()
 
 	-- Spawning objects, I haven't figured this out in the code yet.
 
+	-- TODO Figure out how to set the zones and switch the ped roads off.
+	-- Zones
+	-- Night
+	-- print("Setting zones...")
+	world.set_zone_ped_info("GOLF1", 0, 3, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0)
+	world.set_zone_car_info("GOLF1", 0, 3, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0)
+	-- -- Day
+	world.set_zone_ped_info("GOLF1", 1, 3, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0)
+	world.set_zone_car_info("GOLF1", 1, 3, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0)
+
+	--
+
 
 	-- This works in here now!
 
@@ -197,7 +216,7 @@ function OnInit()
 	-- Locations are stored in freeroam-locations.lua, and more can be added.
 	-------
 	-- Putting this at the end, if there are errors above this will probably crash anyways
-	
+
 	-- Spawn in the player, mostly for spawning without the .scm scripts
 	player_functions.load_player_data()
 end
@@ -223,7 +242,21 @@ player.give_weapon(weapon_enums.eWeaponType.WEAPONTYPE_MOLOTOV, 100)
 
 -- Back of mansion.
 -- world.switch_ped_roads_off({x = -395.6, y = -658.6, z = 0.0}, { x = -363.2, y = -636.7, z = 32.0})
+-- world.switch_ped_roads_off(-395.6, -658.6, 0.0, -363.2, -636.7, 32.0)
 
+-- This works now! I tested it by the golf course road block going towards island 2!
+-- Peds and vehicles no longer want to go past the golf course road block bridge.
+-- Golf course road block
+-- world.switch_ped_roads_off(189.8, 230.3, 0.0, 248.0, 258.5, 30.0)
+-- world.switch_ped_roads_off(-38.0, 84.3, 0.0, -102.3, 95.1, 30.0)
+
+-- world.switch_roads_off(189.8, 230.3, 0.0, 248.0, 258.5, 30.0)
+-- world.switch_roads_off(-38.0, 84.3, 0.0, -102.3, 95.1, 30.0)
+-- world.switch_roads_off(175.0, 236.1, 0.0, 161.0, 242.4, 30.0)
+-- world.switch_roads_off(149.8, 231.4, 0.0, 136.0, 235.3, 30.0)
+-- world.switch_roads_off(63.4, 188.6, 0.0, 49.4, 189.7, 30.0)
+----
+---
 
 ------------------
 
@@ -344,7 +377,9 @@ function OnTick()
 
 		-- game.wait(2000)
 
-
+		-- Display the markers on the map
+		-- TODO Make these able to be toggled, possibly when the player is near an area.
+		-- markers.test_loop1()
 
 		-- Well I cannot call functions outside of OnTick in here, at least in other files.
 		-- This works here though.

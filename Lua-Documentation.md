@@ -210,14 +210,21 @@ Any functions without a usage below are just getter or setter functions and don'
 | Function | Description | Usage |
 | ----- | ---- | ----- |
 | world.blow_up_all_vehicles | Blow up all vehicles near the player. | |
-| world.switch_roads_off | Turn the roads off in the area for vehicles. | world.switch_roads_off({x = 25, y = 25, z = 25}, {x = 50, y = 50, z = 50}) |
-| world.switch_roads_on | Turn the roads on in the area for vehicles. | world.switch_roads_on({x = 25, y = 25, z = 25}, {x = 50, y = 50, z = 50}) |
-| world.switch_ped_roads_off | Turn the roads off in the area for peds. | world.switch_ped_roads_off({x = 25, y = 25, z = 25}, {x = 50, y = 50, z = 50}) |
-| world.switch_ped_roads_on | Turn the roads on in the area for peds. | world.switch_ped_roads_on({x = 25, y = 25, z = 25}, {x = 50, y = 50, z = 50}) |
+| world.switch_roads_off | Turn the roads off in the area for vehicles. | world.switch_roads_off(25, 25, 25, 50, 50, 50) |
+| world.switch_roads_on | Turn the roads on in the area for vehicles. | world.switch_roads_on(25, 25, 25, 50, 50, 50) |
+| world.switch_ped_roads_off | Turn the roads off in the area for peds. | world.switch_ped_roads_off(25, 25, 25, 50, 50, 50) |
+| world.switch_ped_roads_on | Turn the roads on in the area for peds. | world.switch_ped_roads_on(25, 25, 25, 50, 50, 50) |
 | world.set_ped_density | Set the ped density, takes a value between 0 and 1.0 | |
 | world.set_vehicle_density | Set the vehicle density, takes a value between 0 and 1.0 | |
 | world.set_ped_objectives | Set the specified boolean values for the ped objectives, give weapons will give the ped a pistol currently, attack player, exit vehicle and kill peds all do what they say, should be easy to understand what they do. | world.set_ped_objectives(give_ped_weapons, attack_player, should_exit_vehicle, kill_peds) |
-| world.fade_camera | Fade the games camera in and out, fixed in v1. | world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_OUT) |
+| world.fade_camera | Fade the games camera in and out, fixed in 1.2.14-8a | world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_OUT) |
+| world.get_fading_status | Check if the camera is fading in or out, returns true if it is currently in a fading status. |  |
 | world.set_marker | Set the worlds target marker to a specified X, and Y coordinate if not already set. | world.set_marker({x = 25, y = 25}) |
 | world.set_car_generator | Sets a car generator up in the world, example usage in kcnet-keybind-events under 'dbgCarGeneratorsTest' | |
 | world.toggle_car_generator | Toggles the specified car generator, Param1: The car generator ID, Param2: 0 is off, and 101 is on  | world.toggle_car_generator(car_generator, 101) |
+| world.draw_sphere | Draw a sphere on the map like a teleport marker, currently broken and I cannot toggle it back off, the ID can be any number from my testing. | world.draw_sphere(id, {x = 25, y = 25, z = 25}, radius) |
+| world.switch_rubbish | Toggles the trash on the ground such as newspapers on/off, normally it is on. | switch_rubbish(true) |
+| world.set_zone_ped_info | Set the ped info for the zone, incomplete and broken. | world.set_zone_ped_info("GOLF1", 0, 3, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0) |
+| world.set_zone_car_info | Set the vehicle info for the zone, incomplete and broken. | world.set_zone_car_info("GOLF1", 0, 3, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0) |
+| world.set_zone_civilian_car_info | Set the civilian vehicle for the zone, incomplete and broken. | |
+| world.set_zone_group | Set the group for the zone, this one might work but hasn't been tested. | world.set_zone_group("GOLF1", 0, 0) |
