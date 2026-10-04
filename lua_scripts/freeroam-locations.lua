@@ -291,6 +291,30 @@ BombGarages = {
     }
 
 }
+
+SafehouseGarages = {
+    -- Mansion
+    mansion1 = {
+        ---@type CVector
+        leftBottom = {
+            x = -362.12,
+            y = -550.214,
+            z = 11.722,
+        },
+        ---@type CVector2D
+        front = {
+            x = -362.12,
+            y = -539.484,
+        },
+        ---@type CVector
+        rightTop = {
+            x = -353.12,
+            y = -550.214,
+            z = 15.16,
+        }
+    }
+}
+
 -- -- Set the area to place the player with the 'F9' keybind here.
 -- mainSpawnX = constructionSiteVehiclePos.x
 

@@ -25,9 +25,19 @@
 ---@alias ObjectHandle integer
 ---@alias PickupModel integer
 ---@alias PickupType integer
+---@alias VehicleModel integer
+---@alias FrontendTrack integer
+---@alias PedModel integer
+
+---@class AudioAPI
+---@field play_frontend fun(frontendTrack: FrontendTrack, volume: number)
+---@field set_sound_volume fun(volume: number)
+---@field set_music_volume fun(volume: number)
+
 
 ---@class GameAPI
----@field add_blip_for_coord fun(position: CVector, sprite: RadarSprite, set_route: boolean)
+---@field add_blip_for_coord fun(position: CVector, sprite: RadarSprite, set_route: boolean, short_range_blip: boolean)
+---@field remove_blip fun(blip_id: number)
 ---@field cheat fun(code: string)
 ---@field get_minute fun(): integer
 ---@field get_hour fun(): integer
@@ -53,6 +63,13 @@
 ---@field has_pickup_been_colleted fun(pickup_handle: number)
 ---@field is_any_pickup_at_coords fun(position: CVector)
 ---@field create_hidden_package fun(position: CVector)
+---@field save fun()
+---@field load fun()
+---@field start_rampage fun(weapon_type: WeaponType, time_ms: number, kills: number, pedModel1: PedModel, pedModel2: PedModel, pedModel3: PedModel, pedModel4: PedModel)
+---@field request_model fun(modelId: number)
+---@field has_model_loaded fun(modelId: number): boolean
+---@field set_gravity fun(gravity: number)
+---@field get_gravity fun(): number
 
 ---@class GarageAPI
 ---@field set fun(leftBottomX: number, leftBottomY: number, leftBottomZ: number, frontX: number, frontY: number, rightTopX: number, rightTopY: number, rightTopZ: number, type: GarageType): number
@@ -69,7 +86,8 @@
 ---@field warning fun(message: string)
 ---@field error fun(message: string)
 ---@field current_directory fun(): string
----@field coords_json fun()
+---@field coords fun()
+---@field heading fun()
 
 ---@class PlayerAPI
 ---@field create fun(player_id: integer, position: CVector)
@@ -104,6 +122,8 @@
 ---@field blow_up_vehicle fun()
 ---@field is_in_vehicle fun(): boolean
 ---@field set_control fun(toggle: boolean)
+---@field everyone_ignore fun(toggle: boolean)
+---@field police_ignore fun(toggle: boolean)
 
 ---@class VehicleAPI
 ---@field create fun(vehicle_id: integer, position: CVector, delete_last_vehicle: boolean, warp_into_vehicle: boolean)
@@ -135,6 +155,23 @@
 ---@field set_object_collision fun(object_handle: ObjectHandle, state: boolean)
 ---@field draw_sphere fun(id: number, position: CVector, radius: number)
 ---@field switch_rubbish fun(state: boolean)
+---@field unlock_all_car_doors_in_area fun(leftBottomX: number, leftBottomY: number, topRightX: number, topRightY: number)
+---@field clear_area fun(radius: number)
+---@field create_car_generator fun(
+---     pos: CVector, 
+---     heading: number, 
+---     vehicleModelId: VehicleModel, 
+---     primaryColor: number, 
+---     secondaryColor: number,
+---     forceSpawn: boolean,
+---     alarmChance: number,    
+---     doorLockChance: number,
+---     minDelay: number,
+---     maxDelay: number)
+---@field switch_car_generator fun(carGenerator: number, carToggle: number)
+
+---@type AudioAPI
+audio = {}
 
 ---@type GameAPI
 game = {}
@@ -215,6 +252,8 @@ world = {}
 ---@field level integer
 ---@field time SaveTime
 ---@field weather SaveWeather
+---@field audio_volume integer
+---@field music_volume integer
 
 --------------------------------
 -- Player data

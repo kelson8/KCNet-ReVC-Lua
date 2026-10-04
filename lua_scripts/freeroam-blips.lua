@@ -92,19 +92,19 @@ end
 --- It should only ever be run in freeroam-game.lua in the OnInit function.
 function map_blips.setup()
     -- map_blips.currentBlip1 = game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false)
-    local currentBlip1 = game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false)
+    local currentBlip1 = game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false, true)
     -- local currentBlip2 = game.add_blip_for_coord(blipPos1, radar_enums.eRadarSprite.RADAR_SPRITE_HARDWARE, false)
     -- local currentBlip2 = game.add_blip_for_coord(blipPos2, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false)
 
     -- Add the respray blips
     -- TODO Make these short range blips, that is what the game normally does.
     -- For now it's fine.
-    game.add_blip_for_coord(respray1Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false)
-    game.add_blip_for_coord(respray2Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false)
-    game.add_blip_for_coord(respray3Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false)
-    game.add_blip_for_coord(respray4Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false)
+    game.add_blip_for_coord(respray1Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false, true)
+    game.add_blip_for_coord(respray2Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false, true)
+    game.add_blip_for_coord(respray3Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false, true)
+    game.add_blip_for_coord(respray4Blip, radar_enums.eRadarSprite.RADAR_SPRITE_SPRAY, false, true)
 
-    game.add_blip_for_coord(bombGarage1Blip, radar_enums.eRadarSprite.RADAR_SPRITE_BIKERS, false)
+    game.add_blip_for_coord(bombGarage1Blip, radar_enums.eRadarSprite.RADAR_SPRITE_BIKERS, false, true)
 
     -- Log the current blip id into the file.
     -- This currently works for one value.

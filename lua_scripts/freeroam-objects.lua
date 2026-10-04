@@ -39,6 +39,24 @@ local com_gate2_closed = 2447
 -- Trash bin
 -- local object_id = 352
 
+-- New
+
+-- Ramps
+-- https://gtastuff.com/models/?game=vc&id=562
+local landjump2 = 562
+
+-- https://gtastuff.com/models/?game=vc&q=ramp&id=4504
+local kickRamp04 = 4504
+
+local newRamp1 = 371
+
+-- Near the airport.
+local ramp1Position = {x = -1288.0, y = -854.0, z = 15.0}
+
+local ramp1 = nil
+
+--
+
 --- Setup all the objects on the map.
 --- This will be used for custom objects that I add.
 --- TODO Make it to where I can remove these objects.
@@ -61,7 +79,7 @@ function object_util.setup_road_blocks()
 
     -- Golf course roadblock
     world.create_object_no_offset({ x = -81.46, y = 81.358, z = 21.04 }, nt_roadblock_gf)
-    
+
     -- These can be used like this for returning the handle.
     -- I may store a list of all object handles, blip handles and everything into a JSON file on startup.
     -- So they can easily be modified while the game is running.
@@ -70,4 +88,21 @@ function object_util.setup_road_blocks()
     -- print("Gold course road block handle: " .. golfCouseRdHandle)
 
     -- South roadblock, TODO There are a few objects for this.
+end
+
+--- Setup some test objects at the airport.
+function object_util.setup_airport_objects()
+    -- Put a ramp to try and jump off of with a car.
+    -- Well this ramp despawns and can be destroyed.
+    -- ramp1 = world.create_object_no_offset(ramp1Position, landjump2)
+    ramp1 = world.create_object_no_offset(ramp1Position, newRamp1)
+
+    -- Shouldn't continue if the object wasn't created.
+    if ramp1 == nil then
+        return
+    end
+    -- ramp1 = world.create_object_no_offset(ramp1Position, kickRamp04)
+    world.dont_remove_object(ramp1)
+
+    world.set_object_collision(ramp1, true)
 end

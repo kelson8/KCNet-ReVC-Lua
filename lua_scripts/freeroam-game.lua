@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 -- SPDX-License-Identifier: MIT
 -- Copyright (c) 2026 kelson8
 
@@ -81,6 +82,9 @@ local randomNumber = 0
 -- This might work for that
 -- https://stackoverflow.com/questions/3481856/sending-variable-pointers-back-and-forth-between-c-and-lua
 
+-- Start the rampages.
+local rampageStarted = false
+
 ---------
 --- New, for testing features.
 ---------
@@ -137,6 +141,30 @@ gbInfiniteAmmoCheat = true
 -- So it's not required, but I will document it in here.
 gbFadeOnDeath = true
 
+-- This will toggle loading the freeroam json save, I had to make it a global in the C++ code.
+-- You can still press 'Load Game' if you fast load into the game.
+-- Currently, pressing new game doesn't do anything since I broke it.
+gbLoadFreeroamSave = true
+
+
+if gbLoadFreeroamSave then
+	config.read_save_data = true
+else
+	config.read_save_data = false
+end
+
+---------------
+--- Incomplete/broken features
+---------------
+-- This can set the gravity in the game if it works
+-- local defaultGravity = 0.008
+
+-- -- gbGravity = defaultGravity
+-- gbGravity = 0.018
+---------------
+
+
+
 --------
 -- Game Init
 -- Runs on game startup
@@ -165,6 +193,9 @@ function OnInit()
 	-- Setup the bomb shop garages
 	garage_util.setup_bomb_garages()
 
+	-- Setup the safe house garages
+	garage_util.setup_safehouse_garages()
+
 	-- Setup some of the objects on the map.
 	-- In the future, I will use this for custom objects.
 	-- object_util.setup_objects()
@@ -173,6 +204,10 @@ function OnInit()
 	if roadBlocksEnabled then
 		object_util.setup_road_blocks()
 	end
+
+	-- Place some objects at the airport.
+	-- Well a lot of these just despawn or fall through the map for some reason.
+	-- object_util.setup_airport_objects()
 
 	-- Setup pickups, some of these get set back in the OnTick function when picked up
 
@@ -195,15 +230,34 @@ function OnInit()
 
 	-- TODO Figure out how to set the zones and switch the ped roads off.
 	-- Zones
+
+	-----
+	-- Golf course
+	-- I think these might be working now, it seems like no cars spawn on the little bridge that I spawn on now.
+	-- Although, it'll need a bit more testing.
+	-----
 	-- Night
 	-- print("Setting zones...")
 	world.set_zone_ped_info("GOLF1", 0, 3, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0)
+	world.set_zone_ped_info("GOLF2", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0)
 	world.set_zone_car_info("GOLF1", 0, 3, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0)
-	-- -- Day
+	world.set_zone_car_info("GOLF2", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0)
+	-- Day
 	world.set_zone_ped_info("GOLF1", 1, 3, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0)
+	world.set_zone_ped_info("GOLF2", 1, 0, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0)
 	world.set_zone_car_info("GOLF1", 1, 3, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0)
+	world.set_zone_car_info("GOLF2", 1, 0, 0, 0, 0, 0, 0, 0, 0, 1000, 0, 0)
+
 
 	--
+	-- These IDs were obtained from a decompiled main.scm.
+	-- I'm not sure where else they are..
+	-- GOLF1_PEDGRP
+	world.set_zone_group("GOLF1", 0, 41)
+	world.set_zone_group("GOLF2", 0, 41)
+	-- GOLF1_NIGHT_PEDGRP
+	world.set_zone_group("GOLF1", 1, 42)
+	world.set_zone_group("GOLF2", 1, 42)
 
 
 	-- This works in here now!
@@ -219,7 +273,10 @@ function OnInit()
 
 	-- Spawn in the player, mostly for spawning without the .scm scripts
 	player_functions.load_player_data()
+
+
 end
+
 
 
 -- This gives the player a weapon with some ammo
@@ -331,7 +388,7 @@ end
 -- Seed the random number generator.
 math.randomseed(os.time())
 
-
+-- local dbgRampageTest = true
 
 ------------------
 -- Now this runs all the time only if there is a while true in here.
@@ -398,9 +455,23 @@ function OnTick()
 			-- world.blow_up_all_vehicles()
 		-- end
 
-		--
-		-- game.wait(3000)
-		--
+		-- if keyBindEvents.isPlayerTeleporting then
+		-- 	player_functions.teleport_fade({x = -16.965517, y = 113.328262, z = 18.983120})
+		-- 	keyBindEvents.isPlayerTeleporting = false
+		-- end
+
+		---------------
+		--- Rampage testing
+		--- Disabled in games code for now.
+		---------------
+		-- if dbgRampageTest and not rampageStarted then
+		-- 	misc_functions.start_rampage()
+		-- 	rampageStarted = true
+		-- end
+
+		if config.lock_game_time then
+			game.set_time(config.locked_hour, config.locked_minute)
+		end
 	end
 end
 
@@ -411,25 +482,27 @@ end
 --------
 
 --- Cheat toggles for debugging.
+--- Ok, why the hell is never wanted crashing it now? Along with some other items...
+--- I have not touched the never wanted code or anything to do with it.
+--- I guess just don't mess with it for now, I'll probably disable this internally for now.
 local enableNeverWanted = false
-local enableInfiniteHealth = false
+local enableInfiniteHealth = true
 
 -- Added in v1.2.14-4a
-local enableInfiniteSprint = false
+local enableInfiniteSprint = true
 ---
 
---- Set ped density to a custom value.
-local toggle_ped_density = true
-local toggle_vehicle_density = true
+--- Disable the peds and vehicles if toggled.
+local disablePeds = true
+local disableVehicles = true
 
--- This can be set to 0.0 to disable the peds and vehicles.
+-- This can be set to 0.0 to disable the peds and vehicles, although the booleans above are easier to do.
 -- These values can be between 0.0 and 1.0, otherwise this won't work.
+-- Default values used if the peds and vehicles aren't disabled.
 -- local ped_density = 0.5
 local ped_density = 1.0
--- local ped_density = 0.0
 -- local vehicle_density = 0.5
 local vehicle_density = 1.0
--- local vehicle_density = 0.0
 
 -- If this is disabled, you won't lose weapons when busted or wasted.
 local lose_weapons = true
@@ -446,13 +519,18 @@ else
 end
 
 -- Set the ped density to a custom value.
-if toggle_ped_density then
+-- if toggle_ped_density then
+if disablePeds then
+	world.set_ped_density(0.0)
+else
 	world.set_ped_density(ped_density)
 end
 
 -- Set the vehicle density to a custom value.
 -- TODO Make this disable the emergency vehicles too, I didn't know fire trucks still spawned.
-if toggle_vehicle_density then
+if disableVehicles then
+	world.set_vehicle_density(0.0)
+else
 	world.set_vehicle_density(vehicle_density)
 end
 

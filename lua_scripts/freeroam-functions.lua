@@ -34,6 +34,7 @@ cheat_functions = {}
 file_util = {}
 log_util = {}
 
+misc_functions = {}
 player_functions = {}
 
 -- If this is turned off, this script won't attempt to load the save data from kcnet-revc-save.json.
@@ -220,6 +221,40 @@ function log_util.print_error(message)
 	print("[KCNet-ReVC-Lua][Error]: " .. message)
 end
 
+--- Test for starting a rampage
+--- Currently this crashes in the game, so it isn't enabled.
+--- Although I'll try to use this in the future.
+--- TODO Fix this to work sometime.
+function misc_functions.start_rampage()
+	-------------
+	--- Rampage testing
+	-------------
+
+	local weaponModel = weapon_enums.eWeaponType.WEAPONTYPE_SNIPERRIFLE
+
+	game.request_model(weaponModel)
+
+	-- Try to let the weapon model load up first.
+	-- Well this says the model has loaded with the below log message, so I'm not sure what's happening here.
+	while not game.has_model_loaded(weaponModel) do
+		game.wait(0)
+	end
+
+	-- if game.has_model_loaded(weaponModel) then
+	-- 	hud.print_msg("Weapon loaded")
+	-- else
+	-- 	hud.print_msg("Weapon not loaded")
+	-- end
+
+	-- Rampage time is in milliseconds.
+	-- Ped model IDs seem to go from 9 to 82
+	-- game.start_rampage(weaponModel,
+	-- -- 120000, 10, 12, 13, 14, 15)
+	-- 5000, 10, 12, 13, 14, 15)
+	-------------
+	-------------
+	-------------
+end
 
 ------------
 -- Save file validation
@@ -238,12 +273,12 @@ function save_functions.validate_save(save)
 	-- If wanting to use custom save versions, disable this below and switch to the lua enum.
 	-- This currently reads from my ReVC code.
 	if save.version ~= EXPECTED_SAVE_VERSION then
-	-- if save.version ~= custom_save.eSaveVersion.save_version then
+		-- if save.version ~= custom_save.eSaveVersion.save_version then
 		return false, "Invalid save version"
 	end
 
 	if save.format ~= EXPECTED_SAVE_FORMAT then
-	-- if save.format ~= custom_save.eSaveVersion.save_format then
+		-- if save.format ~= custom_save.eSaveVersion.save_format then
 		return false, "Invalid save format"
 	end
 
@@ -292,7 +327,7 @@ end
 --- This can load from the kcnet-revc-save.json custom json format.
 --- I will be making a save pickup or something later in this but this is all loaded in with lua.
 --- So I can easily modify how this loads without even rebuilding the game code.
---- 
+---
 --- This requires the ViceExtended subfolder since the games root folder isn't in lua_scripts.
 ----------------------
 function player_functions.load_player_data()
@@ -316,7 +351,6 @@ function player_functions.load_player_data()
 		-- This works for loading the stats from the function!
 		-- Cleans up the freeroam-game.lua file quite a bit.
 		player_functions.load_save_stats(save_file_path)
-
 	else
 		-- If the save file isn't going to be used, this below is set as a manual spawn point.
 
@@ -325,14 +359,41 @@ function player_functions.load_player_data()
 	end
 end
 
-
-
 --- Run a fade effect on the player
 --- @param time number The time for the fade in seconds.
 function player_functions.fade_effect(time)
 	world.fade_camera(time, camera_enums.eFadeDirection.FADE_OUT)
 	game.wait(3000)
 	world.fade_camera(time, camera_enums.eFadeDirection.FADE_IN)
+end
+
+--- Teleport the player to a location with a fade
+--- This was mostly copied out of map_pickups.save_loop()
+--- @param pos CVector The new position.
+function player_functions.teleport_fade(pos)
+	-- while true do
+		-- game.wait(0)
+
+	-- Disable player movement.
+	player.set_control(false)
+	-- Fade the camera out for the save.
+	-- world.fade_camera(1.0, camera_enums.eFadeDirection.FADE_OUT)
+	world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_OUT)
+
+	-- log_util.print_msg("Attempting to fade out...")
+
+	game.wait(2000)
+
+	player.set_position(pos)
+
+	game.wait(500)
+
+	-- Fade the camera back in
+	world.fade_camera(2.0, camera_enums.eFadeDirection.FADE_IN)
+	-- log_util.print_msg("Attempting to fade in...")
+	-- Re-enable player movement.
+	player.set_control(true)
+	-- end
 end
 
 --- Kill the player when their health is low
@@ -390,7 +451,6 @@ function player_functions.get_saved_position(file)
 	local playerX = save_file.player.position.x
 	local playerY = save_file.player.position.y
 	local playerZ = save_file.player.position.z
-
 
 	return { x = playerX, y = playerY, z = playerZ }
 end
@@ -478,6 +538,11 @@ function player_functions.load_save_stats(file)
 
 	-- Target marker
 	local targetMarkerPos = { x = save_file.map.target_marker.x, y = save_file.map.target_marker.y }
+
+	-- Audio volume, added in v1.2.15-1a
+	-- TODO Fix this to be reapplied.
+	local soundEffectsvolume = save_file.game.audio_volume
+	local musicVolume = save_file.game.music_volume
 
 	-----
 	-- Save file version and format.
@@ -573,8 +638,8 @@ function player_functions.load_save_stats(file)
 	------------------------
 
 	-- Set the previous weather
-	game.force_weather(newWeather)
-	game.force_weather_now(newWeather)
+	-- game.force_weather(newWeather)
+	-- game.force_weather_now(newWeather)
 
 	-- Set the game time
 	game.set_time(gameHour, gameMinute)
@@ -586,8 +651,12 @@ function player_functions.load_save_stats(file)
 	end
 
 	-- New, for setting the players money.
+	-- print(playerMoney)
 	player.set_money(playerMoney)
 
+	-- New, for setting the game audio
+	audio.set_sound_volume(soundEffectsvolume)
+	audio.set_music_volume(musicVolume)
 end
 
 -------------

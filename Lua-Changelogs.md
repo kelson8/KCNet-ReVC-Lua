@@ -333,7 +333,7 @@ feat: Fix fading with pickups
 
 * Update changelog and documentation.
 
-### Latest 1.2.14-9a
+### 1.2.14-9a
 
 feat: Update scripts, and add a few
 
@@ -352,3 +352,28 @@ feat: Update scripts, and add a few
 * Update formatting for switch ped and vehicle roads off to match with the scripts, this seems to fix these.
 
 * Update changelog and documentation.
+
+# 1.2.15
+
+### Latest 1.2.15-2a
+
+feat: Make blips short range and other changes
+
+* Add some safe house garage locations to freeroam-locations.
+* Add test for loading in rampages, this crashes so is disabled in the game code.
+* Update set_zone_ped_info commands to try and work.
+
+* Add option to lock the game time and set the time to lock in the config.
+
+* Make ped density toggles a bit more clear in freeroam-game.lua.
+
+* Add player_functions.teleport_fade function to freeroam-functions.lua, and add some more options to save.
+* Disable setting weather on reloading a save.
+
+* Move save game pickup
+
+* Add setup_safehouse_garages function into freeroam-garages.lua.
+
+* Add some more objects for testing in freeroam-objects.lua.
+
+* Update Lua-Documentation, changelogs, and readme.

@@ -37,6 +37,15 @@ dofile("ViceExtended/lua_scripts/freeroam-markers.lua")
 -- https://www.lua.org/pil/14.html
 -- for n in pairs(_G) do print(n) end
 
+keyBindEvents = {}
+
+-- Check for if player is teleporting, for the fade teleport.
+keyBindEvents.isPlayerTeleporting = false
+
+if keyBindEvents.isPlayerTeleporting then
+	print("Attempting to teleport player...")
+end
+
 ------
 -- Prefix for logging values to the console.
 ------
@@ -64,7 +73,7 @@ local payNSpray1 = GameLocations.payNSpray1
 -- The current players position.
 -- This adds an offset for spawning vehicles.
 
---@type CVector
+---@type CVector
 local playerPos = { x = player.get_position().x + 5.0, y = player.get_position().y + 5.0, z = player.get_position().z + 5.0}
 
 
@@ -173,10 +182,42 @@ local dbgSphereTest = false
 -- Trash on ground toggle testing.
 local dbgSwitchRubbishTest = false
 
+
+-- Teleport fading and testing with flag in freeroam-game.lua.
+local dbgFadeTeleportTest = false
+
 -- This can log the players current coordinates into my json format.
 -- Very useful for copying locations im currently at, instead of manually copying them. 
--- log.coords_json()
+-- log.coords()
+-- Now you can get the heading by using this
+-- log.heading()
 -- player.set_position({x = 692.181641, y = -418.629639, z = 11.068894})
+
+-- TODO Implement game.wait in the keybinds, and wasted/busted scripts.
+if dbgFadeTeleportTest then
+	keyBindEvents.isPlayerTeleporting = true
+	-- Well game.wait won't run in here, I'll need to redesign these scripts a bit.
+	-- player_functions.teleport_fade({x = -16.965517, y = 113.328262, z = 18.983120})
+end
+
+-- Test starting a rampage.
+local dbgRampageTest = false
+
+-- This is under the bridge where I have the player set to spawn.
+-- player.set_position({x = -16.965517, y = 113.328262, z = 18.983120})
+
+-- Testing ped paths disabled at golf course road block
+-- player.set_position({x = 153.515686, y = 231.859375, z = 18.985413})
+
+-- Test playing a sound, this now works.
+
+-- audio.play_frontend(
+-- 	audio_enums.eSound.SOUND_GARAGE_BAD_VEHICLE,
+-- 	1.0)
+
+-- Testing changing the gravity.
+-- Well this just crashes it now.
+local dbgGravityTest = false
 
 -----------
 
@@ -600,6 +641,9 @@ if dbgBlipTest then
 	---
 	---
 	current_blip = map_blips.get_current_blip()
+
+	if current_blip == nil then return end
+
 	print(current_blip)
 	game.remove_blip(current_blip)
 end
@@ -695,6 +739,35 @@ end
 if dbgSwitchRubbishTest then
 	local groundTrashOff = false
 	world.switch_rubbish(not groundTrashOff)
+end
+
+-- TODO Test this for starting rampages.
+-- if dbgRampageTest then
+-- 	-- game.start_rampage(weapon_model, time, kills, pedModel1, pedModel2, pedModel3, pedModel4)
+
+-- 	-- Ped model IDs seem to go from 9 to 82
+-- 	-- game.start_rampage(weapon_enums.eWeaponType.WEAPONTYPE_SHOTGUN,
+-- 	-- 	120000, 10, 12, 13, 14, 15)
+-- end
+
+-- Testing changing the gravity.
+-- Default gravity is 0.008
+-- TODO Why is this crashing it now?
+if dbgGravityTest then
+	print("Disabled")
+	-- Strong gravity
+	-- game.set_gravity(0.1)
+	-- Moon gravity
+	-- game.set_gravity(0.001)
+
+	-- Normal gravity
+	-- game.set_gravity(0.008)
+
+	-- Testing
+	-- I think I should set a lower limit on this lol.
+	-- You can fall from my spawn and get hurt, then step on a sidewalk to die with this.
+	-- game.set_gravity(0.9)
+	-- hud.print_msg("Gravity: " .. game.get_gravity())
 end
 
 -------

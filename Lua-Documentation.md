@@ -6,13 +6,13 @@ Anytime I say namespaces I normally mean tables in lua.
 
 The values below that are in tables like this, are using CVectors, so they require the x, y, and z parameters or it won't work.
 
-This project is using Lua version 5.4.7.
-
 ```lua
 start_fire({x = 25, y = 25, z = 25})
 ```
 
 Anything that I have with `DISABLED` in the description below, is a function that is not working yet or unused.
+
+This project is using Lua version 5.4.7.
 
 **Wait function**
 
@@ -80,15 +80,12 @@ This is a list of clothes for the `player.set_clothes` function and a usage for 
 
 ```
 
-**Blip namespace**
-
-Any options in this blip namespace currently cannot be removed just yet until I fix that to work properly.
-These take a blip position with a CVector from my types.lua, so an X, Y, and Z value.
-
+**Audio namespace**
 | Function | Description | Usage |
 | ----- | ---- | ----- |
-| game.add_blip_for_coord | This can add a blip to the coord, currently only supported in freeroam-game.lua, mostly uses the same format as [ADD_BLIP_FOR_COORD_OLD](https://library.sannybuilder.com/#/vc/script/extensions/default/0167) | game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_SAVE, false) |
-
+| audio.play_frontend | Plays a frontend audio sound effect with the specified volume. | audio.play_frontend(audio_enums.eSound.SOUND_RAMPAGE_FAILED, 1.0)  |
+| audio.set_sound_volume | Sets the volume of the sound effects in game. | audio.set_sound_volume(1.0) |
+| audio.set_music_volume | Sets the volume of the music in game. | audio.set_music_volume(1.0) |
 
 **Game namespace**
 
@@ -109,7 +106,7 @@ These take a blip position with a CVector from my types.lua, so an X, Y, and Z v
 | game.set_time | Set the game time to the specified hour and minute. | game.set_time(10, 55) |
 | game.set_time_scale | Set the time scale to the specified value, this is untested. | game.set_time_scale(1) |
 | game.add_explosion | Add an explosion at the specified coords, if parameter 2 is true it enables the explosion sound. | game.add_explosion({x = 25, y = 25, z = 25}, true) |
-| game.add_blip_for_coord | This sets a blip at the coordinates with a custom sprite and if the blip should have a route set to it. | game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_BIKER, false) |
+| game.add_blip_for_coord | This sets a blip at the coordinates with a custom sprite and if the blip should have a route set to it, param 3 is if the blip route is set, param 4 is if the blip is short range. | game.add_blip_for_coord(blipPos, radar_enums.eRadarSprite.RADAR_SPRITE_BIKER, false, true) |
 | game.override_next_restart | Override the next restart for the game, this will spawn at this location instead of a wasted/busted respawn point. | game.override_next_restart({x = airport.pos.x, y = airport.pos.y, z = airport.pos.z}, airport.heading) |
 | game.cancel_override_restart | This cancels an overridden spawn point | |
 | game.create_object_no_offset | Create an object at the specified coordinates. | game.create_object_no_offset({ x = -715.082, y = -489.689, z = 12.549 }, 2246) |
@@ -140,11 +137,13 @@ For the below garages, the garage types are from my 'garage_enums.eGarageType' e
 
 
 **Hud namespace**
+
 | Function | Description | Usage |
 | ----- | ---- | ----- |
 | hud.print_msg | Display a message for the hud, I think this is limited to like 16 characters | hud.print_msg("Message on HUD.") |
 
 **Log namespace**
+
 These functions log to my lua log file in ReVC.
 
 They get output to the `ViceExtended/logs` folder with the log file being named `KCNet-ReVC-lua.log`.
@@ -157,6 +156,8 @@ The below items only take a log message parameter.
 | log.warning | Log a warning message to the log file. | |
 | log.error | Log a error message to the log file. | |
 | log.current_directory | | |
+| log.coords | Log the current coords to the log file. | |
+| log.heading | Log the current heading to the log file. | |
 
 
 **Player namespace**
@@ -207,6 +208,7 @@ Any functions without a usage below are just getter or setter functions and don'
 | vehicle.freze_position | Toggle for frezing the vehicles position | vehicle.freeze_position(true) |
 
 **World namespace**
+
 | Function | Description | Usage |
 | ----- | ---- | ----- |
 | world.blow_up_all_vehicles | Blow up all vehicles near the player. | |

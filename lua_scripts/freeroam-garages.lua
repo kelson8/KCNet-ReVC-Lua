@@ -57,6 +57,26 @@ function garage_util.setup_bomb_garages()
         garage_enums.eGarageType.GARAGE_BOMBSHOP3)
 end
 
+--- Setup a few of the safe house garages.
+--- TODO Fix these to work for saving vehices into.
+--- I will eventually setup a garage save test in the future.
+function garage_util.setup_safehouse_garages()
+    local mansionGarage1 = SafehouseGarages.mansion1
+
+    -- These safe house garages seem to use the GARAGE_HIDEOUT types.
+    garage.set(mansionGarage1.leftBottom.x, mansionGarage1.leftBottom.y, mansionGarage1.leftBottom.z,
+        mansionGarage1.front.x, mansionGarage1.front.y,
+        mansionGarage1.rightTop.x, mansionGarage1.rightTop.y, mansionGarage1.rightTop.z,
+        garage_enums.eGarageType.GARAGE_HIDEOUT_ELEVEN)
+
+    -- TODO Implement these later
+    -- garage.set_rotating_garage_door
+    -- garage.no_special_camera_for_this_garage
+    -- garage.set_maxiumum_number_of_cars_in_garage
+
+    -- garage.set_maxiumum_number_of_cars_in_garage garage11 2
+end
+
 --- Toggle a garage
 --- TODO Make this check if the player is in a garage.
 --- If this is toggled while I am inside of a garage, I am softlocked until I use the suicide cheat.

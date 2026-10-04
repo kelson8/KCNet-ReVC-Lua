@@ -19,6 +19,12 @@ map_pickups = {}
 
 map_pickups.saveGamePickup = 411
 
+-- The position of the save pickup that respawns.
+map_pickups.saveGamePickup1Pos = { x = 3, y = 148, z = 19 }
+
+-- The position to spawn at after saving
+map_pickups.saveGamePickup1TeleportPos = { x = 10, y = 155, z = 19 }
+
 ----------
 --- For object spawning flags.
 ----------
@@ -36,7 +42,8 @@ function map_pickups.create_save_markers()
     if map_pickups.savePickup1Spawned then return end
 
     -- At the bridge for my current spawn.
-    map_pickups.savePickup1 = game.create_pickup({ x = -13, y = 133, z = 28 }, map_pickups.saveGamePickup,
+    -- map_pickups.savePickup1 = game.create_pickup({ x = -13, y = 133, z = 28 }, map_pickups.saveGamePickup,
+    map_pickups.savePickup1 = game.create_pickup(map_pickups.saveGamePickup1Pos, map_pickups.saveGamePickup,
         pickup_enums.ePickupType.PICKUP_ONCE)
     -- print(savePickup1)
     map_pickups.savePickup1Spawned = true
@@ -75,9 +82,6 @@ function map_pickups.save_loop()
         game.remove_pickup(map_pickups.savePickup1)
         map_pickups.savePickup1 = nil
 
-        local newPlayerPos = { x = -18, y = 138, z = 27 }
-
-
         -- I got the fading to work in here!
         -- Although I think adding these additional wait statements will break the other parts of the loop.
         -- At least while this is running, it should be fine though.
@@ -99,7 +103,7 @@ function map_pickups.save_loop()
 
         -- This sometimes sets the position twice, I think it's the flag I'm using here.
         -- if not map_pickups.playerTeleported then
-            player.set_position(newPlayerPos)
+            player.set_position(map_pickups.saveGamePickup1TeleportPos)
             -- map_pickups.playerTeleported = true
         -- end
 
@@ -116,6 +120,10 @@ function map_pickups.save_loop()
         -- log_util.print_msg("Attempting to fade in...")
         -- Re-enable player movement.
         player.set_control(true)
+
+        -- Save the game
+        -- This works!
+        game.save()
 
         -- The player was teleported.
         -- If this isn't changed it'll keep spawning them on the save pickup.
@@ -135,7 +143,8 @@ function map_pickups.save_loop()
     -- This should respawn the save pickup if it is used.
     if map_pickups.savePickup1 == nil and not map_pickups.savePickup1Spawned and not map_pickups.playerTeleported then
         -- This works for respawning the pickup!
-        map_pickups.savePickup1 = game.create_pickup({ x = -13, y = 133, z = 28 }, map_pickups.saveGamePickup,
+        -- map_pickups.savePickup1 = game.create_pickup({ x = -13, y = 133, z = 28 }, map_pickups.saveGamePickup,
+        map_pickups.savePickup1 = game.create_pickup(map_pickups.saveGamePickup1Pos, map_pickups.saveGamePickup,
             pickup_enums.ePickupType.PICKUP_ONCE)
         -- hud.print_msg("Respawn pickup")
 

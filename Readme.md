@@ -120,7 +120,7 @@ This list will be updated as I find more bugs in my ReVC build.
 
 ## KCNet-ReVC Version
 
-Currently, the ReVC code these lua scripts are based on is my internal version `1.2.14-8a` and I have been making breaking changes between some of these minor point releases.
+Currently, the ReVC code these lua scripts are based on is my internal version `1.2.15-2a` and I have been making breaking changes between some of these minor point releases.
 
 I may switch up my internal version numbering later on, currently it just makes a bit of sense to increment the version number especially where I have been making a lot of changes and may need to revert breaking changes.
 
