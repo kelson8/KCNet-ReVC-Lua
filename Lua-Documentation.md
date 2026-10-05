@@ -168,10 +168,12 @@ Any functions without a usage below are just getter or setter functions and don'
 | ----- | ---- | ----- |
 | player.create | Create the player, mostly for the game init since my scripts take over and don't run the CREATE_PLAYER functions. | player.create(0, {x = 25, y = 25, z = 25}, ) |
 | player.set_position | Set the players position. | player.set_position({x = 25, y = 25, z = 25}) |
+| player.set_heading | Set the players current heading. | player.set_heading(170.0) |
+| player.get_heading | Get the players current heading. | player.get_heading() |
 | player.get_health | Get the players current health  | |
 | player.set_health | Set the players health.  | |
 | player.get_armor | Get the players current armor.  | |
-| player.set_armor | Set the players armor  | |
+| player.set_armor | Set the players armor  | player.set_armor(250) |
 | player.get_money | Get the players current amount of money.  | |
 | player.get_position | Get the players current position, access with either `x`, `y` or `z` values.  | player.get_position().x |
 | player.heal | Set the players health to max |  |

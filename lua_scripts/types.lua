@@ -92,6 +92,8 @@
 ---@class PlayerAPI
 ---@field create fun(player_id: integer, position: CVector)
 ---@field set_position fun(position: CVector)
+---@field set_heading fun(heading: number)
+---@field get_heading fun(): number
 ---@field get_health fun(): number
 ---@field set_health fun(health: number)
 ---@field get_armor fun(): number

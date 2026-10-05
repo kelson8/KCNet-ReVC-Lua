@@ -28,3 +28,6 @@ lua_scripts/extra_functions
 
 # Auto generated files.
 lua_scripts/current_blip.txt
+
+# Generated with 'ldoc .' for lua documentation.
+docs/

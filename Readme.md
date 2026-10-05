@@ -106,6 +106,11 @@ These values get read in the game code, and will be reloaded when `F5` is presse
 | gbInfiniteAmmoCheat | Enables infinite ammo for the player. |
 | gbFadeOnDeath | Toggle for fading the game camera when the player dies or is wasted, by default this is true and is only a required value if you want to turn it off. |
 
+**Generating Documentation**
+
+You can generate some documentation for this project to be viewed in a web browser with [ldoc](https://github.com/lunarmodules/LDoc) and lua by running this command in this Git repo:
+* ldoc .
+
 ## Bugs
 
 Current bugs within my ReVC build

@@ -357,6 +357,8 @@ feat: Update scripts, and add a few
 
 ### Latest 1.2.15-2a
 
+**Commit 1**
+
 feat: Make blips short range and other changes
 
 * Add some safe house garage locations to freeroam-locations.
@@ -377,3 +379,14 @@ feat: Make blips short range and other changes
 * Add some more objects for testing in freeroam-objects.lua.
 
 * Update Lua-Documentation, changelogs, and readme.
+
+**Commit 2**
+
+feat: Move save pickup teleport into function
+
+* This makes it to where I can easily make multiple save pickups, although I need to work on making this code a bit neater still.
+
+* Add get and set heading functions for player.
+* Set optional clear area toggle for save pickups.
+* Add config.ld for Lua LDoc documentation support.
+* Update changelog, readme, and gitignore.
